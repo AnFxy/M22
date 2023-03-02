@@ -1,0 +1,162 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+
+android {
+    namespace 'com.nonetxmxy.mmzqfxy'
+    compileSdk 33
+
+    // 签名
+    signingConfigs {
+        debug {
+            storeFile file('./mzqfxym.jks')
+            storePassword 'mzqfxy'
+            keyAlias 'mzqfxy'
+            keyPassword 'mzqfxy'
+        }
+        release {
+            storeFile file('./mzqfxym.jks')
+            storePassword 'mzqfxy'
+            keyAlias 'mzqfxy'
+            keyPassword 'mzqfxy'
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.nonetxmxy.mmzqfxy"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        flavorDimensions "project"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // 设置签名来源
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // 设置签名来源
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    productFlavors {
+        stage{
+            dimension "project"
+            applicationId 'com.nonetxmxy.mmzqfxy'
+
+        }
+        product{
+            dimension "project"
+            applicationId 'com.nonetxmxy.mmzqfxy'
+
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding{
+        enabled = true
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 名称_日期_android_版本号.apk
+            outputFileName = "DanaPlus_${currentTime()}_${versionName}.apk"
+        }
+    }
+}
+
+static def currentTime() {
+    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
+}
+
+dependencies {
+
+
+    def nav_version = "2.5.3"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    // lifecycle
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'//lifecycleScope
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'//viewModelScope
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+    // activity-ktx fragment-ktx
+    implementation 'androidx.activity:activity-ktx:1.6.1'
+    implementation 'androidx.fragment:fragment-ktx:1.5.4'
+
+    // hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // adapter
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4"
+
+    // 工具类
+    implementation 'com.blankj:utilcodex:1.30.6'
+
+    // 加载圈
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+    // 图片加载
+    implementation "com.github.bumptech.glide:glide:4.14.2"
+    kapt "com.github.bumptech.glide:compiler:4.14.2"
+
+    // 日期选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+
+    //刷新
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // 计测工具 Adjust SDK
+    implementation 'com.adjust.sdk:adjust-android:4.24.1'
+    implementation 'com.android.installreferrer:installreferrer:2.1'
+
+
+
+}
