@@ -24,4 +24,11 @@
         <item name="android:windowFullscreen">true</item>
         <item name="background">@android:color/transparent</item>
     </style>
+
+    <style name="AnimationBottomDialog" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dia_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dia_bottom_out</item>
+    </style>
+
+
 </resources>

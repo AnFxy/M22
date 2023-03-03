@@ -23,13 +23,8 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     override fun FragmentAuthUserInfoBinding.setLayout() {
         toolBar.setupWithNavController(navController)
         toolBar.setNavigationIcon(R.mipmap.fanhui)
+        includeAuthTitle.image.setImageResource(R.mipmap.jinbi1)
 
-//        SpanUtils.with(includeAuthTitle.tvHint)
-//            .append("*")
-//            .setForegroundColor(ColorUtils.getColor(R.color.color_06047))
-//            .append("*888")
-//            .setForegroundColor(ColorUtils.getColor(R.color.gray_999999))
-//            .create()
 
     }
 }

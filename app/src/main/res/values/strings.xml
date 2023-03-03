@@ -9,4 +9,14 @@
     <string name="update_dia_title">更新标题</string>
     <string name="update_next">下次更新</string>
     <string name="update_now">现在更新</string>
+
+
+
+    <string name="selector_hint">Por favor elige</string>
+    <string name="input_hint">Por favor completa</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="enviar">Enviar</string>
+
+
+
 </resources>
