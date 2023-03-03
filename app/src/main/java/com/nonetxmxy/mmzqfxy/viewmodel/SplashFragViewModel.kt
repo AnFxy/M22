@@ -1,42 +1,44 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
-import com.nonetxmxy.mmzqfxy.base.DialogSet
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.repository.create.BeginRepository
+import com.nonetxmxy.mmzqfxy.model.UpdateType
+import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.tools.CheckFakePhoneUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashFragViewModel @Inject constructor(
-    private val beginRepository: BeginRepository
+    private val beginRepository: IBeginRepository
 ) : BaseViewModel() {
 
-    val closePage = MutableSharedFlow<Unit>()
+    val closePage = MutableSharedFlow<Unit>(replay = 1)
 
-    val showTipsDialog = MutableSharedFlow<Unit>()
+    val showTipsDialog = MutableSharedFlow<Unit>(replay = 1)
+
+    val showUpdateDialog = MutableSharedFlow<UpdateType>(replay = 1)
 
     init {
-       startLaunchFlow()
+        startLaunchFlow()
     }
 
     private fun startLaunchFlow() {
-        viewModelScope.launch {
+        launchUIWithDialog {
             if (CheckFakePhoneUtil.isFacePhone()) {
                 closePage.emit(Unit)
             } else {
-                if (LocalCache.isShowTips) {
-                    showTipsDialog.emit(Unit)
+                if (LocalCache.isShowedTips) {
+                    checkUpdate()
                 } else {
-
+                    showTipsDialog.emit(Unit)
                 }
             }
         }
     }
 
+    suspend fun checkUpdate() {
+        showUpdateDialog.emit(beginRepository.checkUpdateInformation())
+    }
 }

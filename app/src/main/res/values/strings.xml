@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MexiCredi</string>
+
+    <!--启动页-->
+    <string name="tips_dia_title">披露标题</string>
+    <string name="tips_dia_content">巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</string>
+    <string name="tips_dia_cancel">取消</string>
+    <string name="tips_dia_confirm">确定</string>
+    <string name="update_dia_title">更新标题</string>
+    <string name="update_next">下次更新</string>
+    <string name="update_now">现在更新</string>
 </resources>
