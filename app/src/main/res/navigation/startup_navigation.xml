@@ -7,5 +7,15 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.SplashFragment"
-        android:label="SplashFragment" />
+        android:label="SplashFragment">
+
+        <action android:id="@+id/go_main"
+            app:destination="@id/main_navigation"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+
+    </fragment>
+
+    <include app:graph="@navigation/main_navigation"/>
+
 </navigation>

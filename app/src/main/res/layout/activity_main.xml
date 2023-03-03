@@ -13,7 +13,7 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:layout_constraintVertical_weight="1"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main_navigation"
+        app:navGraph="@navigation/startup_navigation"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/nv_bottom"/>
 
