@@ -17,11 +17,8 @@ abstract class BaseActivity<VB : ViewBinding, T : BaseViewModel> : AppCompatActi
     private val mviewModel: T by lazy { getViewMode() }
 
     // 网络加载圈
-    val requestDataLoadDialog: DialogSet by lazy {
-        val dialog = DialogSet.provideDialog(this, R.layout.dia_loading)
-        dialog.setCancelable(false)
-        dialog.setCanceledOnTouchOutside(false)
-        dialog
+    val requestDataLoadDialog: RxDialogSet by lazy {
+        RxDialogSet.provideDialog(this, R.layout.dia_loading)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

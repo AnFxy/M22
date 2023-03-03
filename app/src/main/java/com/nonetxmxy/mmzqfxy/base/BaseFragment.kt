@@ -23,12 +23,9 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
     }
 
     // 网络加载圈
-    val requestDataLoadDialog: DialogSet? by lazy {
+    val requestDataLoadDialog: RxDialogSet? by lazy {
         context?.let {
-            val dialog = DialogSet.provideDialog(it, R.layout.dia_loading)
-            dialog.setCancelable(false)
-            dialog.setCanceledOnTouchOutside(false)
-            dialog
+            RxDialogSet.provideDialog(it, R.layout.dia_loading)
         }
     }
 
