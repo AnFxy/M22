@@ -58,6 +58,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
                     setLimitClickListener {
                         // TODO 前往Google商店
                     }
+
                 }
         }
     }
