@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/authUserIndoFragment">
+
+    <fragment
+        android:id="@+id/authUserIndoFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserIndoFragment"
+        android:label="Datos personales" />
+</navigation>

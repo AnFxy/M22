@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.nonetxmxy.mmzqfxy.R
 import kotlinx.coroutines.launch
@@ -16,6 +18,9 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
     lateinit var binding: T
 
     var isHiddenStatus = false
+
+    lateinit var navController: NavController
+
 
     // viewModel 获取
     private val mviewModel: VB by lazy {
@@ -96,7 +101,7 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        navController = findNavController()
         binding.setLayout()
         binding.setObserver()
         setLayout()

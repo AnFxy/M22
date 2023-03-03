@@ -7,5 +7,11 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.SplashFragment"
-        android:label="SplashFragment" />
+        android:label="SplashFragment">
+        <action
+            android:id="@+id/action_splashFragment_to_auth_navigation"
+            app:destination="@id/auth_navigation" />
+    </fragment>
+    <include app:graph="@navigation/auth_navigation" />
+
 </navigation>
