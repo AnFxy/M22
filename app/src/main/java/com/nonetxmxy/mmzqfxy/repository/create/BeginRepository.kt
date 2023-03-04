@@ -9,6 +9,6 @@ class BeginRepository @Inject constructor() : IBeginRepository {
 
     override suspend fun checkUpdateInformation(): UpdateType {
         delay(1000)
-        return UpdateType.OPTIONAL
+        return UpdateType.NO_NEED_UPDATE
     }
 }

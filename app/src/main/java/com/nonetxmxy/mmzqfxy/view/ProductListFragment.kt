@@ -20,4 +20,6 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         parent: ViewGroup?
     ): FragmentProductListBinding =
         FragmentProductListBinding.inflate(inflater, parent, false)
+
+
 }

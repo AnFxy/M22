@@ -30,7 +30,7 @@ class SplashFragViewModel @Inject constructor(
                 closePage.emit(Unit)
             } else {
                 if (LocalCache.isShowedTips) {
-                    checkUpdate()
+                    showUpdateDialog.emit(beginRepository.checkUpdateInformation())
                 } else {
                     showTipsDialog.emit(Unit)
                 }
@@ -38,7 +38,9 @@ class SplashFragViewModel @Inject constructor(
         }
     }
 
-    suspend fun checkUpdate() {
-        showUpdateDialog.emit(beginRepository.checkUpdateInformation())
+    fun checkUpdate() {
+        launchUIWithDialog {
+            showUpdateDialog.emit(beginRepository.checkUpdateInformation())
+        }
     }
 }
