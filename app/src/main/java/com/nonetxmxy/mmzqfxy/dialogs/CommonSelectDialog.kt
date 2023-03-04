@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.blankj.utilcode.util.ScreenUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.CommonSelectAdapter
 import com.nonetxmxy.mmzqfxy.databinding.DiaCommonSelectBinding
@@ -39,7 +38,7 @@ class CommonSelectDialog constructor(context: Context, themeResId: Int) :
         window?.apply {
             setLayout(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ((ScreenUtils.getAppScreenHeight()) * 0.37).toInt()
+                ViewGroup.LayoutParams.WRAP_CONTENT,
             )
             attributes.gravity = Gravity.BOTTOM
             setWindowAnimations(R.style.AnimationBottomDialog)

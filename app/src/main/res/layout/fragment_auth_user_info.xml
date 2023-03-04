@@ -34,7 +34,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_10_radius_white"
                 android:orientation="vertical">
-
+                <!--教育程度-->
                 <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
                     android:id="@+id/commonSelect1"
                     android:layout_width="match_parent"
@@ -47,28 +47,29 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:text="Estado civil" />
-
+                <!--婚姻状态-->
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="25dp"
-                    android:layout_marginTop="12dp"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:spanCount="2" />
-
+                    android:layout_marginTop="12dp" />
+                <!--孩子数量-->
                 <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
                     android:id="@+id/commonSelect2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     app:select_title="Numero de hijos" />
 
+                <!--家庭住址-->
                 <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
                     android:id="@+id/commonSelect3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:select_title="Dirección de domicilio" />
 
+                <!--详细街道-->
                 <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
                     android:id="@+id/input1"
                     android:layout_width="match_parent"
@@ -81,7 +82,6 @@
             <include
                 android:id="@+id/includeAuthBottom"
                 layout="@layout/include_auth_bottom" />
-
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -29,6 +29,15 @@ class InputInfoView constructor(
     val editValue
         get() = binding.editText.text.toString()
 
+
+    var inputContent = ""
+        set(value) {
+            field = value
+            if (value.isNotEmpty()) {
+                binding.editText.setText(value)
+            }
+        }
+
     init {
         initAttribute(attrs)
         initListener()
