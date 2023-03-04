@@ -10,6 +10,16 @@
     <string name="update_next">下次更新</string>
     <string name="update_now">现在更新</string>
 
+
+
+    <string name="selector_hint">Por favor elige</string>
+    <string name="input_hint">Por favor completa</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="enviar">Enviar</string>
+
+
+
+
     <!--首页-->
     <string name="home_title">首页标题</string>
     <string name="banner_content">Banner提示语</string>

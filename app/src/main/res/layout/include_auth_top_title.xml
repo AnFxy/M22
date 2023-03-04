@@ -2,16 +2,16 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
     android:layout_marginTop="10dp"
+    android:background="@drawable/shape_10_radius_white"
     android:orientation="vertical"
     android:padding="15dp">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@mipmap/jinbi1" />
+        android:scaleType="fitXY" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -30,15 +30,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="标题"
+            android:text="Protegeremos su información y no divulgaremos
+su información de contacto a ningún tercero sin
+su permiso."
             android:textColor="@color/gray_333333"
             android:textSize="11sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_hint"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textSize="12sp" />
+        android:gravity="center_vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/color_06047"
+            android:textSize="12sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Por favor, llene su información real para ayudarlo con aplicación"
+            android:textColor="@color/gray_999999"
+            android:textSize="12sp" />
+    </LinearLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
