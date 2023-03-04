@@ -30,6 +30,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         navController = navHostFragment.navController
 
         binding.nvBottom.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener(this)
     }
 
     override fun setListener() {

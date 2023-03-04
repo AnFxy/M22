@@ -19,4 +19,11 @@
 
 
 
+
+    <!--首页-->
+    <string name="home_title">首页标题</string>
+    <string name="banner_content">Banner提示语</string>
+    <string name="apply">现在申请</string>
+    <string name="cycle_days">借款天数</string>
+    <string name="rate">借款利率</string>
 </resources>

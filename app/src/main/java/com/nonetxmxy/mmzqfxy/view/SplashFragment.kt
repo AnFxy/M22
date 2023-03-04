@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentSplashBinding
 import com.nonetxmxy.mmzqfxy.model.UpdateType
@@ -25,14 +26,15 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
     private val tipsDialog: RxDialogSet? by lazy {
         context?.let {
             val dialog = RxDialogSet.provideDialog(it, R.layout.dia_tips)
-                dialog.setViewState<TextView>(R.id.tv_confirm) {
-                    setLimitClickListener {
-                        lifecycleScope.launch {
-                            viewModel.checkUpdate()
-                        }
-                        dialog.dismiss()
+            dialog.setViewState<TextView>(R.id.tv_confirm) {
+                setLimitClickListener {
+                    lifecycleScope.launch {
+                        viewModel.checkUpdate()
                     }
+                    LocalCache.isShowedTips = true
+                    dialog.dismiss()
                 }
+            }
             dialog.setViewState<TextView>(R.id.tv_cancel) {
                 setLimitClickListener {
                     dialog.dismiss()
@@ -45,16 +47,16 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
     private val updateDialog: RxDialogSet? by lazy {
         context?.let {
             val dialog = RxDialogSet.provideDialog(it, R.layout.dia_update)
-                dialog.setViewState<TextView>(R.id.tv_update_later) {
-                    setLimitClickListener {
-                        navController.navigate(SplashFragmentDirections.goMain())
-                        dialog.dismiss()
-                    }
-                }.setViewState<TextView>(R.id.tv_update_now) {
-                    setLimitClickListener {
-                        // TODO 前往Google商店
-                    }
+            dialog.setViewState<TextView>(R.id.tv_update_later) {
+                setLimitClickListener {
+                    navController.navigate(SplashFragmentDirections.goMain())
+                    dialog.dismiss()
                 }
+            }.setViewState<TextView>(R.id.tv_update_now) {
+                setLimitClickListener {
+                    // TODO 前往Google商店
+                }
+            }
         }
     }
 
