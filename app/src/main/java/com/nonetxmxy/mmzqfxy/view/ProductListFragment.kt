@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentProductListBinding
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.ProductListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -25,8 +26,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         FragmentProductListBinding.inflate(inflater, parent, false)
 
     override fun FragmentProductListBinding.setLayout() {
-        lifecycleScope.launch {
-            delay(1000)
+        binding.tvApply.setLimitClickListener {
             navController.navigate(ProductListFragmentDirections.actionProductListFragmentToAuthNavigation())
         }
     }
