@@ -1,8 +1,12 @@
 package com.nonetxmxy.mmzqfxy.inject
 
+import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
+import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import com.nonetxmxy.mmzqfxy.repository.IUserAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.create.AuthRepository
 import com.nonetxmxy.mmzqfxy.repository.create.BeginRepository
+import com.nonetxmxy.mmzqfxy.repository.create.OrderRepository
 import com.nonetxmxy.mmzqfxy.repository.create.UserAuthRepository
 import dagger.Binds
 import dagger.Module
@@ -21,4 +25,14 @@ abstract class RepositoryModule {
     abstract fun createUserAuthRepository(
         userAuthRepository: UserAuthRepository
     ): IUserAuthRepository
+
+    @Binds
+    abstract fun createOrderRepository(
+        orderRepository: OrderRepository
+    ): IOrderRepository
+
+    @Binds
+    abstract fun createAuthRepository(
+        authRepository: AuthRepository
+    ): IAuthRepository
 }

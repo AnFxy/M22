@@ -34,7 +34,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     }
 
     override fun setListener() {
-
     }
 
     override fun onDestinationChanged(

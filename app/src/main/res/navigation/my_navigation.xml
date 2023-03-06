@@ -7,5 +7,33 @@
     <fragment
         android:id="@+id/myFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.MyFragment"
-        android:label="MyFragment" />
+        android:label="MyFragment">
+        <action
+            android:id="@+id/action_myFragment_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
+        <action
+            android:id="@+id/action_myFragment_to_cardsFragment"
+            app:destination="@id/cardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.OrderListFragment"
+        android:label="OrderListFragmentMy">
+        <argument
+            android:name="isTab"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.CardsFragment"
+        android:label="CardsFragment" >
+        <action
+            android:id="@+id/action_cardsFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AddCardsFragment"
+        android:label="AddCardsFragment" />
 </navigation>
