@@ -26,5 +26,9 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
         binding.containerHis.setLimitClickListener {
             navController.navigate(MyFragmentDirections.actionMyFragmentToOrderListFragment(false))
         }
+
+        binding.containerCard.setLimitClickListener {
+            navController.navigate(MyFragmentDirections.actionMyFragmentToCardsFragment())
+        }
     }
 }

@@ -45,5 +45,9 @@
     <string name="expand">展期</string>
     <string name="no_order_tips">没有任何借款订单呢！</string>
 
+    <!--银行卡列表页面-->
+    <string name="cards">银行卡列表</string>
+    <string name="add_cards">添加银行卡</string>
+    <string name="no_any_cards_tips">你还没有任何银行卡！</string>
 
 </resources>

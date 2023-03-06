@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.adjust.sdk.Util
 import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.databinding.ItemOrderListBinding
@@ -14,7 +13,8 @@ import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import kotlin.math.abs
 
-class OrderListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var orders: List<SampleOrder> = emptyList()
         set(value) {
@@ -107,7 +107,7 @@ class OrderListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 false
             )
             emptyBinding.tvRequest.setLimitClickListener {
-                // TODO 前往首页
+                goPro.invoke()
             }
             EmptyViewHolder(emptyBinding)
         } else {
@@ -117,7 +117,7 @@ class OrderListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 false
             )
             itemBinding.tvRepay.setLimitClickListener {
-                // TODO 前往借款页面
+                goRepay.invoke()
             }
             OrderViewHolder(itemBinding)
         }

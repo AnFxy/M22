@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nonetxmxy.mmzqfxy.R
@@ -23,7 +24,22 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
     private val viewModel: OrderListFragViewModel by viewModels()
 
     private val adapter: OrderListAdapter by lazy {
-        OrderListAdapter()
+        OrderListAdapter({
+            navController.navigate(
+                R.id.product_list_navigation,
+                null,
+                NavOptions.Builder()
+                    .setRestoreState(true)
+                    .setPopUpTo(
+                        R.id.productListFragment,
+                        false,
+                        true
+                    )
+                    .build()
+            )
+        }, {
+
+        })
     }
 
     private val orderArgs: OrderListFragmentArgs by navArgs()
