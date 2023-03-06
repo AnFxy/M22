@@ -7,6 +7,11 @@
     <fragment
         android:id="@+id/orderListFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.OrderListFragment"
-        android:label="OrderListFragment" />
+        android:label="OrderListFragment" >
+        <argument
+            android:name="isTab"
+            android:defaultValue="true"
+            app:argType="boolean"/>
+    </fragment>
 
 </navigation>

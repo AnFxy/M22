@@ -10,15 +10,10 @@
     <string name="update_next">下次更新</string>
     <string name="update_now">现在更新</string>
 
-
-
     <string name="selector_hint">Por favor elige</string>
     <string name="input_hint">Por favor completa</string>
     <string name="cancelar">Cancelar</string>
     <string name="enviar">Enviar</string>
-
-
-
 
     <!--首页-->
     <string name="home_title">首页标题</string>
@@ -26,4 +21,29 @@
     <string name="apply">现在申请</string>
     <string name="cycle_days">借款天数</string>
     <string name="rate">借款利率</string>
+
+    <!--我的页面-->
+    <string name="his">贷款历史</string>
+    <string name="card">银行卡</string>
+    <string name="verifi">信息认证</string>
+    <string name="privacy">隐私政策</string>
+    <string name="my">关于我们</string>
+    <string name="feedback">意见反馈</string>
+    <string name="us_order_des">你有一笔订单已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！</string>
+
+    <!--贷款历史页面-->
+    <string name="loan_amount">借款金额</string>
+    <string name="loan_period">借款期数</string>
+    <string name="loan_cycle">借款周期</string>
+    <string name="request_date">借款日期</string>
+    <string name="on_reviewing">审核中</string>
+    <string name="refused">审核失败</string>
+    <string name="reviewing_pass">审核通过</string>
+    <string name="repay_days">%d 天后到期</string>
+    <string name="overdue_days">逾期了 %d天</string>
+    <string name="repay">还款</string>
+    <string name="expand">展期</string>
+    <string name="no_order_tips">没有任何借款订单呢！</string>
+
+
 </resources>

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentMyBinding
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.MyFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,4 +21,10 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
         parent: ViewGroup?
     ): FragmentMyBinding =
         FragmentMyBinding.inflate(inflater, parent, false)
+
+    override fun setLayout() {
+        binding.containerHis.setLimitClickListener {
+            navController.navigate(MyFragmentDirections.actionMyFragmentToOrderListFragment(false))
+        }
+    }
 }

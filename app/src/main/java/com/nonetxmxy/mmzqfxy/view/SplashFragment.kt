@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -91,8 +92,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
                         updateDialog?.setViewState<TextView>(R.id.tv_update_later) {
                             setVisible(false)
                         }?.show()
-                    UpdateType.NO_NEED_UPDATE ->
-                        navController.navigate(SplashFragmentDirections.goMain())
+                    UpdateType.NO_NEED_UPDATE -> {
+                        navController.setGraph(R.navigation.main_navigation)
+                    }
                 }
             }
         }
