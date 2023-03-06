@@ -19,7 +19,7 @@ class SourceIncomeAdapter :
         if (currentIndex == holder.layoutPosition) {
             textview.typeface = Typeface.DEFAULT_BOLD
             textview.setTextColor(ColorUtils.getColor(R.color.gray_532e00))
-            textview.setBackgroundResource(R.drawable.shape_btn_enable_bg)
+            textview.setBackgroundResource(R.drawable.shape_btn_enable_bg_stroke)
         } else {
             textview.typeface = Typeface.DEFAULT
             textview.setTextColor(ColorUtils.getColor(R.color.gray_999999))

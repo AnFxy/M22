@@ -9,6 +9,7 @@ import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.databinding.ViewCommonSelectBinding
 import com.nonetxmxy.mmzqfxy.dialogs.AddressSelectDialog
 import com.nonetxmxy.mmzqfxy.dialogs.CommonSelectDialog
+import com.nonetxmxy.mmzqfxy.model.AdministrativeData
 import com.nonetxmxy.mmzqfxy.model.OptionShowItem
 
 class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
@@ -24,17 +25,18 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
         AddressSelectDialog(context, R.style.SimpleDialog)
     }
 
-    var clickOptionItemBlock: ((String) -> Unit)? = null
+    var clickOptionItemBlock: ((OptionShowItem) -> Unit)? = null
+    var addressSelectOKBlock: ((String, String) -> Unit)? = null
 
     private var selectType = 0
 
-    private var selectTitle = ""
+    var selectTitle = ""
         set(value) {
             field = value
             if (value.isNotEmpty()) binding.title.text = value
         }
 
-     var selectContent = ""
+    var selectContent = ""
         set(value) {
             field = value
             if (value.isNotEmpty()) {
@@ -57,7 +59,7 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
                 }
 
                 1 -> {
-
+                    addressSelectDialog.show()
                 }
             }
         }
@@ -65,7 +67,13 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
         commonSelectDialog.clickItemBlock = {
             binding.content.text = it.showContent
             binding.content.typeface = Typeface.DEFAULT_BOLD
-            clickOptionItemBlock?.invoke(it.showContent)
+            clickOptionItemBlock?.invoke(it)
+        }
+
+        addressSelectDialog.addressSelectOKBlock = { province: String, city: String ->
+            binding.content.text = "$province/$city"
+            binding.content.typeface = Typeface.DEFAULT_BOLD
+            addressSelectOKBlock?.invoke(province, city)
         }
     }
 
@@ -73,10 +81,17 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
         commonSelectDialog.show()
     }
 
+    fun showAddressSelectDialog() {
+        addressSelectDialog.show()
+    }
 
     fun setOptionShowList(data: List<OptionShowItem>?) {
         if (data.isNullOrEmpty()) return
         commonSelectDialog.setOptionShowList(selectTitle, data)
+    }
+
+    fun setAdministrativeList(data: AdministrativeData) {
+        addressSelectDialog.setAdministrativeList(selectTitle, data)
     }
 
     private fun initAttribute(attrs: AttributeSet?) {

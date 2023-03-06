@@ -1,6 +1,7 @@
 package com.nonetxmxy.mmzqfxy.customer_view
 
 import android.content.Context
+import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo.IME_ACTION_NEXT
@@ -14,7 +15,7 @@ class InputInfoView constructor(
 
     private var binding = ViewInputInfoBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private var inputTitle = ""
+     var inputTitle = ""
         set(value) {
             field = value
             if (value.isNotEmpty()) binding.title.text = value
@@ -34,6 +35,7 @@ class InputInfoView constructor(
         set(value) {
             field = value
             if (value.isNotEmpty()) {
+                binding.editText.typeface = Typeface.DEFAULT_BOLD
                 binding.editText.setText(value)
             }
         }

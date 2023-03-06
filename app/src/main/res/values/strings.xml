@@ -11,13 +11,17 @@
     <string name="update_now">现在更新</string>
 
 
-
     <string name="selector_hint">Por favor elige</string>
     <string name="input_hint">Por favor completa</string>
     <string name="cancelar">Cancelar</string>
     <string name="enviar">Enviar</string>
+    <string name="estado_civil">Estado civil</string>
+    <string name="select_province">请选择省份</string>
+    <string name="select_city">请选择城市</string>
 
 
+    <string name="selector_error_hint">Por favor elige %s</string>
+    <string name="input_error_hint">Por favor completa %s</string>
 
 
     <!--首页-->

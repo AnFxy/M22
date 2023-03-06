@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.SizeUtils
 
 class GridLayoutManagerItemDecoration(
-    private val marginVertical: Float = 0f,
     private val marginHorizontal: Float = 0f
 ) : RecyclerView.ItemDecoration() {
 

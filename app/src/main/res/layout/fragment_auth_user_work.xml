@@ -69,8 +69,7 @@
                     android:id="@+id/commonSelect3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:select_title="Dirección de domicilio"
-                    app:select_type="address" />
+                    app:select_title="Dirección de domicilio" />
 
                 <!--详细街道-->
                 <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
