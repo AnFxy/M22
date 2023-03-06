@@ -50,4 +50,12 @@
     <string name="add_cards">添加银行卡</string>
     <string name="no_any_cards_tips">你还没有任何银行卡！</string>
 
+    <!--全部认证信息-->
+    <string name="personal_message">个人信息</string>
+    <string name="work_message">工作信息</string>
+    <string name="contract_message">联系人信息</string>
+    <string name="id_message">身份证信息</string>
+    <string name="card_message">银行卡信息</string>
+    <string name="all_message">认证信息</string>
+
 </resources>

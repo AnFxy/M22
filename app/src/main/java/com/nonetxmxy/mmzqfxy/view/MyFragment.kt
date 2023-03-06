@@ -30,5 +30,9 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
         binding.containerCard.setLimitClickListener {
             navController.navigate(MyFragmentDirections.actionMyFragmentToCardsFragment())
         }
+
+        binding.containerInfo.setLimitClickListener {
+            navController.navigate(MyFragmentDirections.actionMyFragmentToAllAuthFragment())
+        }
     }
 }

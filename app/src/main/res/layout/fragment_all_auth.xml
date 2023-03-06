@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/m_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@mipmap/fanhui">
+
+        <TextView
+            style="@style/SimpleToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/verifi" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/container_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/white_10"
+        app:layout_constraintTop_toBottomOf="@id/m_toolbar">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/gongzuoxinxi_a"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/gray_333333"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_message"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_check_state_user"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/weigouxuan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_work"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/white_10"
+        app:layout_constraintTop_toBottomOf="@id/container_user">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/gerenxinxi_a"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/gray_333333"
+            android:layout_height="wrap_content"
+            android:text="@string/work_message"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_check_state_work"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/weigouxuan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_contract"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/white_10"
+        app:layout_constraintTop_toBottomOf="@id/container_work">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/lianxiren_a"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/gray_333333"
+            android:layout_height="wrap_content"
+            android:text="@string/contract_message"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_check_state_contract"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/weigouxuan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/white_10"
+        app:layout_constraintTop_toBottomOf="@id/container_contract">
+
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/shenfenxinxi_a"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/gray_333333"
+            android:layout_height="wrap_content"
+            android:text="@string/id_message"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_check_state_id"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/weigouxuan"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="19dp"
+        android:background="@drawable/white_10"
+        app:layout_constraintTop_toBottomOf="@id/container_id">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@mipmap/yinhang_a"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="@color/gray_333333"
+            android:layout_height="wrap_content"
+            android:text="@string/card_message"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_check_state_card"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@mipmap/weigouxuan"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="55dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/yellow_6"
+        android:gravity="center"
+        android:paddingVertical="11dp"
+        android:text="@string/apply"
+        android:textColor="@color/gray_532e00"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/container_card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
