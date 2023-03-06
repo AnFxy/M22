@@ -6,6 +6,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:layout_marginHorizontal="12dp"
         android:orientation="vertical">
 
@@ -16,7 +17,7 @@
             android:background="@drawable/shape_common_select_dia_title_bg"
             android:gravity="center"
             android:padding="20dp"
-            android:textColor="@color/color_532e00"
+            android:textColor="@color/gray_532e00"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -25,7 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/white" />
+            android:background="@color/white"
+            android:overScrollMode="never" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/cancelar"
@@ -39,6 +41,5 @@
             android:textColor="@color/gray_666666"
             android:textSize="14sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 </FrameLayout>

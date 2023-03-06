@@ -11,7 +11,7 @@
         android:id="@+id/enviarBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_auth_enviar_btn_bg"
+        android:background="@drawable/shape_btn_enable_bg"
         android:gravity="center"
         android:padding="12dp"
         android:text="@string/enviar"

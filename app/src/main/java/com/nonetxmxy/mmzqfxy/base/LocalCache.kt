@@ -8,6 +8,9 @@ class LocalCache {
         // 是否已经展示过披露了
         var isShowedTips: Boolean by SPSet(FinalKeys.IS_TIPS, false)
 
-        //
+        //认证
+        var infoCredit = 0
+
+
     }
 }
