@@ -27,6 +27,11 @@
     <color name="gray_999999_20">#33999999</color>
     <color name="black_000000_50">#88000000</color>
     <color name="black_efefef">#FFEFEFEF</color>
+    <color name="red_f06047">#F06047</color>
+    <color name="light_red">#F5E6E3</color>
+    <color name="color_00b938">#00B938</color>
+    <color name="color_fff7dd">#FFF7DD</color>
+    <color name="color_ffedb2">#FFEDB2</color>
 
     <color name="yellow_ffd247">#FFD247</color>
     <color name="yellow_f5c83b">#F5C83B</color>
