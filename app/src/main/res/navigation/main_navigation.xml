@@ -7,4 +7,8 @@
     <include app:graph="@navigation/order_list_navigation" />
     <include app:graph="@navigation/my_navigation" />
 
+    <action android:id="@+id/goMain"
+        app:destination="@id/main_navigation"
+        app:popUpToInclusive="true"
+        app:popUpTo="@id/main_navigation"/>
 </navigation>
