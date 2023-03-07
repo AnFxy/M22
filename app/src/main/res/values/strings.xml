@@ -58,4 +58,24 @@
     <string name="card_message">银行卡信息</string>
     <string name="all_message">认证信息</string>
 
+    <!--关于我们-->
+    <string name="about_us_title">关于我们</string>
+    <string name="company_name">公司名</string>
+    <string name="company_des">公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</string>
+    <string name="logout">登出</string>
+    <string name="logout_dialog_des">确定要登出吗？</string>
+    <string name="logout_dialog_cancel">取消</string>
+    <string name="logout_dialog_confirm">登出</string>
+
+    <!--登录页面-->
+    <string name="login_page_title">@string/app_name</string>
+    <string name="guding_52">+52</string>
+    <string name="input_phone_number_tips">请输入正确的手机号</string>
+    <string name="privacy_tips">请阅读并同意营私协议</string>
+    <string name="agree_tips">请先阅读并同意隐私协议！</string>
+    <string name="send_vcode_tips">向手机号 %s 发送验证码</string>
+    <string name="send">发送</string>
+    <string name="login">Login</string>
+    <string name="send_voice_code">发送语音验证码</string>
+
 </resources>
