@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_navigation"
-    app:startDestination="@id/authContactPersonFragment">
+    app:startDestination="@id/authIdentityFragment">
 
     <fragment
         android:id="@+id/authUserIndoFragment"
@@ -19,6 +19,10 @@
     <fragment
         android:id="@+id/authContactPersonFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthContactPersonFragment"
+        android:label="Datos personales" />
+    <fragment
+        android:id="@+id/authIdentityFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthIdentityFragment"
         android:label="Datos personales" />
 
 

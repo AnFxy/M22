@@ -3,10 +3,7 @@ package com.nonetxmxy.mmzqfxy.view.auth
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
@@ -21,7 +18,6 @@ import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.SelfData
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserInfoViewModel>() {
@@ -87,7 +83,6 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             )
             checkData()
         }
-
         binding.commonSelect3.addressSelectOKBlock = { province: String, city: String ->
             viewModel.pagerData = viewModel.pagerData.copy(
                 familyProvince = province, familyCity = city
@@ -160,23 +155,20 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     }
 
     override fun FragmentAuthUserInfoBinding.setObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.optionShowListFlow.collect {
-                    if (it == null) return@collect
-                    commonSelect1.setOptionShowList(it.marryStatus)
-                    commonSelect2.setOptionShowList(it.marryStatus)
-                    estadoCivilAdapter.setList(it.marryStatus)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.optionShowListFlow.collect {
+                if (it == null) return@collect
+                commonSelect1.setOptionShowList(it.marryStatus)
+                commonSelect2.setOptionShowList(it.marryStatus)
+                estadoCivilAdapter.setList(it.marryStatus)
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.administrativeListFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-                .collect {
-                    if (it == null) return@collect
-                    commonSelect3.setAdministrativeList(it)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.administrativeListFlow.collect {
+                if (it == null) return@collect
+                commonSelect3.setAdministrativeList(it)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {

@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
@@ -19,7 +17,6 @@ import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthContactPersonBinding
 import com.nonetxmxy.mmzqfxy.tools.ContactPersonUtil
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthContactPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthContactPersonFragment :
@@ -52,6 +49,7 @@ class AuthContactPersonFragment :
     override fun FragmentAuthContactPersonBinding.setLayout() {
         mToolbar.setupWithNavController(navController)
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
+        includeAuthTitle.image.setImageResource(R.mipmap.jinbi3)
 
         contact1Phone.contactPersonOKBlock = {
             selectContact1 = true
@@ -83,22 +81,18 @@ class AuthContactPersonFragment :
     }
 
     override fun FragmentAuthContactPersonBinding.setObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.optionShowListFlow.collect {
-                    if (it == null) return@collect
-                    contact1Relacion.setOptionShowList(it.marryStatus)
-                    contact2Relacion.setOptionShowList(it.marryStatus)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.optionShowListFlow.collect {
+                if (it == null) return@collect
+                contact1Relacion.setOptionShowList(it.marryStatus)
+                contact2Relacion.setOptionShowList(it.marryStatus)
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.pagerDataFlow.collect {
-                    contact1Phone.selectContent = it.relationshipFirst
-                    contact2Phone.selectContent = ""
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.pagerDataFlow.collect {
+                contact1Phone.selectContent = it.relationshipFirst
+                contact2Phone.selectContent = ""
             }
         }
 

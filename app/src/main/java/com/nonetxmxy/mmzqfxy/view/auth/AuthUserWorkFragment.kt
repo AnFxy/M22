@@ -3,10 +3,7 @@ package com.nonetxmxy.mmzqfxy.view.auth
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.StringUtils
@@ -18,7 +15,6 @@ import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthUserWorkBinding
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserWorkViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserWorkViewModel>() {
@@ -169,25 +165,22 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
 
 
     override fun FragmentAuthUserWorkBinding.setObserver() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.optionShowListFlow.collect {
-                    if (it == null) return@collect
-                    commonSelect1.setOptionShowList(it.marryStatus)
-                    commonSelect2.setOptionShowList(it.marryStatus)
-                    commonSelect3.setOptionShowList(it.marryStatus)
-                    commonSelect4.setOptionShowList(it.marryStatus)
-                    sourceIncomeAdapter.setList(it.marryStatus)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.optionShowListFlow.collect {
+                if (it == null) return@collect
+                commonSelect1.setOptionShowList(it.marryStatus)
+                commonSelect2.setOptionShowList(it.marryStatus)
+                commonSelect3.setOptionShowList(it.marryStatus)
+                commonSelect4.setOptionShowList(it.marryStatus)
+                sourceIncomeAdapter.setList(it.marryStatus)
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.administrativeListFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-                .collect {
-                    if (it == null) return@collect
-                    commonSelect5.setAdministrativeList(it)
-                }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.administrativeListFlow.collect {
+                if (it == null) return@collect
+                commonSelect5.setAdministrativeList(it)
+            }
         }
     }
 }
