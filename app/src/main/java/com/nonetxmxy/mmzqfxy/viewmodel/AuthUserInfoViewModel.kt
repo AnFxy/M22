@@ -3,9 +3,10 @@ package com.nonetxmxy.mmzqfxy.viewmodel
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.AdministrativeData
+import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.OptionShowList
 import com.nonetxmxy.mmzqfxy.model.SelfData
-import com.nonetxmxy.mmzqfxy.repository.IUserAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.IUserInfoAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -16,14 +17,8 @@ import kotlinx.coroutines.joinAll
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthUserIndoViewModel @Inject constructor(private val repository: IUserAuthRepository) :
+class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInfoAuthRepository) :
     BaseViewModel() {
-
-    sealed class PagerEvent {
-        object UpdatePageView : PagerEvent()
-        object GoWorkPage : PagerEvent()
-        object Finsh : PagerEvent()
-    }
 
     private val _optionShowListFlow = MutableStateFlow<OptionShowList?>(null)
     val optionShowListFlow = _optionShowListFlow.asStateFlow()
@@ -43,8 +38,7 @@ class AuthUserIndoViewModel @Inject constructor(private val repository: IUserAut
         familyAddress = "",
     )
 
-
-    private val _pagerEventFlow = MutableSharedFlow<PagerEvent>(1)
+    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>(1)
     val pagerEventFlow = _pagerEventFlow
 
     init {
@@ -54,16 +48,14 @@ class AuthUserIndoViewModel @Inject constructor(private val repository: IUserAut
     private fun getPageData() {
         launchUIWithDialog {
             coroutineScope {
-                val a = async {
+                joinAll(async {
                     _optionShowListFlow.emit(repository.getOptionShowList())
-                }
-                val b = async {
+                }, async {
                     _administrativeListFlow.emit(repository.getAdministrativeList())
-                }
-                joinAll(a, b)
+                })
                 if (LocalCache.infoCredit == 1) {
                     pagerDataFlow = repository.getSubmitInfo()
-                    pagerEventFlow.emit(PagerEvent.UpdatePageView)
+                    pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
                 }
             }
         }
@@ -74,9 +66,9 @@ class AuthUserIndoViewModel @Inject constructor(private val repository: IUserAut
             val boolean = repository.submitInfo(pagerDataFlow)
             if (boolean) {
                 if (LocalCache.workCredit == 1) {
-                    pagerEventFlow.emit(PagerEvent.Finsh)
+                    pagerEventFlow.emit(AuthPagerEvent.Finish)
                 } else {
-                    pagerEventFlow.emit(PagerEvent.GoWorkPage)
+                    pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
                 }
             }
         }

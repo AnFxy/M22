@@ -13,22 +13,23 @@ import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
+import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
 import com.nonetxmxy.mmzqfxy.adapters.GridLayoutManagerItemDecoration
-import com.nonetxmxy.mmzqfxy.adapters.SourceIncomeAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthUserInfoBinding
+import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.SelfData
-import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserIndoViewModel
+import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserIndoViewModel>() {
+class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserInfoViewModel>() {
 
-    private val viewModel: AuthUserIndoViewModel by viewModels()
+    private val viewModel: AuthUserInfoViewModel by viewModels()
 
-    private val sourceIncomeAdapter by lazy {
-        val adapter = SourceIncomeAdapter()
+    private val estadoCivilAdapter by lazy {
+        val adapter = AuthPageDataSelectAdapter()
         adapter.setOnItemClickListener { _, _, position ->
             if (position == adapter.currentIndex || position >= adapter.data.size) return@setOnItemClickListener
             val data = adapter.data[position]
@@ -55,24 +56,25 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
 
     override fun FragmentAuthUserInfoBinding.setLayout() {
 
-        toolBar.setupWithNavController(navController)
-        toolBar.setNavigationIcon(R.mipmap.fanhui)
+        mToolbar.setupWithNavController(navController)
+        mToolbar.setNavigationIcon(R.mipmap.fanhui)
 
         includeAuthTitle.image.setImageResource(R.mipmap.jinbi1)
 
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.addItemDecoration(GridLayoutManagerItemDecoration(38f))
-        recyclerView.adapter = sourceIncomeAdapter
+        recyclerView.adapter = estadoCivilAdapter
 
-        includeAuthBottom.enviarBtn.setOnClickListener {
-            if (checkData()) {
-                viewModel.submitInfo()
-            }
-        }
         initListener()
     }
 
     private fun initListener() {
+        binding.includeAuthBottom.enviarBtn.setOnClickListener {
+            if (checkData()) {
+                viewModel.submitInfo()
+            }
+        }
+
         binding.commonSelect1.clickOptionItemBlock = {
             viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
                 educationLevel = it.dataValue, educationLevelShow = it.showContent
@@ -109,12 +111,6 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             return false
         }
         if (viewModel.pagerDataFlow.marryStatus.isEmpty()) {
-            ToastUtils.showShort(
-                StringUtils.format(
-                    StringUtils.getString(R.string.selector_error_hint),
-                    binding.commonSelect1.selectTitle
-                )
-            )
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -170,7 +166,7 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     if (it == null) return@collect
                     commonSelect1.setOptionShowList(it.marryStatus)
                     commonSelect2.setOptionShowList(it.marryStatus)
-                    sourceIncomeAdapter.setList(it.marryStatus)
+                    estadoCivilAdapter.setList(it.marryStatus)
                 }
             }
         }
@@ -186,13 +182,13 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.pagerEventFlow.collect {
                 when (it) {
-                    AuthUserIndoViewModel.PagerEvent.Finsh -> {
+                    AuthPagerEvent.Finish -> {
                         navController.navigateUp()
                     }
-                    AuthUserIndoViewModel.PagerEvent.GoWorkPage -> {
-                        navController.navigate(AuthUserIndoFragmentDirections.actionAuthUserIndoFragmentToAuthUserWorkFragment())
+                    AuthPagerEvent.GoNextPage -> {
+                        navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserIndoFragmentToAuthUserWorkFragment())
                     }
-                    AuthUserIndoViewModel.PagerEvent.UpdatePageView -> updatePage(viewModel.pagerDataFlow)
+                    AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerDataFlow)
                 }
             }
         }
@@ -211,10 +207,10 @@ class AuthUserIndoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             val index = viewModel.optionShowListFlow.value?.marryStatus?.map { map ->
                 map.showContent
             }?.indexOf(data.marryStatusShow) ?: return
-            val oldIndex = sourceIncomeAdapter.currentIndex
-            sourceIncomeAdapter.currentIndex = index
-            sourceIncomeAdapter.notifyItemChanged(oldIndex)
-            sourceIncomeAdapter.notifyItemChanged(index)
+            val oldIndex = estadoCivilAdapter.currentIndex
+            estadoCivilAdapter.currentIndex = index
+            estadoCivilAdapter.notifyItemChanged(oldIndex)
+            estadoCivilAdapter.notifyItemChanged(index)
         }
     }
 }

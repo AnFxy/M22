@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_navigation"
-    app:startDestination="@id/authUserIndoFragment">
+    app:startDestination="@id/authUserWorkFragment">
 
     <fragment
         android:id="@+id/authUserIndoFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserIndoFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
         android:label="Datos personales" >
         <action
             android:id="@+id/action_authUserIndoFragment_to_authUserWorkFragment"
@@ -15,5 +15,5 @@
     <fragment
         android:id="@+id/authUserWorkFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserWorkFragment"
-        android:label="AuthUserWorkFragment" />
+            android:label="Datos del trabajo" />
 </navigation>

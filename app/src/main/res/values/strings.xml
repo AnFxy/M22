@@ -16,6 +16,7 @@
     <string name="cancelar">Cancelar</string>
     <string name="enviar">Enviar</string>
     <string name="estado_civil">Estado civil</string>
+    <string name="fuente_de_ingresos">Fuente de ingresos</string>
     <string name="select_province">请选择省份</string>
     <string name="select_city">请选择城市</string>
 

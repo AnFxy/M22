@@ -1,13 +1,7 @@
 package com.nonetxmxy.mmzqfxy.inject
 
-import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
-import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
-import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
-import com.nonetxmxy.mmzqfxy.repository.IUserAuthRepository
-import com.nonetxmxy.mmzqfxy.repository.create.AuthRepository
-import com.nonetxmxy.mmzqfxy.repository.create.BeginRepository
-import com.nonetxmxy.mmzqfxy.repository.create.OrderRepository
-import com.nonetxmxy.mmzqfxy.repository.create.UserAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.*
+import com.nonetxmxy.mmzqfxy.repository.create.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,9 +16,14 @@ abstract class RepositoryModule {
     ): IBeginRepository
 
     @Binds
-    abstract fun createUserAuthRepository(
-        userAuthRepository: UserAuthRepository
-    ): IUserAuthRepository
+    abstract fun createUserInfoAuthRepository(
+        userAuthRepository: UserInfoAuthRepository
+    ): IUserInfoAuthRepository
+
+    @Binds
+    abstract fun createUserWorkAuthRepository(
+        userAuthRepository: UserWorkAuthRepository
+    ): IUserWorkAuthRepository
 
     @Binds
     abstract fun createOrderRepository(

@@ -3,15 +3,15 @@ package com.nonetxmxy.mmzqfxy.repository.create
 import com.nonetxmxy.mmzqfxy.model.AdministrativeData
 import com.nonetxmxy.mmzqfxy.model.OptionShowItem
 import com.nonetxmxy.mmzqfxy.model.OptionShowList
-import com.nonetxmxy.mmzqfxy.model.SelfData
-import com.nonetxmxy.mmzqfxy.repository.IUserAuthRepository
+import com.nonetxmxy.mmzqfxy.model.WorkData
+import com.nonetxmxy.mmzqfxy.repository.IUserWorkAuthRepository
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class UserAuthRepository @Inject constructor(/*val remoteService: IUserAuthService*/) :
-    IUserAuthRepository {
+class UserWorkAuthRepository @Inject constructor(/*val remoteService: IUserAuthService*/) :
+    IUserWorkAuthRepository {
 
-    override suspend fun getOptionShowList(): OptionShowList {
+    override suspend fun getOptionShowList(vararg connetColumn: String): OptionShowList {
         //remoteService.getOptionShowList()
         delay(1500)
         return OptionShowList(
@@ -23,22 +23,19 @@ class UserAuthRepository @Inject constructor(/*val remoteService: IUserAuthServi
         )
     }
 
-    override suspend fun submitInfo(data: SelfData): Boolean {
+    override suspend fun submitWorkInfo(data: WorkData): Boolean {
         delay(2000)
         return true
     }
 
-    override suspend fun getSubmitInfo(): SelfData {
-        return SelfData(
-            educationLevelShow = "666",
-            educationLevel = "6",
-            marryStatusShow = "大学",
-            marryStatus = "大学",
-            childrenTotalShow = "99",
-            childrenTotal = "9",
-            familyProvince = "999",
-            familyCity = "66666",
-            familyAddress = "66666666",
+    override suspend fun getSubmitWorkInfo(): WorkData {
+        return WorkData(
+            workNature = "",
+            workNatureShow = "",
+            incomeSourceType = "",
+            incomeSourceTypeShow = "",
+            companyMonthIncome = "",
+            companyMonthIncomeShow = ""
         )
     }
 

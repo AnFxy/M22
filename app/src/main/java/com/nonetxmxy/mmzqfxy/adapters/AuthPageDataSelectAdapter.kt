@@ -8,7 +8,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.model.OptionShowItem
 
-class SourceIncomeAdapter :
+class AuthPageDataSelectAdapter :
     BaseQuickAdapter<OptionShowItem, BaseViewHolder>(R.layout.item_soure_income) {
 
     var currentIndex = -1

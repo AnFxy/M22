@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+        android:id="@+id/m_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white" />
@@ -35,7 +35,7 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/shape_10_radius_white"
                 android:orientation="vertical">
-                <!--教育程度-->
+                <!--工作类型-->
                 <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
                     android:id="@+id/commonSelect1"
                     android:layout_width="match_parent"
@@ -47,8 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
-                    android:text="@string/estado_civil" />
-                <!--婚姻状态-->
+                    android:text="@string/fuente_de_ingresos" />
+                <!--收入来源-->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
@@ -56,30 +56,88 @@
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="12dp"
                     android:overScrollMode="never" />
-                <!--孩子数量-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/commonSelect2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:select_title="Numero de hijos" />
-
-                <!--家庭住址-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/commonSelect3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:select_title="Dirección de domicilio" />
-
-                <!--详细街道-->
+                <!--薪水-->
                 <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
                     android:id="@+id/input1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:enter_title="Salario" />
+
+                <!--工资支付频率-->
+                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                    android:id="@+id/commonSelect2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:select_title="Frecuencia de pago de salarios" />
+
+                <!--发薪日-->
+                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                    android:id="@+id/commonSelect3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
-                    app:enter_title="Calle detallada (** Comunidad ** Calle ** Número)" />
+                    app:select_title="Fecha de pago del salario" />
+
+                <!--入职时间-->
+                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                    android:id="@+id/commonSelect4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:select_title="Hora de entrada al trabajo" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/companyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_10_radius_white"
+                android:orientation="vertical"
+                android:paddingTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Información de empresa"
+                    android:textColor="@color/color_00230b"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <!--公司名称-->
+                <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
+                    android:id="@+id/input2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:enter_title="Nombre de la empresa" />
+
+                <!--公司地址-->
+                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                    android:id="@+id/commonSelect5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    app:select_title="Dirección de la empresa" />
+                <!--公司详细地址-->
+                <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
+                    android:id="@+id/input3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:enter_title="Calle detallada (** Comunidad ** Calle ** Número)" />
+                <!--公司电话-->
+                <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
+                    android:id="@+id/inpu4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="5dp"
+                    app:enter_title="Teléfono de la empresa (opcional)" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <include
                 android:id="@+id/includeAuthBottom"
