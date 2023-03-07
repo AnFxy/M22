@@ -85,4 +85,12 @@
     <string name="upload">上传</string>
     <string name="sugges_text_hint">请输入你的意见，请输入你的意见，请输入你的意见，请输入你的意见</string>
 
+    <!--还款页面-->
+    <string name="repay_page_title">还款页面</string>
+    <string name="repay_tips">*请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户</string>
+    <string name="repay_all">待还款金额</string>
+    <string name="remain_peroids">待还期数</string>
+    <string name="select_amount">选中的一共要还 `$`%d(含有`$`%d 减免)</string>
+    <string name="select_all">全选</string>
+
 </resources>
