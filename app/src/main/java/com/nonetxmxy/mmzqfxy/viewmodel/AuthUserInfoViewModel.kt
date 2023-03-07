@@ -26,7 +26,7 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
     private val _administrativeListFlow = MutableStateFlow<AdministrativeData?>(null)
     val administrativeListFlow = _administrativeListFlow.asStateFlow()
 
-    var pagerDataFlow = SelfData(
+    var pagerData = SelfData(
         educationLevelShow = "",
         educationLevel = "",
         marryStatusShow = "",
@@ -38,7 +38,7 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
         familyAddress = "",
     )
 
-    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>(1)
+    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
     val pagerEventFlow = _pagerEventFlow
 
     init {
@@ -54,7 +54,7 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
                     _administrativeListFlow.emit(repository.getAdministrativeList())
                 })
                 if (LocalCache.infoCredit == 1) {
-                    pagerDataFlow = repository.getSubmitInfo()
+                    pagerData = repository.getSubmitInfo()
                     pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
                 }
             }
@@ -63,7 +63,7 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
 
     fun submitInfo() {
         launchUIWithDialog {
-            val boolean = repository.submitInfo(pagerDataFlow)
+            val boolean = repository.submitInfo(pagerData)
             if (boolean) {
                 if (LocalCache.workCredit == 1) {
                     pagerEventFlow.emit(AuthPagerEvent.Finish)

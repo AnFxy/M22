@@ -35,3 +35,8 @@ data class WorkData(
     val companyAddress: String?,
     val companyPhone: String?*/
 )
+
+@Keep
+data class ContactPersonData(
+    val relationshipFirst: String
+)

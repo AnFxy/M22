@@ -21,6 +21,11 @@ abstract class RepositoryModule {
     ): IUserInfoAuthRepository
 
     @Binds
+    abstract fun createContactPersonAuthRepository(
+        userAuthRepository: ContactPersonAuthRepository
+    ): IContactPersonAuthRepository
+
+    @Binds
     abstract fun createUserWorkAuthRepository(
         userAuthRepository: UserWorkAuthRepository
     ): IUserWorkAuthRepository

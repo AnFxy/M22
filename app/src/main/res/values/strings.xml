@@ -19,10 +19,15 @@
     <string name="fuente_de_ingresos">Fuente de ingresos</string>
     <string name="select_province">请选择省份</string>
     <string name="select_city">请选择城市</string>
+    <string name="numero_telefono">Número de teléfono</string>
+    <string name="nombre">Nombre</string>
+    <string name="relación">Relación</string>
 
 
     <string name="selector_error_hint">Por favor elige %s</string>
     <string name="input_error_hint">Por favor completa %s</string>
+    <string name="internationall_number">+51</string>
+    <string name="permission_hint">需要授予权限</string>
 
 
     <!--首页-->

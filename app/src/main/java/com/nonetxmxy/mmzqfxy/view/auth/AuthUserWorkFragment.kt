@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.ui.setupWithNavController
@@ -37,7 +38,7 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
             adapter.notifyItemChanged(oldIndex)
             adapter.notifyItemChanged(position)
 
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 incomeSourceType = data.dataValue, incomeSourceTypeShow = data.showContent
             )
         }
@@ -56,7 +57,7 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
         mToolbar.setupWithNavController(navController)
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
 
-        includeAuthTitle.image.setImageResource(R.mipmap.jinbi2)
+        includeAuthTitle.image.setImageResource(R.mipmap.jinbi1)
 
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.addItemDecoration(GridLayoutManagerItemDecoration(38f))
@@ -73,33 +74,33 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
         }
 
         binding.commonSelect1.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 workNature = it.dataValue, workNatureShow = it.showContent
             )
             checkData()
         }
         binding.commonSelect2.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
 //                payCycle = it.dataValue, payCycleShow = it.showContent
             )
             checkData()
         }
 
         binding.commonSelect3.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
 //                payday = it.dataValue, paydayShow = it.showContent
             )
             checkData()
         }
         binding.commonSelect4.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 //beginWorkYear = it.showContent
             )
             checkData()
         }
 
         binding.commonSelect5.addressSelectOKBlock = { province: String, city: String ->
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
 //                companyProvince = province, companyCity = city
             )
             checkData()
@@ -108,11 +109,11 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
 
 
     private fun checkData(): Boolean {
-        viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+        viewModel.pagerData = viewModel.pagerData.copy(
             companyMonthIncomeShow = binding.input1.editValue
         )
 
-        if (viewModel.pagerDataFlow.workNature.isEmpty()) {
+        if (viewModel.pagerData.workNature.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -122,7 +123,7 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
             binding.commonSelect1.showOptionDialog()
             return false
         }
-        if (viewModel.pagerDataFlow.incomeSourceType.isEmpty()) {
+        if (viewModel.pagerData.incomeSourceType.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -176,10 +177,17 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     commonSelect2.setOptionShowList(it.marryStatus)
                     commonSelect3.setOptionShowList(it.marryStatus)
                     commonSelect4.setOptionShowList(it.marryStatus)
-                    commonSelect5.setOptionShowList(it.marryStatus)
                     sourceIncomeAdapter.setList(it.marryStatus)
                 }
             }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.administrativeListFlow.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+                .collect {
+                    if (it == null) return@collect
+                    commonSelect5.setAdministrativeList(it)
+                }
         }
     }
 }

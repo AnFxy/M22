@@ -27,6 +27,7 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
 
     var clickOptionItemBlock: ((OptionShowItem) -> Unit)? = null
     var addressSelectOKBlock: ((String, String) -> Unit)? = null
+    var contactPersonOKBlock: (() -> Unit)? = null
 
     private var selectType = 0
 
@@ -61,15 +62,21 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
                 1 -> {
                     addressSelectDialog.show()
                 }
+                2 -> {
+                    //联系人选择回调
+                    contactPersonOKBlock?.invoke()
+                }
             }
         }
 
+        //通用选择回调
         commonSelectDialog.clickItemBlock = {
             binding.content.text = it.showContent
             binding.content.typeface = Typeface.DEFAULT_BOLD
             clickOptionItemBlock?.invoke(it)
         }
 
+        //地址選擇回调
         addressSelectDialog.addressSelectOKBlock = { province: String, city: String ->
             binding.content.text = "$province/$city"
             binding.content.typeface = Typeface.DEFAULT_BOLD
@@ -98,6 +105,25 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
         val t = context.obtainStyledAttributes(attrs, R.styleable.CommonSelectView)
         selectType = t.getInt(R.styleable.CommonSelectView_select_type, 0)
         selectTitle = t.getString(R.styleable.CommonSelectView_select_title) ?: ""
+        val textViewEndSrc = t.getDrawable(R.styleable.CommonSelectView_android_drawableEnd)
+        val tvIconVisibility = t.getBoolean(R.styleable.CommonSelectView_tvIconVisibility, true)
+        if (!tvIconVisibility) {
+            binding.content.setCompoundDrawablesWithIntrinsicBounds(
+                null,
+                null,
+                null,
+                null
+            )
+        } else {
+            if (textViewEndSrc != null) {
+                binding.content.setCompoundDrawablesWithIntrinsicBounds(
+                    null,
+                    null,
+                    textViewEndSrc,
+                    null
+                )
+            }
+        }
         t.recycle()
     }
 }

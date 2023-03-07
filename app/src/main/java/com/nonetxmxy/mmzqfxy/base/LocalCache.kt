@@ -11,5 +11,6 @@ class LocalCache {
         //认证
         var infoCredit = 0
         var workCredit = 0
+        var contactPersonCredit = 0
     }
 }

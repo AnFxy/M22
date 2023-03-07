@@ -39,7 +39,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             adapter.notifyItemChanged(oldIndex)
             adapter.notifyItemChanged(position)
 
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 marryStatus = data.dataValue, marryStatusShow = data.showContent
             )
         }
@@ -59,7 +59,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
         mToolbar.setupWithNavController(navController)
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
 
-        includeAuthTitle.image.setImageResource(R.mipmap.jinbi1)
+        includeAuthTitle.image.setImageResource(R.mipmap.jinbi2)
 
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.addItemDecoration(GridLayoutManagerItemDecoration(38f))
@@ -76,20 +76,20 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
         }
 
         binding.commonSelect1.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 educationLevel = it.dataValue, educationLevelShow = it.showContent
             )
             checkData()
         }
         binding.commonSelect2.clickOptionItemBlock = {
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 childrenTotal = it.dataValue, childrenTotalShow = it.showContent
             )
             checkData()
         }
 
         binding.commonSelect3.addressSelectOKBlock = { province: String, city: String ->
-            viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+            viewModel.pagerData = viewModel.pagerData.copy(
                 familyProvince = province, familyCity = city
             )
             checkData()
@@ -97,10 +97,10 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     }
 
     private fun checkData(): Boolean {
-        viewModel.pagerDataFlow = viewModel.pagerDataFlow.copy(
+        viewModel.pagerData = viewModel.pagerData.copy(
             familyAddress = binding.input1.editValue
         )
-        if (viewModel.pagerDataFlow.educationLevel.isEmpty()) {
+        if (viewModel.pagerData.educationLevel.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -110,7 +110,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.commonSelect1.showOptionDialog()
             return false
         }
-        if (viewModel.pagerDataFlow.marryStatus.isEmpty()) {
+        if (viewModel.pagerData.marryStatus.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -120,7 +120,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.scrollView.smoothScrollTo(0, binding.recyclerView.top)
             return false
         }
-        if (viewModel.pagerDataFlow.childrenTotal.isEmpty()) {
+        if (viewModel.pagerData.childrenTotal.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -130,7 +130,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.commonSelect2.showOptionDialog()
             return false
         }
-        if (viewModel.pagerDataFlow.familyProvince.isEmpty() && viewModel.pagerDataFlow.familyCity.isEmpty()) {
+        if (viewModel.pagerData.familyProvince.isEmpty() && viewModel.pagerData.familyCity.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -141,7 +141,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             return false
         }
 
-        if (viewModel.pagerDataFlow.familyAddress.isEmpty()) {
+        if (viewModel.pagerData.familyAddress.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.input_error_hint), binding.input1.inputTitle
@@ -188,7 +188,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     AuthPagerEvent.GoNextPage -> {
                         navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserIndoFragmentToAuthUserWorkFragment())
                     }
-                    AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerDataFlow)
+                    AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerData)
                 }
             }
         }

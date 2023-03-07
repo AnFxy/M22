@@ -25,10 +25,10 @@ class AuthUserWorkViewModel @Inject constructor(private val repository: IUserWor
     private val _administrativeListFlow = MutableStateFlow<AdministrativeData?>(null)
     val administrativeListFlow = _administrativeListFlow.asStateFlow()
 
-    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>(1)
+    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
     val pagerEventFlow = _pagerEventFlow
 
-    var pagerDataFlow = WorkData(
+    var pagerData = WorkData(
         workNature = "",
         workNatureShow = "",
         incomeSourceType = "",
@@ -50,7 +50,7 @@ class AuthUserWorkViewModel @Inject constructor(private val repository: IUserWor
                     _administrativeListFlow.emit(repository.getAdministrativeList())
                 })
                 if (LocalCache.workCredit == 1) {
-                    pagerDataFlow = repository.getSubmitWorkInfo()
+                    pagerData = repository.getSubmitWorkInfo()
                     pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
                 }
             }
@@ -59,7 +59,7 @@ class AuthUserWorkViewModel @Inject constructor(private val repository: IUserWor
 
     fun submitWorkInfo() {
         launchUIWithDialog {
-            val boolean = repository.submitWorkInfo(pagerDataFlow)
+            val boolean = repository.submitWorkInfo(pagerData)
             if (boolean) {
                 if (LocalCache.workCredit == 1) {
                     pagerEventFlow.emit(AuthPagerEvent.Finish)

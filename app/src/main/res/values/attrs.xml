@@ -4,8 +4,11 @@
         <attr name="select_type" format="enum">
             <enum name="general" value="0" />
             <enum name="address" value="1" />
+            <enum name="contacto" value="2" />
         </attr>
         <attr name="select_title" format="string" />
+        <attr name="android:drawableEnd" />
+        <attr name="tvIconVisibility" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="InputInfoView">
