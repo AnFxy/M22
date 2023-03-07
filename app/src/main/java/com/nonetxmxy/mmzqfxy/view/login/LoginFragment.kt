@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.FragmentLoginBinding
 import com.nonetxmxy.mmzqfxy.model.LoginType
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
@@ -68,6 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragViewModel>() {
 
         lifecycleScope.launch {
             viewModel.goPage.collect {
+                LocalCache.phoneNumber = viewModel.inputNumber.value
                 when(it) {
                     LoginType.MAIN -> navController.navigate(R.id.goMain)
                     LoginType.SMS -> navController.navigate(LoginFragmentDirections.actionLoginFragmentToSMSFragment())

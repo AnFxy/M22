@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_myFragment_to_aboutCompanyFragment"
             app:destination="@id/aboutCompanyFragment" />
+        <action
+            android:id="@+id/action_myFragment_to_suggestionsFragment"
+            app:destination="@id/suggestionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -58,4 +61,8 @@
     </fragment>
 
     <include app:graph="@navigation/login_navigation"/>
+    <fragment
+        android:id="@+id/suggestionsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.SuggestionsFragment"
+        android:label="SuggestionsFragment" />
 </navigation>

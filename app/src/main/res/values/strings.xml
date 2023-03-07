@@ -78,4 +78,11 @@
     <string name="login">Login</string>
     <string name="send_voice_code">发送语音验证码</string>
 
+    <!--意见反馈页面-->
+    <string name="sugges_text">添加评论</string>
+    <string name="sugges_pic">问题截图，促进问题解决（可选）</string>
+    <string name="sugges_phone">填写联系方式</string>
+    <string name="upload">上传</string>
+    <string name="sugges_text_hint">请输入你的意见，请输入你的意见，请输入你的意见，请输入你的意见</string>
+
 </resources>
