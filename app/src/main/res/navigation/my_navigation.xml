@@ -14,6 +14,15 @@
         <action
             android:id="@+id/action_myFragment_to_cardsFragment"
             app:destination="@id/cardsFragment" />
+        <action
+            android:id="@+id/action_myFragment_to_allAuthFragment"
+            app:destination="@id/allAuthFragment" />
+        <action
+            android:id="@+id/action_myFragment_to_aboutCompanyFragment"
+            app:destination="@id/aboutCompanyFragment" />
+        <action
+            android:id="@+id/action_myFragment_to_suggestionsFragment"
+            app:destination="@id/suggestionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -36,4 +45,24 @@
         android:id="@+id/addCardsFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AddCardsFragment"
         android:label="AddCardsFragment" />
+    <fragment
+        android:id="@+id/allAuthFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.AllAuthFragment"
+        android:label="AllAuthFragment" />
+    <fragment
+        android:id="@+id/aboutCompanyFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.AboutCompanyFragment"
+        android:label="AboutCompanyFragment" >
+        <action
+            android:id="@+id/action_aboutCompanyFragment_to_loginFragment"
+            app:destination="@id/login_navigation"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <include app:graph="@navigation/login_navigation"/>
+    <fragment
+        android:id="@+id/suggestionsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.SuggestionsFragment"
+        android:label="SuggestionsFragment" />
 </navigation>
