@@ -113,15 +113,16 @@
 
             <CheckBox
                 android:id="@+id/cb_privacy"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:padding="6dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:gravity="center"
-                android:button="@drawable/privacy_check_box" />
+                android:background="@drawable/privacy_check_box"
+                android:button="@null" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:text="@string/privacy_tips"/>
 
         </LinearLayout>

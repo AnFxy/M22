@@ -1,6 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_16"
+        android:layout_marginHorizontal="15dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="20dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <CheckBox
+            android:id="@+id/cb_select"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:button="@null"
+            android:background="@drawable/privacy_check_box"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_period"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="Periodo x"
+            android:textColor="@color/gray_333333"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/cb_select"
+            app:layout_constraintEnd_toStartOf="@id/tv_order"
+            app:layout_constraintTop_toTopOf="@id/cb_select"
+            app:layout_constraintBottom_toBottomOf="@id/cb_select"/>
+
+        <TextView
+            android:id="@+id/tv_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Orden x"
+            android:textColor="@color/gray_666666"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cb_select"
+            app:layout_constraintBottom_toBottomOf="@id/cb_select"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/gray_e9e9e9"
+            app:layout_constraintTop_toBottomOf="@id/cb_select"/>
+
+        <TextView
+            android:id="@+id/tv_status_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxXXXXXXXX"
+            android:textSize="12sp"
+            android:layout_marginTop="13dp"
+            android:textColor="@color/color_ffa700"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/container_loan_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_status_days">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/borrowed_amount"
+                android:textColor="@color/gray_666666"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_borrowed_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="$x,xxxx"
+                android:textColor="@color/gray_333333"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_handle_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="9dp"
+            app:layout_constraintTop_toBottomOf="@id/container_loan_amount">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/handle_amount"
+                android:textColor="@color/gray_666666"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_handle_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="$x,xxxx"
+                android:textColor="@color/gray_333333"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/container_loan_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="13dp"
+            app:layout_constraintTop_toBottomOf="@id/container_handle_amount">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_date"
+                android:textColor="@color/gray_666666"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_loan_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="$x,xxxx"
+                android:textColor="@color/gray_333333"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="25dp"
+            android:paddingVertical="11dp"
+            android:text="@string/repay"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/gray_532e00"
+            android:textSize="16sp"
+            android:background="@drawable/yellow_8"
+            app:layout_constraintTop_toBottomOf="@id/container_loan_date"/>
+
+        <TextView
+            android:id="@+id/tv_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/expand"
+            android:textColor="@color/color_ffa700"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_pay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

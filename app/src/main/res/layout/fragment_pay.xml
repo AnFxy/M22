@@ -7,8 +7,9 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="276dp"
-        android:background="@color/yellow_ffd247"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="h,30:23"
+        android:background="@mipmap/bg_c"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.Toolbar
@@ -160,10 +161,11 @@
 
             <CheckBox
                 android:id="@+id/cb_select_all"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginStart="20dp"
-                android:button="@drawable/privacy_check_box"/>
+                android:background="@drawable/privacy_check_box"
+                android:button="@null"/>
 
             <TextView
                 android:layout_width="wrap_content"
