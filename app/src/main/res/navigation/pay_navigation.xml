@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pay_navigation"
+    app:startDestination="@id/payFragment">
+
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.payback.PayFragment"
+        android:label="PayFragment" >
+        <action
+            android:id="@+id/action_payFragment_to_expandFragment"
+            app:destination="@id/expandFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/expandFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.payback.ExpandFragment"
+        android:label="ExpandFragment" />
+</navigation>

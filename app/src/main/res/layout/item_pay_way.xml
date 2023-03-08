@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingHorizontal="15dp">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="68dp"
+        android:layout_height="32dp"
+        android:background="@color/gray_e9e9e9"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pay_tag_recommend"
+        android:layout_marginStart="13dp"
+        android:textSize="12sp"
+        android:textColor="@color/color_ffa700"
+        app:layout_constraintStart_toEndOf="@id/iv_logo"
+        app:layout_constraintTop_toTopOf="@id/iv_logo"
+        app:layout_constraintBottom_toBottomOf="@id/iv_logo"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/fanhui_a"
+        app:layout_constraintTop_toTopOf="@id/iv_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_logo"/>
+
+    <LinearLayout
+        android:id="@+id/container_pay_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tv_pay_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_333333"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="15dp"
+            android:text="88888xxxxx8888xxx88"
+            android:background="@drawable/grey_6"
+            />
+
+        <TextView
+            android:id="@+id/tv_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="COPY"
+            android:paddingVertical="6dp"
+            android:paddingHorizontal="11dp"
+            android:textStyle="bold"
+            android:textColor="@color/gray_532e00"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/yellow_6" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/gray_eeeeee"
+        app:layout_constraintTop_toBottomOf="@id/container_pay_code"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

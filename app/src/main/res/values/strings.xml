@@ -100,4 +100,29 @@
     <string name="upload">上传</string>
     <string name="sugges_text_hint">请输入你的意见，请输入你的意见，请输入你的意见，请输入你的意见</string>
 
+    <!--还款页面-->
+    <string name="repay_page_title">还款页面</string>
+    <string name="repay_tips">*请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户</string>
+    <string name="repay_all">待还款金额</string>
+    <string name="remain_peroids">待还期数</string>
+    <string name="borrowed_amount">借入金额</string>
+    <string name="handle_amount">到手金额</string>
+    <string name="pay_date">还款日期</string>
+    <string name="select_amount">选中的一共要还 `$`%d(含有`$`%d 减免)</string>
+    <string name="select_all">全选</string>
+    <string name="congratulation_request_again">恭喜你，\n获得了独家再贷款特权！</string>
+
+    <!--展期页面-->
+    <string name="expand_page_title">展期页面</string>
+    <string name="expand_days">展期天数</string>
+    <string name="expand_details">展期细节</string>
+    <string name="expand_fee">延期费用</string>
+    <string name="need_pay">支付总费用</string>
+    <string name="expand_date">延期后还款日期</string>
+    <string name="expand_tips">支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。</string>
+    <string name="expand_confirm">确认展期</string>
+    <string name="pay_way">还款通道</string>
+    <string name="pay_tag_recommend">推荐的</string>
+    <string name="pay_tag_common">普通的</string>
+
 </resources>
