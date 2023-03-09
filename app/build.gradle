@@ -65,11 +65,15 @@ android {
             dimension "project"
             applicationId 'com.nonetxmxy.mmzqfxy'
 
+            buildConfigField "String", "MAIN_URL", '"http://mexclient22.dasuoh.com"'
+            buildConfigField "String", "FILE_URL", '"http://ksfile.danamasuk.com"'
         }
         product{
             dimension "project"
             applicationId 'com.nonetxmxy.mmzqfxy'
 
+            buildConfigField "String", "MAIN_URL", '"http://mexclient22.dasuoh.com"'
+            buildConfigField "String", "FILE_URL", '"http://ksfile.danamasuk.com"'
         }
     }
 
