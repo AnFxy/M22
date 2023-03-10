@@ -16,21 +16,6 @@ abstract class RepositoryModule {
     ): IBeginRepository
 
     @Binds
-    abstract fun createUserInfoAuthRepository(
-        userAuthRepository: UserInfoAuthRepository
-    ): IUserInfoAuthRepository
-
-    @Binds
-    abstract fun createContactPersonAuthRepository(
-        userAuthRepository: ContactPersonAuthRepository
-    ): IContactPersonAuthRepository
-
-    @Binds
-    abstract fun createUserWorkAuthRepository(
-        userAuthRepository: UserWorkAuthRepository
-    ): IUserWorkAuthRepository
-
-    @Binds
     abstract fun createOrderRepository(
         orderRepository: OrderRepository
     ): IOrderRepository

@@ -5,7 +5,6 @@ import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.ContactPersonData
 import com.nonetxmxy.mmzqfxy.model.OptionShowList
-import com.nonetxmxy.mmzqfxy.repository.IContactPersonAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

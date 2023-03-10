@@ -4,4 +4,7 @@ data class BaseResponse<T>(
     val data: T? = null,
     val code: Int? = null,
     private val message: String? = null,
-)
+) {
+    fun checkDataEmpty() =
+        data ?: throw Exception("null")
+}

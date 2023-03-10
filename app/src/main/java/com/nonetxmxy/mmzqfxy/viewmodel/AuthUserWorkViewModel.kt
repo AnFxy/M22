@@ -6,7 +6,6 @@ import com.nonetxmxy.mmzqfxy.model.AdministrativeData
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.OptionShowList
 import com.nonetxmxy.mmzqfxy.model.WorkData
-import com.nonetxmxy.mmzqfxy.repository.IUserWorkAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
