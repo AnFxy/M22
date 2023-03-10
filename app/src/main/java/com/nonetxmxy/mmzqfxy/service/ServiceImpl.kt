@@ -7,7 +7,10 @@ class ServiceImpl {
         fun giveIBeginService(): IBeginService =
             RetrofitSet.onlyOne.provideRetrofit().create(IBeginService::class.java)
 
-        fun giveIUserAuthService(): IAuthService =
+        fun giveIAuthService(): IAuthService =
             RetrofitSet.onlyOne.provideRetrofit().create(IAuthService::class.java)
+
+        fun giveIMainService(): IMainService =
+            RetrofitSet.onlyOne.provideRetrofit().create(IMainService::class.java)
     }
 }

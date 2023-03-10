@@ -2,6 +2,7 @@ package com.nonetxmxy.mmzqfxy.inject
 
 import com.nonetxmxy.mmzqfxy.service.IBeginService
 import com.nonetxmxy.mmzqfxy.service.IAuthService
+import com.nonetxmxy.mmzqfxy.service.IMainService
 import com.nonetxmxy.mmzqfxy.service.ServiceImpl
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,10 @@ object ServiceModule {
         ServiceImpl.giveIBeginService()
 
     @Provides
-    fun provideIUserAuthService(): IAuthService =
-        ServiceImpl.giveIUserAuthService()
+    fun provideIAuthService(): IAuthService =
+        ServiceImpl.giveIAuthService()
+
+    @Provides
+    fun provideIMainService(): IMainService =
+        ServiceImpl.giveIMainService()
 }
