@@ -6,16 +6,16 @@ import com.blankj.utilcode.util.ColorUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.nonetxmxy.mmzqfxy.R
-import com.nonetxmxy.mmzqfxy.model.OptionShowItem
+import com.nonetxmxy.mmzqfxy.model.response.Tags
 
 class AuthPageDataSelectAdapter :
-    BaseQuickAdapter<OptionShowItem, BaseViewHolder>(R.layout.item_soure_income) {
+    BaseQuickAdapter<Tags, BaseViewHolder>(R.layout.item_soure_income) {
 
     var currentIndex = -1
 
-    override fun convert(holder: BaseViewHolder, item: OptionShowItem) {
+    override fun convert(holder: BaseViewHolder, item: Tags) {
         val textview = holder.getView<TextView>(R.id.textview)
-        textview.text = item.showContent
+        textview.text = item.cnTVzVSsBYV
         if (currentIndex == holder.layoutPosition) {
             textview.typeface = Typeface.DEFAULT_BOLD
             textview.setTextColor(ColorUtils.getColor(R.color.gray_532e00))

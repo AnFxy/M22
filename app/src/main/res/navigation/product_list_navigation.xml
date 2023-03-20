@@ -9,10 +9,21 @@
         android:name="com.nonetxmxy.mmzqfxy.view.ProductListFragment"
         android:label="ProductListFragment" >
         <action
+            android:id="@+id/action_productListFragment_to_login_navigation"
+            app:destination="@id/login_navigation"/>
+        <action
+            android:id="@+id/action_productListFragment_to_pay_navigation"
+            app:destination="@id/pay_navigation"/>
+        <action
             android:id="@+id/action_productListFragment_to_auth_navigation"
-            app:destination="@id/auth_navigation" />
+            app:destination="@id/auth_navigation"/>
     </fragment>
 
+
+
+    <include app:graph="@navigation/login_navigation"/>
+
+    <include app:graph="@navigation/pay_navigation"/>
 
     <include app:graph="@navigation/auth_navigation"/>
 

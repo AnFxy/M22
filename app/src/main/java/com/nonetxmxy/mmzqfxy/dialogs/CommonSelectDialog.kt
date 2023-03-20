@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.CommonSelectAdapter
 import com.nonetxmxy.mmzqfxy.databinding.DiaCommonSelectBinding
-import com.nonetxmxy.mmzqfxy.model.OptionShowItem
+import com.nonetxmxy.mmzqfxy.model.response.Tags
 
 class CommonSelectDialog constructor(context: Context, themeResId: Int) :
     Dialog(context, themeResId) {
 
     private val binding = DiaCommonSelectBinding.inflate(layoutInflater)
 
-    var clickItemBlock: ((OptionShowItem) -> Unit)? = null
+    var clickItemBlock: ((Tags) -> Unit)? = null
 
     private val commonSelectAdapter by lazy {
         val adapter = CommonSelectAdapter()
@@ -54,7 +54,7 @@ class CommonSelectDialog constructor(context: Context, themeResId: Int) :
         }
     }
 
-    fun setOptionShowList(title: String, data: List<OptionShowItem>) {
+    fun setOptionShowList(title: String, data: List<Tags>) {
         binding.diaTitle.text = title
         commonSelectAdapter.setList(data)
     }

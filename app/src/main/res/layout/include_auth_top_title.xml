@@ -51,6 +51,7 @@ su permiso."
             android:textSize="12sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_security_tips"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Por favor, llene su información real para ayudarlo con aplicación"

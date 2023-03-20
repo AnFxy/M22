@@ -1,11 +1,19 @@
 package com.nonetxmxy.mmzqfxy.repository.create
 
+import com.nonetxmxy.mmzqfxy.BuildConfig
+import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.model.ProductsBean
 import com.nonetxmxy.mmzqfxy.model.SampleOrder
+import com.nonetxmxy.mmzqfxy.model.response.AppBean
+import com.nonetxmxy.mmzqfxy.model.response.MineInfo
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
+import com.nonetxmxy.mmzqfxy.service.IMainService
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
-class OrderRepository @Inject constructor() : IOrderRepository {
+class OrderRepository @Inject constructor(
+    private val mainService: IMainService
+) : IOrderRepository {
 
     override suspend fun getOrders(): List<SampleOrder> {
         delay(1000)
@@ -61,5 +69,34 @@ class OrderRepository @Inject constructor() : IOrderRepository {
                 days = -9
             )
         )
+    }
+
+
+    override suspend fun getProducts(): List<ProductsBean> {
+        val maps = HashMap<String, String>()
+        maps["uVx"] = BuildConfig.CODE
+        maps["ZAUqTIK"] = BuildConfig.LANGUAGE
+        if (LocalCache.token.isNotEmpty()) {
+            maps["zdzVswbBoC"] = LocalCache.token
+        }
+        return mainService.productsList(maps).checkDataEmpty().soNLPDaZSdh
+    }
+
+    override suspend fun getAPPs(): List<AppBean> {
+        val maps = HashMap<String, String>()
+        maps["ElH"] = BuildConfig.CODE
+        maps["bMQUAlD"] = BuildConfig.LANGUAGE
+        maps["emrccuSydv"] = LocalCache.token
+        maps["mIdVQD"] = LocalCache.currentProCode
+        return mainService.appsRecommend(maps).checkDataEmpty().ymeF
+    }
+
+    override suspend fun getUserInfo(): MineInfo {
+        val maps = HashMap<String, String>()
+        maps["iYWu"] = BuildConfig.CODE
+        maps["eFVWQmuScjk"] = BuildConfig.LANGUAGE
+        maps["LCQw"] = LocalCache.token
+        maps["PYpiJ"] = LocalCache.currentProCode
+        return mainService.allVerifiMessage(maps).checkDataEmpty().xmYDzadg
     }
 }

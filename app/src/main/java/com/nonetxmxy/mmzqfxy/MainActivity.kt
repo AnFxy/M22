@@ -31,6 +31,25 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
         binding.nvBottom.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(this)
+
+//        binding.nvBottom.setOnItemSelectedListener {
+//            if (!LocalCache.isLogged) {
+//                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
+//                false
+//            } else {
+//                val builder =
+//                    NavOptions.Builder()
+//                        .setLaunchSingleTop(true)
+//                        .setRestoreState(true)
+//                        .setPopUpTo(
+//                            R.id.productListFragment,
+//                            inclusive = false,
+//                            saveState = true
+//                        )
+//                navController.navigate(it.itemId, null, builder.build())
+//                navController.currentDestination?.id == it.itemId
+//            }
+//        }
     }
 
     override fun setListener() {

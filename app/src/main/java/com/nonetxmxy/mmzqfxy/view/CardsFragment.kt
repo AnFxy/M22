@@ -44,7 +44,7 @@ class CardsFragment : BaseFragment<FragmentCardsBinding, CardsFragViewModel>() {
     }
 
     override fun setObserver() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.cards.collect {
                 adapter.orders = it
                 binding.tvAddCards.setVisible(it.isNotEmpty())

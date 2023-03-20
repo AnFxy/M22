@@ -55,6 +55,7 @@ class RetrofitSet private constructor() {
     private fun provideHeaders(): Map<String, String> {
         val headers = HashMap<String, String>()
         headers["Content-Type"] = "application/json"
+        headers["code"] = "MXC"
         headers["isSecert"] = if (BuildConfig.NEED_JIA_MI) "1" else "0"
         if (BuildConfig.NEED_JIA_MI) {
             headers["secretKey"] = SecretUtil.randomKey()

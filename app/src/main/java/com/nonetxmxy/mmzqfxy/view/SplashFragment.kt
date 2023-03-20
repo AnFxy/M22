@@ -5,14 +5,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentSplashBinding
-import com.nonetxmxy.mmzqfxy.model.UpdateType
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.SplashFragViewModel
@@ -29,7 +28,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
             val dialog = RxDialogSet.provideDialog(it, R.layout.dia_tips)
             dialog.setViewState<TextView>(R.id.tv_confirm) {
                 setLimitClickListener {
-                    lifecycleScope.launch {
+                    viewLifecycleOwner.lifecycleScope.launch {
                         viewModel.checkUpdate()
                     }
                     LocalCache.isShowedTips = true
@@ -53,10 +52,6 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
                     navController.navigate(SplashFragmentDirections.goMain())
                     dialog.dismiss()
                 }
-            }.setViewState<TextView>(R.id.tv_update_now) {
-                setLimitClickListener {
-                    // TODO 前往Google商店
-                }
             }
         }
     }
@@ -72,29 +67,42 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashFragViewModel>(
     override fun setObserver() {
         navController = findNavController()
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.closePage.collect {
                 activity?.finish()
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.showTipsDialog.collect {
                 tipsDialog?.show()
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.showUpdateDialog.collect {
-                when (it) {
-                    UpdateType.OPTIONAL -> updateDialog?.show()
-                    UpdateType.FORCE ->
-                        updateDialog?.setViewState<TextView>(R.id.tv_update_later) {
-                            setVisible(false)
-                        }?.show()
-                    UpdateType.NO_NEED_UPDATE -> {
-                        navController.setGraph(R.navigation.main_navigation)
-                    }
+                val isNeedUpdate = it.oMGtrc == 0
+                val isForceUpdate = it.ITwm == 1
+                if (isForceUpdate) {
+                    updateDialog?.setViewState<TextView>(R.id.tv_update_later) {
+                        setVisible(false)
+                    }?.setViewState<TextView>(R.id.tv_update_content) {
+                        text = it.eHuxdiAPuTS
+                    }?.setViewState<TextView>(R.id.tv_update_now) {
+                        setLimitClickListener {
+                            CommonUtil.goGooglePlay(activity, it.uvFD)
+                        }
+                    }?.show()
+                } else if (isNeedUpdate) {
+                    updateDialog?.setViewState<TextView>(R.id.tv_update_content) {
+                        text = it.eHuxdiAPuTS
+                    }?.setViewState<TextView>(R.id.tv_update_now) {
+                        setLimitClickListener {
+                            CommonUtil.goGooglePlay(activity, it.uvFD)
+                        }
+                    }?.show()
+                } else {
+                    navController.navigate(SplashFragmentDirections.goMain())
                 }
             }
         }

@@ -1,7 +1,7 @@
 package com.nonetxmxy.mmzqfxy.model.response
 
 data class AppsResBean(
-    val WtNMjNxN: List<AppBean>
+    val ymeF: List<AppBean>
 )
 
 data class AppBean(

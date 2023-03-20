@@ -2,28 +2,167 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_navigation"
-    app:startDestination="@id/authIdentityFragment">
+    app:startDestination="@id/emptyAuthFragment">
 
     <fragment
-        android:id="@+id/authUserIndoFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
-        android:label="Datos personales">
+        android:id="@+id/emptyAuthFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.empty.EmptyAuthFragment"
+        android:label="EmptyAuthFragment" >
         <action
-            android:id="@+id/action_authUserIndoFragment_to_authUserWorkFragment"
-            app:destination="@id/authUserWorkFragment" />
+            android:id="@+id/action_emptyAuthFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_emptyAuthFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_emptyAuthFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_emptyAuthFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_emptyAuthFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/authUserInfoFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
+        android:label="AuthUserInfoFragment" >
+        <action
+            android:id="@+id/action_authUserInfoFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment"
+            app:popUpTo="@id/authUserInfoFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserInfoFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment"
+            app:popUpTo="@id/authUserInfoFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserInfoFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment"
+            app:popUpTo="@id/authUserInfoFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserInfoFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authUserInfoFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/authUserWorkFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserWorkFragment"
-        android:label="Datos del trabajo" />
+        android:label="AuthUserWorkFragment" >
+        <action
+            android:id="@+id/action_authUserWorkFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment"
+            app:popUpTo="@id/authUserWorkFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserWorkFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment"
+            app:popUpTo="@id/authUserWorkFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserWorkFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment"
+            app:popUpTo="@id/authUserWorkFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserWorkFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authUserWorkFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/authContactPersonFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthContactPersonFragment"
-        android:label="Datos personales" />
+        android:label="AuthContactPersonFragment" >
+        <action
+            android:id="@+id/action_authContactPersonFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment"
+            app:popUpTo="@id/authContactPersonFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authContactPersonFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment"
+            app:popUpTo="@id/authContactPersonFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authContactPersonFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment"
+            app:popUpTo="@id/authContactPersonFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authContactPersonFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authContactPersonFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/authIdentityFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthIdentityFragment"
-        android:label="Datos personales" />
+        android:label="AuthIdentityFragment" >
+        <action
+            android:id="@+id/action_authIdentityFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment"
+            app:popUpTo="@id/authIdentityFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authIdentityFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment"
+            app:popUpTo="@id/authIdentityFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authIdentityFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment"
+            app:popUpTo="@id/authIdentityFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authIdentityFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authIdentityFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addCardsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AddCardsFragment"
+        android:label="AddCardsFragment" >
 
+        <argument
+            app:argType="boolean"
+            android:defaultValue="false"
+            android:name="isJustBack"/>
 
+        <action
+            android:id="@+id/action_addCardsFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment"
+            app:popUpTo="@id/addCardsFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_addCardsFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment"
+            app:popUpTo="@id/addCardsFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_addCardsFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment"
+            app:popUpTo="@id/addCardsFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_addCardsFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment"
+            app:popUpTo="@id/addCardsFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

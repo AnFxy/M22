@@ -69,7 +69,7 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
     }
 
     override fun setObserver() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.orders.collect {
                 adapter.orders = it
             }

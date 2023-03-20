@@ -5,6 +5,7 @@ import com.nonetxmxy.mmzqfxy.tools.SecretUtil
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
+import timber.log.Timber
 import java.nio.charset.Charset
 
 class ResponseJieMiInterceptor : Interceptor {
@@ -13,7 +14,7 @@ class ResponseJieMiInterceptor : Interceptor {
         val request = chain.request()
         var response = chain.proceed(request)
         val jiaMiKey19 = response.headers["responseKey"]
-        if (BuildConfig.MAIN_URL.contains(request.url.host)) {
+        if (BuildConfig.MAIN_URL.contains("${request.url.host}:${request.url.port}")) {
             if (response.isSuccessful) {
                 val body = response.body
                 if (body != null) {
@@ -34,8 +35,9 @@ class ResponseJieMiInterceptor : Interceptor {
                                 ResponseBody.create(
                                     contentType,
                                     SecretUtil.jieMi(
-                                        bodyStr.replace("\"", ""),
-                                        password = completeKey
+                                        originalContent = bodyStr.substring(0, bodyStr.length - 5).replace("\"", ""),
+                                        password = completeKey,
+                                        path = request.url.toString()
                                     )
                                 )
                             ).build()

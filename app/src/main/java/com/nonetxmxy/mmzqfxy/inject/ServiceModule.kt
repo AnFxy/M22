@@ -1,9 +1,6 @@
 package com.nonetxmxy.mmzqfxy.inject
 
-import com.nonetxmxy.mmzqfxy.service.IBeginService
-import com.nonetxmxy.mmzqfxy.service.IAuthService
-import com.nonetxmxy.mmzqfxy.service.IMainService
-import com.nonetxmxy.mmzqfxy.service.ServiceImpl
+import com.nonetxmxy.mmzqfxy.service.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +21,8 @@ object ServiceModule {
     @Provides
     fun provideIMainService(): IMainService =
         ServiceImpl.giveIMainService()
+
+    @Provides
+    fun provideIFileUploadService(): IFileUploadService =
+        ServiceImpl.giveIFileUploadService()
 }

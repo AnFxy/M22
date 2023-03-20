@@ -41,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:select_title="Nivel educativo" />
+                    app:select_title="Tipo de empleo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,6 +62,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:inputType="number"
+                    android:maxLength="6"
                     app:enter_title="Salario" />
 
                 <!--工资支付频率-->
@@ -85,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    app:select_type="date"
                     app:select_title="Hora de entrada al trabajo" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -121,6 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
+                    app:select_type="address"
                     app:select_title="Dirección de la empresa" />
                 <!--公司详细地址-->
                 <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
@@ -135,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="5dp"
+                    android:inputType="number"
                     app:enter_title="Teléfono de la empresa (opcional)" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 

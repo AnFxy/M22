@@ -21,8 +21,15 @@ class RequestJiaMiInterceptor : Interceptor {
             while (keys.hasNext()) {
                 val currentKey = keys.next()
                 value = originalObject.opt(currentKey)
-                // TODO 如果value值再请求map时已经加密了，那么需要解密
-                emptyJSONObject.put(currentKey, value)
+                emptyJSONObject.put(
+                    SecretUtil.randomKey(
+                        isNeedJiaMi = BuildConfig.NEED_JIA_MI,
+                        count = 3
+                    ) + currentKey + SecretUtil.randomKey(
+                        isNeedJiaMi = BuildConfig.NEED_JIA_MI,
+                        count = 2
+                    ), value
+                )
             }
         }
         return emptyJSONObject
@@ -36,15 +43,20 @@ class RequestJiaMiInterceptor : Interceptor {
         val mediaType = headers["Content-type"]?.toMediaTypeOrNull()
         val key: String? = headers["secretKey"]
         val jiaMikey = key?.substring(0, 19) ?: ""
-        val addToBodyBehind = key?.substring(19)
+        val addToBodyBehind = key?.substring(19) ?: ""
         val buffer = Buffer()
         oldBody?.writeTo(buffer)
         val strOldBody: String = buffer.readUtf8()
-        if (BuildConfig.MAIN_URL.contains(request.url.host)) {
+        if (request.url.toString().contains(BuildConfig.MAIN_URL)) {
             val jsonStr = jsonToJSONObject(strOldBody).toString()
             val newBody = if (BuildConfig.NEED_JIA_MI) {
                 if (!key.isNullOrBlank()) {
-                    (SecretUtil.jiaMi(jsonStr, key) + addToBodyBehind).toRequestBody(mediaType)
+                    (SecretUtil.jiaMi(
+                        originalContent = jsonStr,
+                        password = key,
+                        extraKey = addToBodyBehind,
+                        path = request.url.toString()
+                    )).toRequestBody(mediaType)
                 } else {
                     jsonStr.toRequestBody(mediaType)
                 }

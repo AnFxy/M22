@@ -4,15 +4,15 @@ import com.blankj.utilcode.util.ColorUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.nonetxmxy.mmzqfxy.R
-import com.nonetxmxy.mmzqfxy.model.OptionShowItem
+import com.nonetxmxy.mmzqfxy.model.response.Tags
 
 class CommonSelectAdapter :
-    BaseQuickAdapter<OptionShowItem, BaseViewHolder>(R.layout.item_dia_common_select) {
+    BaseQuickAdapter<Tags, BaseViewHolder>(R.layout.item_dia_common_select) {
 
     var curIndex = -1
 
-    override fun convert(holder: BaseViewHolder, item: OptionShowItem) {
-        holder.setText(R.id.textview, item.showContent)
+    override fun convert(holder: BaseViewHolder, item: Tags) {
+        holder.setText(R.id.textview, item.cnTVzVSsBYV)
         holder.setBackgroundColor(
             R.id.textview,
             if (holder.layoutPosition == curIndex)

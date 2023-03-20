@@ -36,6 +36,9 @@
     <string name="apply">现在申请</string>
     <string name="cycle_days">借款天数</string>
     <string name="rate">借款利率</string>
+    <string name="over_due">逾期还款</string>
+    <string name="open_app">Descargar La APP</string>
+    <string name="text_divider">Recomendado para usted</string>
 
     <!--我的页面-->
     <string name="his">贷款历史</string>
@@ -92,6 +95,7 @@
     <string name="send">发送</string>
     <string name="login">Login</string>
     <string name="send_voice_code">发送语音验证码</string>
+    <string name="send_voice_code_on_clock">发送语音验证码(%2d)</string>
 
     <!--意见反馈页面-->
     <string name="sugges_text">添加评论</string>
@@ -124,5 +128,31 @@
     <string name="pay_way">还款通道</string>
     <string name="pay_tag_recommend">推荐的</string>
     <string name="pay_tag_common">普通的</string>
+
+    <!--身份证认证页面-->
+    <string name="id_card_top_des">Subir la frontal</string>
+    <string name="id_card_behind_des">Subir la trasera</string>
+    <string name="card_need_tips">Ejemplo de error de carga de fotos</string>
+    <string name="face_title">Reconocimiento facial</string>
+    <string name="face_tips">Para garantizar la seguridad de su information, elreconnocimiento facial es necesario para verificar suidentidad</string>
+    <string name="user_name">Nombre</string>
+    <string name="user_fa_name">Apellido del padre</string>
+    <string name="user_ma_name">Apellido de la madre</string>
+    <string name="user_id_number">CURP</string>
+    <string name="user_rfc_number">RFC(optional)</string>
+    <string name="photo_select">Seleccionar del album</string>
+    <string name="camera_select">Grabar</string>
+    <string name="please_face_check">Por favor, haga reconocimiento facial!</string>
+
+    <!--银行卡添加页面-->
+    <string name="add_bank_card_title">Datos personales</string>
+    <string name="add_bank_tips">Para facilitar el acceso al prestamo, le aconsejamos que utilice su propia cuenta bancaria</string>
+    <string name="bank_type">Tipo de cuenta</string>
+    <string name="bank_name">nombre del banco</string>
+    <string name="bank_number">La tarjeta bancaria fue enlazada por los otros, por favor cambie otra tarjeta</string>
+    <string name="bank_xinyong">Clabe</string>
+    <string name="bank_save">Debit Card</string>
+
+
 
 </resources>

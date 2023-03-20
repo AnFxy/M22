@@ -2,6 +2,8 @@ package com.nonetxmxy.mmzqfxy.customer_view
 
 import android.content.Context
 import android.graphics.Typeface
+import android.text.InputFilter
+import android.text.InputType
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo.IME_ACTION_NEXT
@@ -15,7 +17,7 @@ class InputInfoView constructor(
 
     private var binding = ViewInputInfoBinding.inflate(LayoutInflater.from(context), this, true)
 
-     var inputTitle = ""
+    var inputTitle = ""
         set(value) {
             field = value
             if (value.isNotEmpty()) binding.title.text = value
@@ -54,8 +56,15 @@ class InputInfoView constructor(
         val t = context.obtainStyledAttributes(attrs, R.styleable.InputInfoView)
         inputTitle = t.getString(R.styleable.InputInfoView_enter_title) ?: ""
         editHint = t.getString(R.styleable.InputInfoView_enter_hint) ?: ""
+
         binding.editText.imeOptions =
             t.getInt(R.styleable.InputInfoView_android_imeOptions, IME_ACTION_NEXT)
+
+        binding.editText.inputType =
+            t.getInt(R.styleable.InputInfoView_android_inputType, InputType.TYPE_CLASS_TEXT)
+        binding.editText.filters = arrayOf(object :
+            InputFilter.LengthFilter(t.getInt(R.styleable.InputInfoView_android_maxLength, 40)) {})
+
         t.recycle()
     }
 }

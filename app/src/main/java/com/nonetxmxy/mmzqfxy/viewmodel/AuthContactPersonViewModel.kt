@@ -1,58 +1,106 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
-import androidx.lifecycle.viewModelScope
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.model.ContactPersonData
-import com.nonetxmxy.mmzqfxy.model.OptionShowList
+import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
+import com.nonetxmxy.mmzqfxy.model.auth.ContractMessage
+import com.nonetxmxy.mmzqfxy.model.response.AllTags
+import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
+import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthContactPersonViewModel @Inject constructor(private val repository: IContactPersonAuthRepository) :
+class AuthContactPersonViewModel @Inject constructor(
+    private val authRepository: IAuthRepository,
+    private val beginRepository: IBeginRepository,
+    private val orderRepository: IOrderRepository
+) :
     BaseViewModel() {
 
-    sealed class Event {
-        object SamePhone : Event()
-    }
-
-    private val _optionShowListFlow = MutableStateFlow<OptionShowList?>(null)
+    private val _optionShowListFlow = MutableStateFlow<AllTags?>(null)
     val optionShowListFlow = _optionShowListFlow.asStateFlow()
 
-    private val _pagerEventFlow = MutableSharedFlow<Event>()
-    val pagerEventFlow = _pagerEventFlow
+    private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
+    val pagerEventFlow: SharedFlow<AuthPagerEvent> = _pagerEventFlow
 
     private val _pagerDataFlow = MutableStateFlow(
-        ContactPersonData(
-            relationshipFirst = ""
+        ContractMessage(
+            Cqr = "",
+            RHaDS = "",
+            KiVk = "",
+            pRgj = "",
+            faVW = "",
+            vwuan = "",
+            tvNbOHA = "",
+            gSNfDy = ""
         )
     )
-    var pagerDataFlow = _pagerDataFlow
+    val pagerDataFlow: StateFlow<ContractMessage> = _pagerDataFlow
+
+    private var startTime: Long = 0L
 
     init {
+        startTime = System.currentTimeMillis()
         getPageData()
     }
 
     private fun getPageData() {
         launchUIWithDialog {
-            _optionShowListFlow.emit(repository.getOptionShowList())
+            _optionShowListFlow.emit(beginRepository.getOptionalDirections())
             if (LocalCache.contactPersonCredit == 1) {
-                _pagerDataFlow.emit(repository.getSubmitContactPerson())
+                _pagerDataFlow.emit(authRepository.getSubmitContractInfo())
+            }
+        }
+    }
+
+    fun submitContractPerson() {
+        launchUIWithDialog {
+            authRepository.submitContractInfo(pagerDataFlow.value, startTime)
+
+            val oldStatus = LocalCache.contactPersonCredit == 1
+
+            val mineInfo = orderRepository.getUserInfo()
+            LocalCache.infoCredit = mineInfo.LbF.toInt()
+            LocalCache.workCredit = mineInfo.UpolPGX.toInt()
+            LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
+            LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
+            LocalCache.faceCredit = mineInfo.jFJE.toInt()
+            LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
+
+            if (oldStatus) {
+                _pagerEventFlow.emit(AuthPagerEvent.Finish)
+            } else {
+                _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
             }
         }
     }
 
     fun updateContactData(selectContact1: Boolean, phone: String, name: String) {
-        if (phone == _pagerDataFlow.value.relationshipFirst || phone == _pagerDataFlow.value.relationshipFirst) {
-            viewModelScope.launch {
-                _pagerEventFlow.emit(Event.SamePhone)
+        if (selectContact1) {
+            if (phone != pagerDataFlow.value.faVW) {
+                _pagerDataFlow.value = pagerDataFlow.value.copy(RHaDS = phone, KiVk = name)
             }
         } else {
-            _pagerDataFlow.value = _pagerDataFlow.value.copy(relationshipFirst = phone)
+            if (phone != pagerDataFlow.value.RHaDS) {
+                _pagerDataFlow.value = pagerDataFlow.value.copy(faVW = phone, vwuan = name)
+            }
+        }
+    }
+
+    fun updateContactRelationShip(
+        isFirst: Boolean = true,
+        relationShipId: String,
+        relationShip: String
+    ) {
+        if (isFirst) {
+            _pagerDataFlow.value =
+                pagerDataFlow.value.copy(Cqr = relationShipId, tvNbOHA = relationShip)
+        } else {
+            _pagerDataFlow.value =
+                pagerDataFlow.value.copy(pRgj = relationShipId, gSNfDy = relationShip)
         }
     }
 }

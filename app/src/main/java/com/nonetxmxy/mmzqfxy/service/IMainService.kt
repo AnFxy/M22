@@ -1,18 +1,15 @@
 package com.nonetxmxy.mmzqfxy.service
 
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
-import com.nonetxmxy.mmzqfxy.model.ProductsBean
 import com.nonetxmxy.mmzqfxy.model.Regions
-import com.nonetxmxy.mmzqfxy.model.response.AllTags
-import com.nonetxmxy.mmzqfxy.model.response.AllVerifiMessageResBean
-import com.nonetxmxy.mmzqfxy.model.response.AppsResBean
+import com.nonetxmxy.mmzqfxy.model.response.*
 import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface IMainService {
     // 首页产品列表
     @POST(NetPaths.productLists)
-    suspend fun productsList(@Body maps: HashMap<String, String>): BaseResponse<List<ProductsBean>>
+    suspend fun productsList(@Body maps: HashMap<String, String>): BaseResponse<ProductResBean>
 
     // 获取用户所有认证状态
     @POST(NetPaths.allVerifiMessage)

@@ -14,7 +14,10 @@ import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthContactPersonBinding
+import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
+import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.tools.ContactPersonUtil
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthContactPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,6 +62,28 @@ class AuthContactPersonFragment :
             selectContact1 = false
             openAddressBook()
         }
+
+        contact1Relacion.clickOptionItemBlock = {
+            viewModel.updateContactRelationShip(
+                isFirst = true,
+                relationShipId = it.TuJpAVA,
+                relationShip = it.cnTVzVSsBYV
+            )
+        }
+
+        contact2Relacion.clickOptionItemBlock = {
+            viewModel.updateContactRelationShip(
+                isFirst = false,
+                relationShipId = it.TuJpAVA,
+                relationShip = it.cnTVzVSsBYV
+            )
+        }
+
+        binding.includeAuthBottom.enviarBtn.setLimitClickListener {
+            if (checkData()) {
+                viewModel.submitContractPerson()
+            }
+        }
     }
 
     private fun openAddressBook() {
@@ -84,26 +109,119 @@ class AuthContactPersonFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.optionShowListFlow.collect {
                 if (it == null) return@collect
-                contact1Relacion.setOptionShowList(it.marryStatus)
-                contact2Relacion.setOptionShowList(it.marryStatus)
+                contact1Relacion.setOptionShowList(it.zHezuLsDK)
+                contact2Relacion.setOptionShowList(it.zHezuLsDK)
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pagerDataFlow.collect {
-                contact1Phone.selectContent = it.relationshipFirst
-                contact2Phone.selectContent = ""
+                contact1Phone.selectContent = it.RHaDS
+                contact1Name.selectContent = it.KiVk
+                contact1Relacion.selectContent = it.tvNbOHA
+                contact2Phone.selectContent = it.faVW
+                contact2Name.selectContent = it.vwuan
+                contact2Relacion.selectContent = it.gSNfDy
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pagerEventFlow.collect {
                 when (it) {
-                    AuthContactPersonViewModel.Event.SamePhone -> {
-                        ToastUtils.showShort("相同手机号")
+                    AuthPagerEvent.Finish -> navController.popBackStack()
+                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
+                    else -> {
+                        // Do nothing
                     }
                 }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel._baseGoPage.collect {
+                when (it) {
+                    PageType.USER -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserInfoFragment())
+                    PageType.WORK -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserWorkFragment())
+                    PageType.CONTRACT -> {}
+                    PageType.ID -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
+                    PageType.BANK -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAddCardsFragment())
+                    PageType.FACE -> {}
+                    PageType.CONFIRM -> {}
+                }
+            }
+        }
+    }
+
+    private fun checkData(): Boolean {
+        val currentData = viewModel.pagerDataFlow.value
+        if (currentData.Cqr.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact1Relacion.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact1Relacion.top)
+            return false
+        }
+
+        if (currentData.RHaDS.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact1Phone.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact1Phone.top)
+            return false
+        }
+
+        if (currentData.KiVk.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact1Name.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact1Name.top)
+            return false
+        }
+
+        // ------------------------------------------------------------------------
+
+        if (currentData.pRgj.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact2Relacion.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact2Relacion.top)
+            return false
+        }
+
+        if (currentData.faVW.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact2Phone.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact2Phone.top)
+            return false
+        }
+
+        if (currentData.vwuan.isEmpty()) {
+            ToastUtils.showShort(
+                StringUtils.format(
+                    StringUtils.getString(R.string.selector_error_hint),
+                    binding.contact2Name.selectTitle
+                )
+            )
+            binding.scrollView.smoothScrollTo(0, binding.contact2Name.top)
+            return false
+        }
+
+        return true
     }
 }

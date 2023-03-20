@@ -2,6 +2,8 @@ package com.nonetxmxy.mmzqfxy.tools
 
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import java.text.NumberFormat
+import java.util.*
 
 fun View.setVisible(isCouldSeen: Boolean) {
     visibility = if (isCouldSeen) View.VISIBLE else View.GONE
@@ -37,3 +39,8 @@ fun Toolbar.setMenuAndNavLimitClickListener(navClickBlock: () -> Unit, menuClick
         }
     })
 }
+
+fun Number.jinE(): String =
+    "S/".plus(" ").plus(NumberFormat.getNumberInstance(Locale("es", "PE")).format(this))
+
+fun Int.days() = "$this dias"

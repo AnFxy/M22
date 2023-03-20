@@ -1,7 +1,6 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
-import com.nonetxmxy.mmzqfxy.model.LoginType
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -15,7 +14,7 @@ class LoginFragViewModel @Inject constructor(
 
     val inputNumber = MutableStateFlow<String>("")
 
-    val goPage = MutableSharedFlow<LoginType>()
+    val goPage = MutableSharedFlow<Unit>()
 
     init {
 
@@ -26,9 +25,8 @@ class LoginFragViewModel @Inject constructor(
     }
 
     fun beginToLogin() {
-        // TODO API
         launchUIWithDialog {
-            goPage.emit(beginRepository.getLoginType())
+            goPage.emit(Unit)
         }
     }
 }

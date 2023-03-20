@@ -10,6 +10,7 @@
 
     <color name="gray_eeeeee">#EEEEEE</color>
     <color name="gray_aaaaaa">#AAAAAA</color>
+    <color name="gray_cccccc">#CCCCCC</color>
     <color name="gray_999999">#999999</color>
     <color name="gray_f9f9f9">#f9f9f9</color>
     <color name="gray_666666">#666666</color>
@@ -28,7 +29,10 @@
     <color name="gray_333333_16">#29333333</color>
     <color name="gray_333333_8">#14333333</color>
     <color name="gray_999999_50">#88999999</color>
+    <color name="gray_f5f5f5">#F5F5F5</color>
     <color name="gray_999999_20">#33999999</color>
+    <color name="gray_f6f6f6">#F6F6F6</color>
+    <color name="red_ff5a5a">#FF5A5A</color>
     <color name="black_000000_50">#88000000</color>
     <color name="black_efefef">#FFEFEFEF</color>
     <color name="red_f06047">#F06047</color>
@@ -46,5 +50,6 @@
     <color name="color_dddd">#FFDDDDDD</color>
     <color name="color_e3e3">#FFE3E3E3</color>
     <color name="color_00230b">#FF00230B</color>
+    <color name="color_fafbfc">#FAFBFC</color>
 
 </resources>

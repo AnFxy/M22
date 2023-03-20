@@ -11,11 +11,14 @@ import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
+//import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
 import com.nonetxmxy.mmzqfxy.adapters.GridLayoutManagerItemDecoration
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthUserInfoBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
-import com.nonetxmxy.mmzqfxy.model.SelfData
+import com.nonetxmxy.mmzqfxy.model.PageType
+import com.nonetxmxy.mmzqfxy.model.auth.UserMessage
+//import com.nonetxmxy.mmzqfxy.model.SelfData
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +39,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             adapter.notifyItemChanged(position)
 
             viewModel.pagerData = viewModel.pagerData.copy(
-                marryStatus = data.dataValue, marryStatusShow = data.showContent
+                kaAT = data.TuJpAVA, XKbzBk = data.cnTVzVSsBYV
             )
         }
         adapter
@@ -73,29 +76,26 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
 
         binding.commonSelect1.clickOptionItemBlock = {
             viewModel.pagerData = viewModel.pagerData.copy(
-                educationLevel = it.dataValue, educationLevelShow = it.showContent
+                vnQBj = it.TuJpAVA, xzwqCVcwQ = it.cnTVzVSsBYV
             )
-            checkData()
         }
         binding.commonSelect2.clickOptionItemBlock = {
             viewModel.pagerData = viewModel.pagerData.copy(
-                childrenTotal = it.dataValue, childrenTotalShow = it.showContent
+                AnmkImJZjp = it.TuJpAVA, iJH = it.cnTVzVSsBYV
             )
-            checkData()
         }
         binding.commonSelect3.addressSelectOKBlock = { province: String, city: String ->
             viewModel.pagerData = viewModel.pagerData.copy(
-                familyProvince = province, familyCity = city
+                qLh = province, URCcx = city
             )
-            checkData()
         }
     }
 
     private fun checkData(): Boolean {
         viewModel.pagerData = viewModel.pagerData.copy(
-            familyAddress = binding.input1.editValue
+            dFZqoeahk = binding.input1.editValue
         )
-        if (viewModel.pagerData.educationLevel.isEmpty()) {
+        if (viewModel.pagerData.vnQBj.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -105,7 +105,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.commonSelect1.showOptionDialog()
             return false
         }
-        if (viewModel.pagerData.marryStatus.isEmpty()) {
+        if (viewModel.pagerData.kaAT.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -115,7 +115,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.scrollView.smoothScrollTo(0, binding.recyclerView.top)
             return false
         }
-        if (viewModel.pagerData.childrenTotal.isEmpty()) {
+        if (viewModel.pagerData.AnmkImJZjp.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -125,7 +125,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             binding.commonSelect2.showOptionDialog()
             return false
         }
-        if (viewModel.pagerData.familyProvince.isEmpty() && viewModel.pagerData.familyCity.isEmpty()) {
+        if (viewModel.pagerData.qLh.isEmpty() || viewModel.pagerData.URCcx.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.selector_error_hint),
@@ -136,7 +136,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             return false
         }
 
-        if (viewModel.pagerData.familyAddress.isEmpty()) {
+        if (viewModel.pagerData.dFZqoeahk.isEmpty()) {
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.input_error_hint), binding.input1.inputTitle
@@ -158,9 +158,9 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.optionShowListFlow.collect {
                 if (it == null) return@collect
-                commonSelect1.setOptionShowList(it.marryStatus)
-                commonSelect2.setOptionShowList(it.marryStatus)
-                estadoCivilAdapter.setList(it.marryStatus)
+                commonSelect1.setOptionShowList(it.PBjZodk)
+                commonSelect2.setOptionShowList(it.pAf)
+                estadoCivilAdapter.setList(it.cSmAoN)
             }
         }
 
@@ -171,34 +171,44 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             }
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.pagerEventFlow.collect {
                 when (it) {
-                    AuthPagerEvent.Finish -> {
-                        navController.navigateUp()
-                    }
-                    AuthPagerEvent.GoNextPage -> {
-                        navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserIndoFragmentToAuthUserWorkFragment())
-                    }
+                    AuthPagerEvent.Finish -> navController.popBackStack()
+                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
                     AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerData)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel._baseGoPage.collect {
+                when (it) {
+                    PageType.USER -> {}
+                    PageType.WORK -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthUserWorkFragment())
+                    PageType.CONTRACT -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthContactPersonFragment())
+                    PageType.ID -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
+                    PageType.BANK -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAddCardsFragment())
+                    PageType.FACE -> {}
+                    PageType.CONFIRM -> {}
                 }
             }
         }
     }
 
     //读取用户提交内容
-    private fun updatePage(data: SelfData) {
+    private fun updatePage(data: UserMessage) {
         binding.apply {
-            commonSelect1.selectContent = data.educationLevelShow
-            commonSelect2.selectContent = data.childrenTotalShow
-            if (data.familyProvince.isNotEmpty() || data.familyCity.isNotEmpty()) {
-                commonSelect3.selectContent = "${data.familyProvince}/${data.familyCity}"
+            commonSelect1.selectContent = data.vnQBj
+            commonSelect2.selectContent = data.AnmkImJZjp
+            if (data.qLh.isNotEmpty() || data.URCcx.isNotEmpty()) {
+                commonSelect3.selectContent = "${data.qLh}/${data.URCcx}"
             }
-            input1.inputContent = data.familyAddress
+            input1.inputContent = data.dFZqoeahk
 
-            val index = viewModel.optionShowListFlow.value?.marryStatus?.map { map ->
-                map.showContent
-            }?.indexOf(data.marryStatusShow) ?: return
+            val index = viewModel.optionShowListFlow.value?.cSmAoN?.map { map ->
+                map.cnTVzVSsBYV
+            }?.indexOf(data.XKbzBk) ?: return
             val oldIndex = estadoCivilAdapter.currentIndex
             estadoCivilAdapter.currentIndex = index
             estadoCivilAdapter.notifyItemChanged(oldIndex)

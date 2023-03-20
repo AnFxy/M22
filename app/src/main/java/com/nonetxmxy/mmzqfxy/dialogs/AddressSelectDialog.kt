@@ -11,8 +11,8 @@ import com.blankj.utilcode.util.StringUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.AdministrativeAdapter
 import com.nonetxmxy.mmzqfxy.databinding.DiaAddressSelectBinding
-import com.nonetxmxy.mmzqfxy.model.AddressItem
-import com.nonetxmxy.mmzqfxy.model.AdministrativeData
+import com.nonetxmxy.mmzqfxy.model.ProvinceOrCity
+import com.nonetxmxy.mmzqfxy.model.Regions
 
 class AddressSelectDialog constructor(context: Context, themeResId: Int) :
     Dialog(context, themeResId) {
@@ -27,11 +27,11 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
             val data = adapter.data[position]
             if (p == null) {
                 p = data
-                adapter.setList(handlerAddress(getCity(data.id)))
-                provinceName = data.name
+                adapter.setList(handlerAddress(getCity(data.beEymAI)))
+                provinceName = data.DmFXvr
             } else {
                 c = data
-                cityName = data.name
+                cityName = data.DmFXvr
                 addressSelectOKBlock?.invoke(provinceName, cityName)
                 dismiss()
             }
@@ -39,7 +39,7 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
         adapter
     }
 
-    private var addressData: AdministrativeData? = null
+    private var addressData: Regions? = null
 
     private var provinceName = ""
         set(value) {
@@ -81,7 +81,7 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = addressAdapter
 
-        addressData?.province?.let {
+        addressData?.Rpp?.let {
             addressAdapter.setList(handlerAddress(it))
         }
 
@@ -93,12 +93,12 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
             c = null
             provinceName = StringUtils.getString(R.string.select_province)
             cityName = StringUtils.getString(R.string.select_city)
-            addressData?.province?.let {
+            addressData?.Rpp?.let {
                 addressAdapter.setList(handlerAddress(it))
             }
         }
         binding.tvCity.setOnClickListener {
-            p?.id?.let { i ->
+            p?.beEymAI?.let { i ->
                 c = null
                 cityName = StringUtils.getString(R.string.select_city)
                 addressAdapter.setList(handlerAddress(getCity(i)))
@@ -106,23 +106,23 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
         }
     }
 
-    private fun getCity(id: Int) = addressData?.city?.filter {
-        it.parentid == id
+    private fun getCity(id: Long) = addressData?.ewgSAY?.filter {
+        it.kgmAjY == id
     } ?: emptyList()
 
-    private var p: AddressItem? = null
+    private var p: ProvinceOrCity? = null
 
-    private var c: AddressItem? = null
+    private var c: ProvinceOrCity? = null
 
-    private fun handlerAddress(administrativeItems: List<AdministrativeData.AdministrativeItem>): List<AddressItem> {
+    private fun handlerAddress(administrativeItems: List<ProvinceOrCity>): List<ProvinceOrCity> {
         //A-Z排序
         val data = administrativeItems.sortedBy { item ->
-            item.name
+            item.DmFXvr
         }
         //查找首字母索引
-        val dataList = mutableListOf<AddressItem>()
+        val dataList = mutableListOf<ProvinceOrCity>()
         data.groupBy {
-            it.name.first().uppercaseChar()
+            it.DmFXvr.first().uppercaseChar()
         }.forEach { entry ->
             var showParentLetter = true
             entry.value.forEachIndexed { listIndex, item ->
@@ -130,8 +130,12 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
                     showParentLetter = false
                 }
                 dataList.add(
-                    AddressItem(
-                        showParentLetter, entry.key.toString(), item.name, item.parentid, item.id
+                    ProvinceOrCity(
+                        isShowLetter = showParentLetter,
+                        letter = entry.key.toString(),
+                        DmFXvr = item.DmFXvr,
+                        kgmAjY = item.kgmAjY,
+                        beEymAI = item.beEymAI
                     )
                 )
             }
@@ -139,7 +143,7 @@ class AddressSelectDialog constructor(context: Context, themeResId: Int) :
         return dataList
     }
 
-    fun setAdministrativeList(title: String, data: AdministrativeData) {
+    fun setAdministrativeList(title: String, data: Regions) {
         binding.diaTitle.text = title
         addressData = data
     }

@@ -6,7 +6,7 @@ data class ProductsBean(
     val OJjgAEGVuO: String, // 借款天数
     val edVaOsmgaab: String, // 利率
     val MScSWMj: String, // 产品logo 图片的链接
-    val FCmjye: String, // 产品最大额度
+    val FCmiye: String, // 产品最大额度
     val PNw: String, // 产品评分
     val ZnXsyPioYz: Int, // 是否可借 1是 0 不可借
     val gtwYmV: Double, // 产品最大还款金额

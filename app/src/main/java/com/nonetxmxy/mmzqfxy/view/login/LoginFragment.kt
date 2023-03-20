@@ -11,7 +11,6 @@ import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.FragmentLoginBinding
-import com.nonetxmxy.mmzqfxy.model.LoginType
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.LoginFragViewModel
@@ -60,20 +59,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragViewModel>() {
     }
 
     override fun setObserver() {
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.inputNumber.collect {
                 binding.tvContinue.isEnabled = it.length >= 10
                 binding.ivClearText.setVisible(it.isNotEmpty())
             }
         }
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.goPage.collect {
-                LocalCache.phoneNumber = viewModel.inputNumber.value
-                when(it) {
-                    LoginType.MAIN -> navController.navigate(R.id.goMain)
-                    LoginType.SMS -> navController.navigate(LoginFragmentDirections.actionLoginFragmentToSMSFragment())
-                }
+                LocalCache.phoneNumber = "52${viewModel.inputNumber.value}"
+                navController.navigate(LoginFragmentDirections.actionLoginFragmentToSMSFragment())
             }
         }
     }

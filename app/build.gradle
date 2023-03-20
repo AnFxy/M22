@@ -65,9 +65,9 @@ android {
             dimension "project"
             applicationId 'com.nonetxmxy.mmzqfxy'
 
-            buildConfigField "String", "MAIN_URL", '"http://mexclient22.dasuoh.com"'
-            buildConfigField "String", "FILE_URL", '"http://ksfile.danamasuk.com"'
-            buildConfigField "String", "SECRET_ARROW", '"mxcojwy90tysmyhg"'
+            buildConfigField "String", "MAIN_URL", '"http://192.168.0.245:7607/"'
+            buildConfigField "String", "FILE_URL", '"http://192.168.0.245:7606"'
+            buildConfigField "String", "SECRET_ARROW", '"macouty86yhbrtye"'
             buildConfigField "boolean", "NEED_JIA_MI", 'true'
             buildConfigField "String", "LANGUAGE", '"ESP"'
             buildConfigField "String", "CODE", '"MXC"'
@@ -171,5 +171,8 @@ dependencies {
 
     // 日志打印
     implementation 'com.jakewharton.timber:timber:4.7.0'
+
+    // 验证码
+    implementation 'com.jacktuotuo.customview:verificationcodeview:1.0.5'
 
 }

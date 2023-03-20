@@ -3,6 +3,7 @@ package com.nonetxmxy.mmzqfxy.service
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
 import com.nonetxmxy.mmzqfxy.model.ConfigBean
 import com.nonetxmxy.mmzqfxy.model.LoginBean
+import com.nonetxmxy.mmzqfxy.model.response.BanksResBean
 import com.nonetxmxy.mmzqfxy.model.response.UpdateResBean
 import com.nonetxmxy.mmzqfxy.model.response.UseTypeResBean
 import retrofit2.http.Body
@@ -37,4 +38,8 @@ interface IBeginService {
     // 登出
     @POST(NetPaths.logout)
     suspend fun logout(@Body map: HashMap<String, String>): BaseResponse<Unit>
+
+    // 获取所有银行名字
+    @POST(NetPaths.banks)
+    suspend fun banksGot(@Body map: HashMap<String, String>): BaseResponse<BanksResBean>
 }

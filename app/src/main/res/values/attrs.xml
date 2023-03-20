@@ -5,6 +5,8 @@
             <enum name="general" value="0" />
             <enum name="address" value="1" />
             <enum name="contacto" value="2" />
+            <enum name="date" value="3"/>
+            <enum name="bank" value="4"/>
         </attr>
         <attr name="select_title" format="string" />
         <attr name="android:drawableEnd" />
@@ -16,6 +18,15 @@
         <attr name="enter_title" format="string" />
         <attr name="android:imeOptions" />
         <attr name="android:maxLength" />
+        <attr name="android:inputType"/>
         <attr name="emailAutoComplete" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="IDPhotoView">
+        <attr name="Direction" format="enum">
+            <enum name="top" value="1"/>
+            <enum name="behind" value="2"/>
+        </attr>
+        <attr name="imageSrc" format="reference"/>
     </declare-styleable>
 </resources>

@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black_efefef"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/m_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:overScrollMode="never">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <include
+                android:id="@+id/includeAuthTitle"
+                layout="@layout/include_auth_top_title" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_10_radius_white"
+                android:orientation="vertical"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:id="@+id/tv_bank_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/bank_type"
+                    android:paddingHorizontal="15dp"/>
+
+                <RadioGroup
+                    android:id="@+id/rg_bank_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp"
+                    android:paddingHorizontal="25dp">
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/tv_card1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:paddingVertical="13dp"
+                        android:text="@string/bank_xinyong"
+                        android:gravity="center"
+                        android:background="@drawable/bank_type_selector"/>
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/tv_card2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:paddingVertical="13dp"
+                        android:text="@string/bank_save"
+                        android:gravity="center"
+                        android:layout_marginStart="38dp"
+                        android:background="@drawable/bank_type_selector"/>
+
+                </RadioGroup>
+
+                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                    android:id="@+id/commonSelect1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:select_title="@string/bank_name"
+                    android:layout_marginTop="15dp"
+                    app:select_type="bank"/>
+
+                <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
+                    android:id="@+id/input1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:enter_title="@string/bank_number"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <include
+                android:id="@+id/includeAuthBottom"
+                layout="@layout/include_auth_bottom" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -2,45 +2,61 @@ package com.nonetxmxy.mmzqfxy.viewmodel
 
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.model.AdministrativeData
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
-import com.nonetxmxy.mmzqfxy.model.OptionShowList
-import com.nonetxmxy.mmzqfxy.model.SelfData
+import com.nonetxmxy.mmzqfxy.model.Regions
+import com.nonetxmxy.mmzqfxy.model.auth.UserMessage
+import com.nonetxmxy.mmzqfxy.model.response.AllTags
+import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
+import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.joinAll
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInfoAuthRepository) :
+class AuthUserInfoViewModel @Inject constructor(
+    private val beginRepository: IBeginRepository,
+    private val authRepository: IAuthRepository,
+    private val orderRepository: IOrderRepository
+) :
     BaseViewModel() {
 
-    private val _optionShowListFlow = MutableStateFlow<OptionShowList?>(null)
+    private val _optionShowListFlow = MutableStateFlow<AllTags?>(null)
     val optionShowListFlow = _optionShowListFlow.asStateFlow()
 
-    private val _administrativeListFlow = MutableStateFlow<AdministrativeData?>(null)
+    private val _administrativeListFlow = MutableStateFlow<Regions?>(null)
     val administrativeListFlow = _administrativeListFlow.asStateFlow()
 
-    var pagerData = SelfData(
-        educationLevelShow = "",
-        educationLevel = "",
-        marryStatusShow = "",
-        marryStatus = "",
-        childrenTotalShow = "",
-        childrenTotal = "",
-        familyProvince = "",
-        familyCity = "",
-        familyAddress = "",
+    var pagerData = UserMessage(
+        kaAT = "",
+        AnmkImJZjp = "",
+        OnDO = "",
+        vnQBj = "",
+        URXdUgWGz = "",
+        keMI = "",
+        qLh = "",
+        URCcx = "",
+        dFZqoeahk = "",
+        XKbzBk = "",
+        iJH = "",
+        xzwqCVcwQ = "",
+        NylJoZfP = "",
+        hFHaKOITD = "",
     )
 
     private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
-    val pagerEventFlow = _pagerEventFlow
+    val pagerEventFlow: SharedFlow<AuthPagerEvent> = _pagerEventFlow
+
+    var startTime: Long = 0
 
     init {
+        startTime = System.currentTimeMillis()
         getPageData()
     }
 
@@ -48,13 +64,13 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
         launchUIWithDialog {
             coroutineScope {
                 joinAll(async {
-                    _optionShowListFlow.emit(repository.getOptionShowList())
+                    _optionShowListFlow.emit(beginRepository.getOptionalDirections())
                 }, async {
-                    _administrativeListFlow.emit(repository.getAdministrativeList())
+                    _administrativeListFlow.emit(beginRepository.getLatestRegions())
                 })
                 if (LocalCache.infoCredit == 1) {
-                    pagerData = repository.getSubmitInfo()
-                    pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
+                    pagerData = authRepository.getSubmitUserInfo()
+                    _pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
                 }
             }
         }
@@ -62,13 +78,22 @@ class AuthUserInfoViewModel @Inject constructor(private val repository: IUserInf
 
     fun submitInfo() {
         launchUIWithDialog {
-            val boolean = repository.submitInfo(pagerData)
-            if (boolean) {
-                if (LocalCache.workCredit == 1) {
-                    pagerEventFlow.emit(AuthPagerEvent.Finish)
-                } else {
-                    pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
-                }
+            authRepository.submitUserInfo(pagerData, startTime)
+
+            val oldStatus = LocalCache.infoCredit == 1
+
+            val mineInfo = orderRepository.getUserInfo()
+            LocalCache.infoCredit = mineInfo.LbF.toInt()
+            LocalCache.workCredit = mineInfo.UpolPGX.toInt()
+            LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
+            LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
+            LocalCache.faceCredit = mineInfo.jFJE.toInt()
+            LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
+
+            if (oldStatus) {
+                _pagerEventFlow.emit(AuthPagerEvent.Finish)
+            } else {
+                _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
             }
         }
     }

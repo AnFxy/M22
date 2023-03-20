@@ -29,7 +29,7 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
     }
 
     // 网络加载圈
-    val requestDataLoadDialog: RxDialogSet? by lazy {
+    private val requestDataLoadDialog: RxDialogSet? by lazy {
         context?.let {
             RxDialogSet.provideDialog(it, R.layout.dia_loading)
         }
@@ -102,7 +102,7 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
     }
 
     // 更新加载圈的状态，子类也可用
-    fun updateLoadingViewStatus(isLoading: Boolean) {
+    private fun updateLoadingViewStatus(isLoading: Boolean) {
         if (isLoading) {
             if (requestDataLoadDialog?.isShowing == false)
                 requestDataLoadDialog?.show()
