@@ -67,7 +67,6 @@ class CommonSelectView constructor(context: Context, attrs: AttributeSet) :
             }
         }
 
-
     init {
         initAttribute(attrs)
         initListener()

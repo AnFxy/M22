@@ -2,19 +2,25 @@ package com.nonetxmxy.mmzqfxy.view.auth
 
 import android.net.Uri
 import android.os.Bundle
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
+import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.customer_view.*
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthIdentityBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
@@ -22,7 +28,10 @@ import com.nonetxmxy.mmzqfxy.model.PhotoType
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthIdentityViewModel
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
+import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdentityViewModel>() {
@@ -33,6 +42,51 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
 
     override fun getViewMode() = viewModel
+
+    private val uploadIdentityDialog by lazy {
+        val dialog =
+            context?.let { RxDialogSet.provideDialogBottom(it, R.layout.dia_upload_identity) }
+        dialog?.setViewState<TextView>(R.id.cancelar) {
+            setLimitClickListener {
+                dialog.dismiss()
+            }
+        }?.setViewState<TextView>(R.id.grabar) {
+            setLimitClickListener {
+                PermissionUtils.permission(PermissionConstants.CAMERA)
+                    .callback(object : PermissionUtils.FullCallback {
+                        override fun onGranted(granted: MutableList<String>) {
+                            cameraLauncher.launch(Uri.fromFile(File("")))
+                        }
+
+                        override fun onDenied(
+                            deniedForever: MutableList<String>,
+                            denied: MutableList<String>
+                        ) {
+
+                        }
+                    }).request()
+                dialog.dismiss()
+            }
+        }?.setViewState<TextView>(R.id.album) {
+            setLimitClickListener {
+                PermissionUtils.permission(PermissionConstants.CAMERA)
+                    .callback(object : PermissionUtils.FullCallback {
+                        override fun onGranted(granted: MutableList<String>) {
+
+                        }
+
+                        override fun onDenied(
+                            deniedForever: MutableList<String>,
+                            denied: MutableList<String>
+                        ) {
+
+                        }
+                    })
+                dialog.dismiss()
+            }
+        }
+        dialog
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater, parent: ViewGroup?
