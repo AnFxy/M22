@@ -189,8 +189,8 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     PageType.CONTRACT -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthContactPersonFragment())
                     PageType.ID -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
                     PageType.BANK -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAddCardsFragment())
-                    PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.FACE -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToConfirmRequestFragment())
                 }
             }
         }

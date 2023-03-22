@@ -3,6 +3,7 @@ package com.nonetxmxy.mmzqfxy.service
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
 import com.nonetxmxy.mmzqfxy.model.auth.*
 import com.nonetxmxy.mmzqfxy.model.response.BankListResBean
+import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -55,4 +56,12 @@ interface IAuthService {
     // 提交人脸识别
     @POST(NetPaths.verifiSubmit)
     suspend fun faceSent(@Body maps: HashMap<String, String>): BaseResponse<Unit>
+
+    // 获取确认额度的数据
+    @POST(NetPaths.loanConfirm)
+    suspend fun loanConfirmGot(@Body maps: HashMap<String, String>): BaseResponse<ConfirmResBean>
+
+    // 提交贷款申请
+    @POST(NetPaths.applicationRequest)
+    suspend fun applicationRequest(@Body maps: HashMap<String, String>): BaseResponse<Unit>
 }

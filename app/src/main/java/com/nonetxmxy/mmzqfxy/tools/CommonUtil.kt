@@ -2,7 +2,14 @@ package com.nonetxmxy.mmzqfxy.tools
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
+import java.sql.Date
+import java.sql.Timestamp
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 
 class CommonUtil {
     companion object {
@@ -33,5 +40,11 @@ class CommonUtil {
             }
         }
 
+        fun timeLongToDate(timeLong: Long): String {
+            val ts = Timestamp(timeLong)
+            val date = Date(ts.time)
+
+            return SimpleDateFormat("dd/MM/yyyy").format(date)
+        }
     }
 }

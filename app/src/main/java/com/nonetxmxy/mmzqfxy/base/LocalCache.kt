@@ -11,6 +11,9 @@ class LocalCache {
         // 手机号
         var phoneNumber: String by SPSet(FinalKeys.PHONE_NUMBER, "")
 
+        // 客服手机号
+        var serviceNumber: String by SPSet(FinalKeys.SERVICE_NUMBER, "")
+
         // 邮箱号
         var email: String by SPSet(FinalKeys.EMAIL, "")
 

@@ -2,11 +2,9 @@ package com.nonetxmxy.mmzqfxy.view.auth
 
 import android.net.Uri
 import android.os.Bundle
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -19,8 +17,8 @@ import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.customer_view.*
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
+import com.nonetxmxy.mmzqfxy.customer_view.*
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthIdentityBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
@@ -28,8 +26,6 @@ import com.nonetxmxy.mmzqfxy.model.PhotoType
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthIdentityViewModel
-import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
-import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -205,7 +201,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
                     PageType.ID -> {}
                     PageType.BANK -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToAddCardsFragment())
                     PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.CONFIRM -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToConfirmRequestFragment())
                 }
             }
         }

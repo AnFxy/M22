@@ -8,7 +8,9 @@ import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.databinding.ItemOrderListBinding
 import com.nonetxmxy.mmzqfxy.databinding.ItemOrderListEmptyBinding
-import com.nonetxmxy.mmzqfxy.model.SampleOrder
+import com.nonetxmxy.mmzqfxy.model.OrderMessage
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
+import com.nonetxmxy.mmzqfxy.tools.jinE
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import kotlin.math.abs
@@ -16,7 +18,7 @@ import kotlin.math.abs
 class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var orders: List<SampleOrder> = emptyList()
+    var orders: List<OrderMessage> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,16 +31,16 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
 
     class OrderViewHolder(private val binding: ItemOrderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(sampleOrder: SampleOrder) {
-            binding.tvName.text = sampleOrder.name
-            binding.tvOrderNumber.text = "订单号${sampleOrder.orderNum}"
-            binding.tvAmount.text = "$${sampleOrder.loanAmount}"
-            binding.tvPeriod.text = "${sampleOrder.periods}"
-            binding.tvCycle.text = "${sampleOrder.cycle}"
-            binding.tvDate.text = sampleOrder.date
+        fun bindView(sampleOrder: OrderMessage) {
+            binding.tvName.text = sampleOrder.qkpPjr
+            binding.tvOrderNumber.text = "Orden ${sampleOrder.LjNAwGsqXs}"
+            binding.tvAmount.text = sampleOrder.fHTnifvEC.jinE()
+            binding.tvPeriod.text = "${sampleOrder.llYomqGFjAS}"
+            binding.tvCycle.text = "${sampleOrder.nhgL}"
 
-            when (sampleOrder.orderStatus) {
-                0 -> {
+
+            when (sampleOrder.snbrREWru) {
+                0, 1, 2, 3 -> {
                     binding.tvOverOrNot.text = Utils.getApp().getString(R.string.on_reviewing)
                     binding.tvOrderNumber.visibility = View.GONE
                     binding.containerOrderListItem.setBackgroundResource(R.drawable.white_16)
@@ -47,8 +49,11 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
                     )
                     binding.containerCycle.setVisible(true)
                     binding.tvRepay.setVisible(false)
+
+                    binding.tvDate.text = CommonUtil.timeLongToDate(sampleOrder.JuRZheDh.toLong())
+                    binding.tvDateConstant.text = Utils.getApp().getString(R.string.request_date)
                 }
-                1 -> {
+                4 -> {
                     binding.tvOverOrNot.text = Utils.getApp().getString(R.string.reviewing_pass)
                     binding.tvOrderNumber.visibility = View.GONE
                     binding.containerOrderListItem.setBackgroundResource(R.drawable.white_16)
@@ -57,8 +62,10 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
                     )
                     binding.containerCycle.setVisible(true)
                     binding.tvRepay.setVisible(false)
+                    binding.tvDate.text = CommonUtil.timeLongToDate(sampleOrder.JuRZheDh.toLong())
+                    binding.tvDateConstant.text = Utils.getApp().getString(R.string.request_date)
                 }
-                2 -> {
+                6 -> {
                     binding.tvOverOrNot.text = Utils.getApp().getString(R.string.refused)
                     binding.tvOrderNumber.visibility = View.GONE
                     binding.containerOrderListItem.setBackgroundResource(R.drawable.white_16)
@@ -67,19 +74,26 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
                     )
                     binding.containerCycle.setVisible(true)
                     binding.tvRepay.setVisible(false)
+                    binding.tvDate.text = CommonUtil.timeLongToDate(sampleOrder.JuRZheDh.toLong())
+                    binding.tvDateConstant.text = Utils.getApp().getString(R.string.request_date)
                 }
                 else -> {
                     binding.tvOrderNumber.setVisible(true)
                     binding.containerCycle.setVisible(false)
                     binding.tvRepay.setVisible(true)
 
-                    if (sampleOrder.days >= 0) {
+                    binding.tvDate.text =
+                        CommonUtil.timeLongToDate(sampleOrder.sLEsJFIXygv.toLong())
+                    binding.tvDateConstant.text =
+                        Utils.getApp().getString(R.string.confirm_repay_date)
+
+                    if (sampleOrder.JMgRrdrv >= 0) {
                         binding.tvOverOrNot.visibility = View.GONE
                         binding.containerOrderListItem.setBackgroundResource(R.drawable.white_16)
                     } else {
                         binding.tvOverOrNot.text = String.format(
                             Utils.getApp().getString(R.string.overdue_days),
-                            abs(sampleOrder.days)
+                            abs(sampleOrder.JMgRrdrv)
                         )
                         binding.tvOverOrNot.visibility = View.VISIBLE
                         binding.tvOverOrNot.setTextColor(

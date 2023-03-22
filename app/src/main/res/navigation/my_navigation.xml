@@ -44,7 +44,12 @@
     <fragment
         android:id="@+id/addCardsFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AddCardsFragment"
-        android:label="AddCardsFragment" />
+        android:label="AddCardsFragment" >
+        <argument
+            app:argType="boolean"
+            android:defaultValue="false"
+            android:name="isJustBack"/>
+    </fragment>
     <fragment
         android:id="@+id/allAuthFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.AllAuthFragment"

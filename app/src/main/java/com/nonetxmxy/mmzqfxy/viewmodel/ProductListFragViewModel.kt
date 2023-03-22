@@ -35,7 +35,7 @@ class ProductListFragViewModel @Inject constructor(
         launchUIWithDialog {
             val config = viewModelScope.async {
                 val configBean = beginRepository.getAppConfig()
-                LocalCache.phoneNumber = configBean.vMSCnEiPym ?: ""
+                LocalCache.serviceNumber = configBean.vMSCnEiPym ?: ""
                 LocalCache.email = configBean.Fbi ?: ""
             }
             val productList = viewModelScope.async {
@@ -75,7 +75,7 @@ class ProductListFragViewModel @Inject constructor(
                 0, 1, 5, 6 -> navDirections.emit(ProductListFragmentDirections.actionProductListFragmentToAuthNavigation())
                 // 审核状态流程
                 2, 3, 4 -> {
-                    // TODO 审核状态页面
+                    navDirections.emit(ProductListFragmentDirections.actionProductListFragmentToUnderReviewFragment())
                 }
                 // 还款流程
                 7, 8 -> {

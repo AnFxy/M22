@@ -53,12 +53,15 @@
     <string name="loan_amount">借款金额</string>
     <string name="loan_period">借款期数</string>
     <string name="loan_cycle">借款周期</string>
-    <string name="request_date">借款日期</string>
+    <string name="request_date">Tiempo de solicitud</string>
     <string name="on_reviewing">审核中</string>
     <string name="refused">审核失败</string>
     <string name="reviewing_pass">审核通过</string>
+    <string name="on_reviewing_des">审核中</string>
+    <string name="refused_des">审核失败</string>
+    <string name="reviewing_pass_des">审核通过</string>
     <string name="repay_days">%d 天后到期</string>
-    <string name="overdue_days">逾期了 %d天</string>
+    <string name="overdue_days">%d dia de retraso</string>
     <string name="repay">还款</string>
     <string name="expand">展期</string>
     <string name="no_order_tips">没有任何借款订单呢！</string>
@@ -153,6 +156,19 @@
     <string name="bank_xinyong">Clabe</string>
     <string name="bank_save">Debit Card</string>
 
+    <!--确认额度页面-->
+    <string name="confirm_title">Confirmacion del prestamo</string>
+    <string name="confirm_loan_amount">Cantidad prestada</string>
+    <string name="confirm_loan_days">Dias de prestamo</string>
+    <string name="confirm_handle_amount">Cantidad recibida</string>
+    <string name="confirm_detail">Detalles</string>
+    <string name="confirm_rate_amount">intereses y comisiones</string>
+    <string name="confirm_repay_date">Fecha de reembolsar</string>
+    <string name="confirm_need_repay_amount">Importe pendiente de pago</string>
+    <string name="confirm_get_money_account">Cuenta receptora</string>
+    <string name="confirm_modify_bank">Cambiar</string>
 
+    <!--状态页-->
+    <string name="under_review_title">Detalles de orden</string>
 
 </resources>

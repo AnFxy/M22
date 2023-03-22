@@ -12,6 +12,12 @@
             android:name="isTab"
             android:defaultValue="true"
             app:argType="boolean"/>
+
+        <action
+            android:id="@+id/action_orderListFragment_to_pay_navigation"
+            app:destination="@id/pay_navigation"/>
     </fragment>
+
+    <include app:graph="@navigation/pay_navigation"/>
 
 </navigation>

@@ -33,7 +33,7 @@ class AddCardsFragViewModel @Inject constructor(
     val goNextPage: SharedFlow<Unit> = _goNextPage
 
     var pagerData = BankMessage(
-        ZlE = "",
+        ZlE = 0,
         TtoUz = "",
         zUbbNgrgLl = "",
         XpuVfIvsAt = "",

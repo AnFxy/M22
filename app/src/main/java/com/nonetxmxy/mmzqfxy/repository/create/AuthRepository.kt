@@ -3,14 +3,12 @@ package com.nonetxmxy.mmzqfxy.repository.create
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
-import com.nonetxmxy.mmzqfxy.model.SampleBank
 import com.nonetxmxy.mmzqfxy.model.auth.*
 import com.nonetxmxy.mmzqfxy.model.response.FileResponse
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.service.IAuthService
 import com.nonetxmxy.mmzqfxy.service.IFileUploadService
 import com.nonetxmxy.mmzqfxy.service.IMainService
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -18,37 +16,6 @@ class AuthRepository @Inject constructor(
     private val mainService: IMainService,
     private val fileUploadService: IFileUploadService
 ) : IAuthRepository {
-
-    override suspend fun getCards(): List<SampleBank> {
-        delay(1000)
-        return listOf(
-            SampleBank(
-                bankName = "银行1",
-                bankType = "银行类型1",
-                bankNumber = "8893 3424 4350 3453"
-            ),
-            SampleBank(
-                bankName = "银行2",
-                bankType = "银行类型2",
-                bankNumber = "8893 3424 4350 3453"
-            ),
-            SampleBank(
-                bankName = "银行3",
-                bankType = "银行类型3",
-                bankNumber = "8893 3424 4350 3453"
-            ),
-            SampleBank(
-                bankName = "银行4",
-                bankType = "银行类型4",
-                bankNumber = "8893 3424 4350 3453"
-            ),
-            SampleBank(
-                bankName = "银行5",
-                bankType = "银行类型5",
-                bankNumber = "8893 3424 4350 3453"
-            )
-        )
-    }
 
     override suspend fun uploadFile(
         fileStr: String,
@@ -224,7 +191,7 @@ class AuthRepository @Inject constructor(
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "5"
 
-        return authService.cardMessageGot(maps).checkDataEmpty().bankCards
+        return authService.cardMessageGot(maps).checkDataEmpty().ztJJHn
     }
 
     override suspend fun submitBanks(bankMessage: BankMessage, startTime: Long) {
@@ -235,9 +202,11 @@ class AuthRepository @Inject constructor(
         maps["kbsHvq"] = LocalCache.token
         maps["SxVgVauNC"] = "5"
 
-        maps["MyEMaLZNe"] = bankMessage.ZlE
+        if (bankMessage.ZlE != 0L) {
+            maps["MyEMaLZNe"] = bankMessage.ZlE.toString()
+        }
         maps["qnmLwz"] = bankMessage.TtoUz
-        maps["XlluaXPY"] = bankMessage.zUbbNgrgLl
+        maps["XlLuaXPY"] = bankMessage.zUbbNgrgLl
         maps["JxxUD"] = bankMessage.XpuVfIvsAt
         maps["BQyybcwPiz"] = bankMessage.RhgBNBzglD
         maps["ZKUZ"] = (System.currentTimeMillis() - startTime).toString()

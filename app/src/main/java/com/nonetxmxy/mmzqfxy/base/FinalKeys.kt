@@ -5,6 +5,7 @@ object FinalKeys {
     val IS_LOGGED = "is_logged"
     val IS_TIPS = "is_tips"
     val PHONE_NUMBER = "phone_number"
+    val SERVICE_NUMBER = "service_number"
     val EMAIL = "email"
     val TOKEN = "token"
     val CURRENT_PRO_CODE = "current_pro_code"

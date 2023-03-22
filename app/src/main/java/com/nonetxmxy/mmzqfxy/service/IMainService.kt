@@ -38,4 +38,8 @@ interface IMainService {
     // 提交三大埋点数据
     @POST(NetPaths.threeHugeHidden)
     suspend fun submitThreeHugeHidden(@Body maps: HashMap<String, String>): BaseResponse<Unit>
+
+    // 获取历史订单列表
+    @POST(NetPaths.orderList)
+    suspend fun orderListGot(@Body maps: HashMap<String, String>): BaseResponse<OrderResBean>
 }

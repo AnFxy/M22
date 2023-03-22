@@ -1,10 +1,11 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
-import com.nonetxmxy.mmzqfxy.model.SampleBank
+import com.nonetxmxy.mmzqfxy.model.auth.BankMessage
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,15 +13,16 @@ class CardsFragViewModel @Inject constructor(
     private val authRepository: IAuthRepository
 ) : BaseViewModel() {
 
-    val cards = MutableStateFlow<List<SampleBank>>(emptyList())
+    private val _cards = MutableStateFlow<List<BankMessage>>(emptyList())
+    val cards: StateFlow<List<BankMessage>> = _cards
 
     init {
         getAllBanks()
     }
 
-    private fun getAllBanks() {
+    fun getAllBanks() {
         launchUIWithDialog {
-            cards.value = authRepository.getCards()
+            _cards.value = authRepository.getSubmitBanks()
         }
     }
 }

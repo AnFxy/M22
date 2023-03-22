@@ -145,8 +145,8 @@ class AuthContactPersonFragment :
                     PageType.CONTRACT -> {}
                     PageType.ID -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
                     PageType.BANK -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAddCardsFragment())
-                    PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.FACE -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToConfirmRequestFragment())
                 }
             }
         }

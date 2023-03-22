@@ -3,18 +3,32 @@ package com.nonetxmxy.mmzqfxy.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.databinding.ItemBankBinding
 import com.nonetxmxy.mmzqfxy.databinding.ItemBankEmptyBinding
-import com.nonetxmxy.mmzqfxy.model.SampleBank
+import com.nonetxmxy.mmzqfxy.model.auth.BankMessage
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
+import com.nonetxmxy.mmzqfxy.tools.setVisible
 
-class CardsAdapter(private val goAddCards: () -> Unit) :
+class CardsAdapter(
+    private val isSelectIconVisible: Boolean = false,
+    private val goAddCards: () -> Unit,
+    private val onItemSelected: (BankMessage) -> Unit = {}
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var orders: List<SampleBank> = emptyList()
+    var orders: List<BankMessage> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
+        }
+
+    var currentSelectedIndex = 0
+        set(value) {
+            val oldValue = field
+            field = value
+            notifyItemChanged(oldValue)
+            notifyItemChanged(value)
         }
 
     companion object {
@@ -24,10 +38,22 @@ class CardsAdapter(private val goAddCards: () -> Unit) :
 
     class BankViewHolder(private val binding: ItemBankBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(bank: SampleBank) {
-            binding.tvBankName.text = bank.bankName
-            binding.tvBankType.text = bank.bankType
-            binding.tvBankNumber.text = bank.bankNumber
+        fun bindView(
+            bank: BankMessage,
+            isSelected: Boolean,
+            isSelectIconVisible: Boolean,
+            onItemSelected: (BankMessage) -> Unit
+        ) {
+            binding.tvBankName.text = bank.TtoUz
+            binding.tvBankType.text = bank.YfpxWBMDrp
+            binding.tvBankNumber.text = bank.zUbbNgrgLl
+
+            binding.ivSelect.setImageResource(if (isSelected) R.mipmap.xuanzhong else R.mipmap.weixuan)
+            binding.ivSelect.setVisible(isSelectIconVisible)
+
+            binding.root.setLimitClickListener {
+                onItemSelected.invoke(bank)
+            }
         }
     }
 
@@ -68,7 +94,13 @@ class CardsAdapter(private val goAddCards: () -> Unit) :
             holder.bindView()
         } else if (holder is BankViewHolder) {
             val currentItem = orders[position]
-            holder.bindView(currentItem)
+            holder.bindView(
+                currentItem,
+                isSelected = position == currentSelectedIndex,
+                isSelectIconVisible = isSelectIconVisible
+            ) {
+                onItemSelected.invoke(it)
+            }
         }
     }
 }

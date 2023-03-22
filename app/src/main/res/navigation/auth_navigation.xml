@@ -33,6 +33,11 @@
             app:destination="@id/addCardsFragment"
             app:popUpTo="@id/emptyAuthFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_emptyAuthFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
+            app:popUpTo="@id/emptyAuthFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/authUserInfoFragment"
@@ -56,6 +61,11 @@
         <action
             android:id="@+id/action_authUserInfoFragment_to_addCardsFragment"
             app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authUserInfoFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserInfoFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
             app:popUpTo="@id/authUserInfoFragment"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -83,6 +93,11 @@
             app:destination="@id/addCardsFragment"
             app:popUpTo="@id/authUserWorkFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authUserWorkFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
+            app:popUpTo="@id/authUserWorkFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/authContactPersonFragment"
@@ -108,6 +123,11 @@
             app:destination="@id/addCardsFragment"
             app:popUpTo="@id/authContactPersonFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authContactPersonFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
+            app:popUpTo="@id/authContactPersonFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/authIdentityFragment"
@@ -131,6 +151,11 @@
         <action
             android:id="@+id/action_authIdentityFragment_to_addCardsFragment"
             app:destination="@id/addCardsFragment"
+            app:popUpTo="@id/authIdentityFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_authIdentityFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
             app:popUpTo="@id/authIdentityFragment"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -164,5 +189,27 @@
             app:destination="@id/authUserWorkFragment"
             app:popUpTo="@id/addCardsFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_addCardsFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment"
+            app:popUpTo="@id/addCardsFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/confirmRequestFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ConfirmRequestFragment"
+        android:label="ConfirmRequestFragment" >
+        <action
+            android:id="@+id/action_confirmRequestFragment_to_underReviewFragment"
+            app:destination="@id/underReviewFragment"
+            app:popUpTo="@id/confirmRequestFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_confirmRequestFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/underReviewFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment"
+        android:label="UnderReviewFragment" />
 </navigation>

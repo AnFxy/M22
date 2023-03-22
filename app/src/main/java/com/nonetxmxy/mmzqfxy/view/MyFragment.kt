@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.FragmentMyBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.MyFragViewModel
@@ -23,6 +24,14 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
         FragmentMyBinding.inflate(inflater, parent, false)
 
     override fun setLayout() {
+
+        binding.tvPhone.text = LocalCache.phoneNumber.let {
+            if (it.length == 12)
+                it.substring(2)
+            else
+                it
+        }
+
         binding.containerHis.setLimitClickListener {
             navController.navigate(MyFragmentDirections.actionMyFragmentToOrderListFragment(false))
         }

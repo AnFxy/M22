@@ -33,8 +33,8 @@ class EmptyAuthFragment : BaseFragment<FragmentEmptyBinding, EmptyAuthViewModel>
                     PageType.CONTRACT -> navController.navigate(EmptyAuthFragmentDirections.actionEmptyAuthFragmentToAuthContactPersonFragment())
                     PageType.ID -> navController.navigate(EmptyAuthFragmentDirections.actionEmptyAuthFragmentToAuthIdentityFragment())
                     PageType.BANK -> navController.navigate(EmptyAuthFragmentDirections.actionEmptyAuthFragmentToAddCardsFragment())
-                    PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.FACE -> navController.navigate(EmptyAuthFragmentDirections.actionEmptyAuthFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(EmptyAuthFragmentDirections.actionEmptyAuthFragmentToConfirmRequestFragment())
                 }
             }
         }

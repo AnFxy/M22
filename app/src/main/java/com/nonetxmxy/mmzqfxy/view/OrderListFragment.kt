@@ -38,7 +38,7 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
                     .build()
             )
         }, {
-
+            navController.navigate(OrderListFragmentDirections.actionOrderListFragmentToPayNavigation())
         })
     }
 

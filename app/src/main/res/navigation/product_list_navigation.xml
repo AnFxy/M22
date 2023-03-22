@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_productListFragment_to_auth_navigation"
             app:destination="@id/auth_navigation"/>
+        <action
+            android:id="@+id/action_productListFragment_to_underReviewFragment"
+            app:destination="@id/underReviewFragment" />
     </fragment>
 
 
@@ -26,5 +29,9 @@
     <include app:graph="@navigation/pay_navigation"/>
 
     <include app:graph="@navigation/auth_navigation"/>
+    <fragment
+        android:id="@+id/underReviewFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment"
+        android:label="UnderReviewFragmentPro" />
 
 </navigation>

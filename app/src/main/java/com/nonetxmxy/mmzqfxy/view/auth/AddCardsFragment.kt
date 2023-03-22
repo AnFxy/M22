@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigator
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAddCardsBinding
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
@@ -24,6 +26,10 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
     private val arguments: AddCardsFragmentArgs by navArgs()
 
     override fun getViewMode(): AddCardsFragViewModel = viewModel
+
+    companion object {
+        val GO_BACK = "go_back"
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -83,7 +89,7 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.goNextPage.collect {
                 if (arguments.isJustBack) {
-                    navController.popBackStack()
+                    callBackDataWhenDestroyed(GO_BACK, data = true)
                 } else {
                     viewModel.checkGoWhichVerificationPage()
                 }
@@ -98,8 +104,8 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
                     PageType.CONTRACT -> navController.navigate(AddCardsFragmentDirections.actionAddCardsFragmentToAuthContactPersonFragment())
                     PageType.ID -> navController.navigate(AddCardsFragmentDirections.actionAddCardsFragmentToAuthIdentityFragment())
                     PageType.BANK -> {}
-                    PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.FACE -> navController.navigate(AddCardsFragmentDirections.actionAddCardsFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(AddCardsFragmentDirections.actionAddCardsFragmentToConfirmRequestFragment())
                 }
             }
         }

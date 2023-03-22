@@ -252,8 +252,8 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     PageType.CONTRACT -> navController.navigate(AuthUserWorkFragmentDirections.actionAuthUserWorkFragmentToAuthContactPersonFragment())
                     PageType.ID -> navController.navigate(AuthUserWorkFragmentDirections.actionAuthUserWorkFragmentToAuthIdentityFragment())
                     PageType.BANK -> navController.navigate(AuthUserWorkFragmentDirections.actionAuthUserWorkFragmentToAddCardsFragment())
-                    PageType.FACE -> {}
-                    PageType.CONFIRM -> {}
+                    PageType.FACE -> navController.navigate(AuthUserWorkFragmentDirections.actionAuthUserWorkFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(AuthUserWorkFragmentDirections.actionAuthUserWorkFragmentToConfirmRequestFragment())
                 }
             }
         }

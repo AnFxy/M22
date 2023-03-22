@@ -1,13 +1,10 @@
 package com.nonetxmxy.mmzqfxy.repository
 
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
-import com.nonetxmxy.mmzqfxy.model.SampleBank
 import com.nonetxmxy.mmzqfxy.model.auth.*
 import com.nonetxmxy.mmzqfxy.model.response.FileResponse
 
 interface IAuthRepository {
-
-    suspend fun getCards(): List<SampleBank>
 
     suspend fun uploadFile(fileStr: String, suffixName: String): BaseResponse<FileResponse>
 
