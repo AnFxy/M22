@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
@@ -38,6 +39,8 @@ class AuthContactPersonFragment :
         }
 
     private val viewModel: AuthContactPersonViewModel by viewModels()
+
+    private val args: AuthContactPersonFragmentArgs by navArgs()
 
     private var selectContact1 = true
 
@@ -129,7 +132,9 @@ class AuthContactPersonFragment :
             viewModel.pagerEventFlow.collect {
                 when (it) {
                     AuthPagerEvent.Finish -> navController.popBackStack()
-                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
+                    AuthPagerEvent.GoNextPage ->  {
+                        if (args.isJustBack) navController.popBackStack() else viewModel.checkGoWhichVerificationPage()
+                    }
                     else -> {
                         // Do nothing
                     }

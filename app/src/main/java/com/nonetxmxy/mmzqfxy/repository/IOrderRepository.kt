@@ -1,8 +1,6 @@
 package com.nonetxmxy.mmzqfxy.repository
 
-import com.nonetxmxy.mmzqfxy.model.OrderMessage
-import com.nonetxmxy.mmzqfxy.model.ProductsBean
-import com.nonetxmxy.mmzqfxy.model.RepayMessage
+import com.nonetxmxy.mmzqfxy.model.*
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
 import com.nonetxmxy.mmzqfxy.model.response.AppBean
 import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
@@ -22,4 +20,15 @@ interface IOrderRepository {
     suspend fun submitRequestConfirm(confirmMessage: ConfirmMessage)
 
     suspend fun getRepayData(): RepayMessage
+
+    suspend fun getPayWayMessageData(): List<PayWayMessage>
+
+    suspend fun getPayCodeMessageData(
+        mainOrderId: Long,
+        sonOrderId: Long?,
+        payWayId: String,
+        payType: Int
+    ): PayCodeMessage
+
+    suspend fun doConfirmExpand(sonOrderId: Long)
 }

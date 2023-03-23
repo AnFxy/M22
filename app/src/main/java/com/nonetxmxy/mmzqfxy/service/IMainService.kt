@@ -1,8 +1,6 @@
 package com.nonetxmxy.mmzqfxy.service
 
-import com.nonetxmxy.mmzqfxy.model.BaseResponse
-import com.nonetxmxy.mmzqfxy.model.Regions
-import com.nonetxmxy.mmzqfxy.model.RepayMessage
+import com.nonetxmxy.mmzqfxy.model.*
 import com.nonetxmxy.mmzqfxy.model.response.*
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -47,4 +45,16 @@ interface IMainService {
     // 获取还款页面数据
     @POST(NetPaths.repayList)
     suspend fun repayListGot(@Body maps: HashMap<String, String>): BaseResponse<RepayMessage>
+
+    // 获取 还款渠道
+    @POST(NetPaths.repayWay)
+    suspend fun repayWayGot(@Body maps: HashMap<String, String>): BaseResponse<List<PayWayMessage>>
+
+    // 生成还款码
+    @POST(NetPaths.repayCode)
+    suspend fun repayCodeGot(@Body maps: HashMap<String, String>): BaseResponse<PayCodeMessage>
+
+    // 点击确认展期
+    @POST(NetPaths.confirmExpand)
+    suspend fun doConfirmExpand(@Body maps: HashMap<String, String>): BaseResponse<Unit>
 }

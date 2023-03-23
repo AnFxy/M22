@@ -1,23 +1,26 @@
 package com.nonetxmxy.mmzqfxy.view.payback
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.R
+import com.nonetxmxy.mmzqfxy.adapters.PayWayAdapter
 import com.nonetxmxy.mmzqfxy.adapters.RepayListAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
+import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayBinding
 import com.nonetxmxy.mmzqfxy.model.RepayMessage
 import com.nonetxmxy.mmzqfxy.tools.jinE
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
+import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.PayFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,6 +34,51 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
         RepayListAdapter().apply {
             onItemCheckChanged = {
                 updateAllSelectViewStatus()
+            }
+            goRequestAgain = {
+                navController.navigate(PayFragmentDirections.actionPayFragmentToConfirmRequestFragment())
+            }
+            toRepay = { sonId ->
+                viewModel.sonId = sonId
+                viewModel.payType = 1
+                payWayDialog?.show()
+            }
+            toExpand = { order ->
+                viewModel.sonId = order.eJwh
+                viewModel.payType = 2
+                navController.navigate(PayFragmentDirections.actionPayFragmentToExpandFragment(order))
+            }
+        }
+    }
+
+    private val payWayAdapter: PayWayAdapter by lazy {
+        PayWayAdapter().apply {
+            onItemSelected = { code, name, logo ->
+                navController.navigate(
+                    PayFragmentDirections.actionPayFragmentToPayCodeFragment(
+                        payWayCode = code,
+                        payType = viewModel.payType,
+                        orderMainId = viewModel.pagerData.value?.oqiuffK!![0].kcUBu,
+                        orderSonId = viewModel.sonId ?: 0L,
+                        payWayName = name,
+                        proName = viewModel.pagerData.value?.oqiuffK!![0].IAtgc,
+                        payWayLogo = logo
+                    )
+                )
+                payWayDialog?.dismiss()
+            }
+        }
+    }
+
+    private val payWayDialog: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_pay_way)
+            dialog.setViewState<ImageView>(R.id.iv_close) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<RecyclerView>(R.id.rv_pay_way) {
+                adapter = payWayAdapter
             }
         }
     }
@@ -49,6 +97,8 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
             adapter = repayAdapter
         }
 
+        updateAllSelectViewStatus()
+
         binding.cbSelectAll.setOnClickListener {
             repayAdapter.datas = repayAdapter.datas.map {
                 it.apply {
@@ -56,6 +106,20 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                 }
             }
             updateAllSelectViewStatus()
+        }
+
+        binding.tvPay.setLimitClickListener {
+            if (binding.cbSelectAll.isChecked) {
+                viewModel.payType = 5
+            } else {
+                viewModel.payType = 1
+                viewModel.sonId = repayAdapter.datas.first { it.isChecked && it.CZusa in listOf(0, 2) }.eJwh
+            }
+            payWayDialog?.show()
+        }
+
+        receiveCallBackDataFromLastFragment<Boolean>(UnderReviewFragment.BACK) {
+            viewModel.getPageData()
         }
     }
 
@@ -65,12 +129,19 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                 it?.let {
                     // 进行数据过滤，订单异常关闭的
                     val orders = it.oqiuffK.filterNot { item -> item.tTeY == 7 && item.CZusa == 3 }
+                    repayAdapter.isCanRequestAgain = it.Djb == 1
                     updatePage(
                         it.copy(
                             oqiuffK = orders
                         )
                     )
                 }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.payChannel.collect {
+                payWayAdapter.payWays = it
             }
         }
     }
@@ -98,8 +169,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
             (needPayCheckedItems.size == 1 && needPayCheckedItems[0].HAkD == 1) || isAllSelected
 
         val totalPayAmount = needPayCheckedItems.sumOf { it.QhNNScsTT }
-        val totalReduceAmount = 12
-            //needPayCheckedItems.sumOf { it.tcwHIg }
+        val totalReduceAmount = needPayCheckedItems.sumOf { it.tcwHIg }
 
         val reduceText =
             if (totalReduceAmount > 0)

@@ -43,6 +43,12 @@
         android:id="@+id/authUserInfoFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
         android:label="AuthUserInfoFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
         <action
             android:id="@+id/action_authUserInfoFragment_to_authUserWorkFragment"
             app:destination="@id/authUserWorkFragment"
@@ -73,6 +79,12 @@
         android:id="@+id/authUserWorkFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserWorkFragment"
         android:label="AuthUserWorkFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
         <action
             android:id="@+id/action_authUserWorkFragment_to_authUserInfoFragment"
             app:destination="@id/authUserInfoFragment"
@@ -103,6 +115,12 @@
         android:id="@+id/authContactPersonFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthContactPersonFragment"
         android:label="AuthContactPersonFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
         <action
             android:id="@+id/action_authContactPersonFragment_to_authUserWorkFragment"
             app:destination="@id/authUserWorkFragment"
@@ -133,6 +151,12 @@
         android:id="@+id/authIdentityFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthIdentityFragment"
         android:label="AuthIdentityFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
         <action
             android:id="@+id/action_authIdentityFragment_to_authContactPersonFragment"
             app:destination="@id/authContactPersonFragment"
@@ -204,6 +228,7 @@
             app:destination="@id/underReviewFragment"
             app:popUpTo="@id/confirmRequestFragment"
             app:popUpToInclusive="true"/>
+
         <action
             android:id="@+id/action_confirmRequestFragment_to_addCardsFragment"
             app:destination="@id/addCardsFragment" />

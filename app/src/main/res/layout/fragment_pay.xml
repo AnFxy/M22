@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/his" />
+            android:text="@string/repay_page_title" />
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
@@ -150,6 +150,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout

@@ -80,8 +80,6 @@ class AuthUserInfoViewModel @Inject constructor(
         launchUIWithDialog {
             authRepository.submitUserInfo(pagerData, startTime)
 
-            val oldStatus = LocalCache.infoCredit == 1
-
             val mineInfo = orderRepository.getUserInfo()
             LocalCache.infoCredit = mineInfo.LbF.toInt()
             LocalCache.workCredit = mineInfo.UpolPGX.toInt()
@@ -90,11 +88,7 @@ class AuthUserInfoViewModel @Inject constructor(
             LocalCache.faceCredit = mineInfo.jFJE.toInt()
             LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
 
-            if (oldStatus) {
-                _pagerEventFlow.emit(AuthPagerEvent.Finish)
-            } else {
-                _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
-            }
+            _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
         }
     }
 }

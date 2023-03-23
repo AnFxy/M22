@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
@@ -34,55 +35,12 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
     private val viewModel: AuthIdentityViewModel by viewModels()
 
+    private val args: AuthIdentityFragmentArgs by navArgs()
+
     private lateinit var photoLauncher: ActivityResultLauncher<String>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
 
     override fun getViewMode() = viewModel
-
-    private val uploadIdentityDialog by lazy {
-        val dialog =
-            context?.let { RxDialogSet.provideDialogBottom(it, R.layout.dia_upload_identity) }
-        dialog?.setViewState<TextView>(R.id.cancelar) {
-            setLimitClickListener {
-                dialog.dismiss()
-            }
-        }?.setViewState<TextView>(R.id.grabar) {
-            setLimitClickListener {
-                PermissionUtils.permission(PermissionConstants.CAMERA)
-                    .callback(object : PermissionUtils.FullCallback {
-                        override fun onGranted(granted: MutableList<String>) {
-                            cameraLauncher.launch(Uri.fromFile(File("")))
-                        }
-
-                        override fun onDenied(
-                            deniedForever: MutableList<String>,
-                            denied: MutableList<String>
-                        ) {
-
-                        }
-                    }).request()
-                dialog.dismiss()
-            }
-        }?.setViewState<TextView>(R.id.album) {
-            setLimitClickListener {
-                PermissionUtils.permission(PermissionConstants.CAMERA)
-                    .callback(object : PermissionUtils.FullCallback {
-                        override fun onGranted(granted: MutableList<String>) {
-
-                        }
-
-                        override fun onDenied(
-                            deniedForever: MutableList<String>,
-                            denied: MutableList<String>
-                        ) {
-
-                        }
-                    })
-                dialog.dismiss()
-            }
-        }
-        dialog
-    }
 
     override fun getViewBinding(
         inflater: LayoutInflater, parent: ViewGroup?
@@ -187,7 +145,9 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
                 when (it) {
                     AuthPagerEvent.UpdatePageView -> updatePage()
                     AuthPagerEvent.Finish -> navController.popBackStack()
-                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
+                    AuthPagerEvent.GoNextPage -> {
+                        if (args.isJustBack) navController.popBackStack() else viewModel.checkGoWhichVerificationPage()
+                    }
                 }
             }
         }
@@ -307,21 +267,11 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             return false
         }
 
-//        if (viewModel.pagerData.DEyLxCETnd.isEmpty()) {
-//            ToastUtils.showShort(
-//                StringUtils.format(
-//                    StringUtils.getString(R.string.input_error_hint),
-//                    binding.inputRfcNumber.inputTitle
-//                )
-//            )
-//            binding.scrollView.smoothScrollTo(0, binding.inputRfcNumber.top)
+// TODO
+//        if (LocalCache.faceCredit == 0) {
+//            ToastUtils.showShort(getString(R.string.please_face_check))
 //            return false
 //        }
-
-        if (LocalCache.faceCredit == 0) {
-            ToastUtils.showShort(getString(R.string.please_face_check))
-            return false
-        }
 
         return true
     }

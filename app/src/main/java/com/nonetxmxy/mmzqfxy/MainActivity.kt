@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.nonetxmxy.mmzqfxy.base.BaseActivity
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.ActivityMainBinding
 import com.nonetxmxy.mmzqfxy.tools.setVisible
+import com.nonetxmxy.mmzqfxy.view.ProductListFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,24 +39,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         binding.nvBottom.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(this)
 
-//        binding.nvBottom.setOnItemSelectedListener {
-//            if (!LocalCache.isLogged) {
-//                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
-//                false
-//            } else {
-//                val builder =
-//                    NavOptions.Builder()
-//                        .setLaunchSingleTop(true)
-//                        .setRestoreState(true)
-//                        .setPopUpTo(
-//                            R.id.productListFragment,
-//                            inclusive = false,
-//                            saveState = true
-//                        )
-//                navController.navigate(it.itemId, null, builder.build())
-//                navController.currentDestination?.id == it.itemId
-//            }
-//        }
+        binding.nvBottom.setOnItemSelectedListener {
+            if (!LocalCache.isLogged) {
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
+                false
+            } else {
+                val builder =
+                    NavOptions.Builder()
+                        .setLaunchSingleTop(true)
+                        .setRestoreState(true)
+                        .setPopUpTo(
+                            R.id.productListFragment,
+                            inclusive = false,
+                            saveState = true
+                        )
+                navController.navigate(it.itemId, null, builder.build())
+                navController.currentDestination?.id == it.itemId
+            }
+        }
     }
 
     override fun onBackPressed() {

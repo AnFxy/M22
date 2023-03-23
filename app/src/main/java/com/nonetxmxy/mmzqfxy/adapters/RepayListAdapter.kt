@@ -3,8 +3,6 @@ package com.nonetxmxy.mmzqfxy.adapters
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import android.widget.CompoundButton.OnCheckedChangeListener
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.StringUtils.getString
 import com.nonetxmxy.mmzqfxy.R
@@ -28,9 +26,9 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var goRequestAgain: () -> Unit = {}
 
-    var toRepay: ((Long, Long) -> Unit)? = null
+    var toRepay: ((Long) -> Unit)? = null
 
-    var toExpand: ((Long, Long) -> Unit)? = null
+    var toExpand: ((OrderPeriodMessage) -> Unit)? = null
 
     var isCanRequestAgain = false
 
@@ -88,12 +86,12 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(
             order: OrderPeriodMessage,
-            toRepay: ((Long, Long) -> Unit)? = null,
-            toExpand: ((Long, Long) -> Unit)? = null,
+            toRepay: ((Long) -> Unit)? = null,
+            toExpand: ((OrderPeriodMessage) -> Unit)? = null,
             onItemCheckedChanged: () -> Unit
         ) {
             binding.tvPeriod.text = "Periodo ${order.PXsQKJs}"
-            binding.tvOrder.text = "Orden ${order.kcUBu}"
+            binding.tvOrder.text = "Orden ${order.eJwh}"
 
             if (order.fLk >= 0) {
                 binding.tvStatusDays.apply {
@@ -131,10 +129,10 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.tvExpand.setVisible(order.BHWg == 1)
 
             binding.tvPay.setLimitClickListener {
-                toRepay?.invoke(order.kcUBu, order.eJwh)
+                toRepay?.invoke(order.eJwh)
             }
             binding.tvExpand.setLimitClickListener {
-                toExpand?.invoke(order.kcUBu, order.eJwh)
+                toExpand?.invoke(order)
             }
 
             binding.cbSelect.isChecked = order.isChecked

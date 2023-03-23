@@ -134,8 +134,8 @@
     <string name="expand_tips">支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。</string>
     <string name="expand_confirm">确认展期</string>
     <string name="pay_way">还款通道</string>
-    <string name="pay_tag_recommend">推荐的</string>
-    <string name="pay_tag_common">普通的</string>
+    <string name="pay_tag_recommend">Recomendado</string>
+    <string name="pay_tag_common">Comision de reemboslo adicional</string>
 
     <!--身份证认证页面-->
     <string name="id_card_top_des">Subir la frontal</string>
@@ -172,6 +172,21 @@
     <string name="confirm_need_repay_amount">Importe pendiente de pago</string>
     <string name="confirm_get_money_account">Cuenta receptora</string>
     <string name="confirm_modify_bank">Cambiar</string>
+
+    <!--还款渠道-->
+    <string name="payway_title">Metodo de reembolso</string>
+
+    <!--还款码页面-->
+    <string name="pay_code_title">SPEI</string>
+    <string name="pay_code_warning">*Por favor, asegurese de que los reembolsos se realizan mediante metodos oficianles de pago y no se transfieren a cuentas privadas.</string>
+    <string name="pay_way_fixed">Metodo de reembolso</string>
+    <string name="spei_des">Recomendar SPEI, no tiene tarifa de servicio adicional</string>
+    <string name="spei_warning">Si elige %s, tiene un costo de 25 pesos de servicio adicional</string>
+    <string name="code_fixed">Codigo de pago</string>
+    <string name="pay_amount">Importe restante</string>
+    <string name="pro_name">Nombre del producto</string>
+    <string name="more_pro">El reembolso puntual le proporcionara un mayor limite de credito, tipos de interes mas bajos y mas productos de financiacion.</string>
+    <string name="pay_des_title">Metodo de reembolso</string>
 
     <!--状态页-->
     <string name="under_review_title">Detalles de orden</string>

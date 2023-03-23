@@ -83,9 +83,7 @@ class ConfirmRequestFragment :
             }.setViewState<TextView>(R.id.tv_add_cards) {
                 setLimitClickListener {
                     navController.navigate(
-                        ConfirmRequestFragmentDirections.actionConfirmRequestFragmentToAddCardsFragment(
-                            true
-                        )
+                        ConfirmRequestFragmentDirections.actionConfirmRequestFragmentToAddCardsFragment(true)
                     )
                     dialog.dismiss()
                 }

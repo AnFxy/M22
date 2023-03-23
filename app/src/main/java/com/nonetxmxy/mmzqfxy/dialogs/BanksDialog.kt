@@ -53,11 +53,11 @@ class BanksDialog @JvmOverloads constructor(
         /**
          * 过滤出常用的银行
          */
-//        allBlankGroup.addAll(blanks.filter {
-//            Random() == 1
-//        }.map {
-//            ShowBankBean(false, it)
-//        }.toList())
+        allBlankGroup.addAll(blanks.filterIndexed { index, _ ->
+            index < 5
+        }.map {
+            ShowBankBean(false, it)
+        }.toList())
 
         group.keys.sorted().forEach { key ->
             val keyGroup = group[key]

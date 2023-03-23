@@ -79,7 +79,7 @@ class ProductListFragViewModel @Inject constructor(
                 }
                 // 还款流程
                 7, 8 -> {
-                    // TODO
+                    navDirections.emit(ProductListFragmentDirections.actionProductListFragmentToPayNavigation())
                 }
                 else -> {
                     // 不做任何处理

@@ -2,11 +2,11 @@ package com.nonetxmxy.mmzqfxy.repository.create
 
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.model.OrderMessage
-import com.nonetxmxy.mmzqfxy.model.ProductsBean
-import com.nonetxmxy.mmzqfxy.model.RepayMessage
+import com.nonetxmxy.mmzqfxy.model.*
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
-import com.nonetxmxy.mmzqfxy.model.response.*
+import com.nonetxmxy.mmzqfxy.model.response.AppBean
+import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
+import com.nonetxmxy.mmzqfxy.model.response.MineInfo
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import com.nonetxmxy.mmzqfxy.service.IAuthService
 import com.nonetxmxy.mmzqfxy.service.IMainService
@@ -255,6 +255,47 @@ class OrderRepository @Inject constructor(
         maps["wWxfSHoRbo"] = LocalCache.currentProCode
         maps["GFjpYB"] = LocalCache.token
         maps["vqqb"] = "4"
-        return  mainService.repayListGot(maps).checkDataEmpty()
+        return mainService.repayListGot(maps).checkDataEmpty()
+    }
+
+    override suspend fun getPayWayMessageData(): List<PayWayMessage> {
+        val maps = HashMap<String, String>()
+        maps["VisfHICVX"] = BuildConfig.CODE
+        maps["zlYrkRY"] = BuildConfig.LANGUAGE
+        maps["DwfXq"] = LocalCache.token
+        maps["JtbEgyLEmU"] = LocalCache.currentProCode
+        return mainService.repayWayGot(maps).checkDataEmpty()
+    }
+
+    override suspend fun getPayCodeMessageData(
+        mainOrderId: Long,
+        sonOrderId: Long?,
+        payWayId: String,
+        payType: Int
+    ): PayCodeMessage {
+        val maps = HashMap<String, String>()
+        maps["FxQtrIWDjl"] = BuildConfig.CODE
+        maps["DBjP"] = BuildConfig.LANGUAGE
+        maps["sBAFCuKlnd"] = LocalCache.token
+        maps["bfjEM"] = mainOrderId.toString()
+        maps["xHhzYlPMX"] = payWayId
+        maps["gGs"] = LocalCache.currentProCode
+        maps["drYvC"] = payType.toString()
+        sonOrderId?.let {
+            if (payType != 5) {
+                maps["jxRvqQ"] = it.toString()
+            }
+        }
+        return mainService.repayCodeGot(maps).checkDataEmpty()
+    }
+
+    override suspend fun doConfirmExpand(sonOrderId: Long) {
+        val maps = HashMap<String, String>()
+        maps["BqPiiCuy"] = BuildConfig.CODE
+        maps["kuAaWN"] = BuildConfig.LANGUAGE
+        maps["flzYnIRqQ"] = LocalCache.token
+        maps["tDgvW"] = sonOrderId.toString()
+
+        mainService.doConfirmExpand(maps).checkCodeError()
     }
 }

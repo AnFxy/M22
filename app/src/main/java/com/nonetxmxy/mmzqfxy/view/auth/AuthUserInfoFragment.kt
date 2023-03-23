@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
@@ -26,6 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserInfoViewModel>() {
 
     private val viewModel: AuthUserInfoViewModel by viewModels()
+
+    private val args: AuthUserInfoFragmentArgs by navArgs()
 
     private val estadoCivilAdapter by lazy {
         val adapter = AuthPageDataSelectAdapter()
@@ -160,7 +163,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                 if (it == null) return@collect
                 commonSelect1.setOptionShowList(it.PBjZodk)
                 commonSelect2.setOptionShowList(it.pAf)
-                estadoCivilAdapter.setList(it.cSmAoN)
+                estadoCivilAdapter.setList(it.JDnuGMCy)
             }
         }
 
@@ -175,7 +178,9 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             viewModel.pagerEventFlow.collect {
                 when (it) {
                     AuthPagerEvent.Finish -> navController.popBackStack()
-                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
+                    AuthPagerEvent.GoNextPage -> {
+                        if (args.isJustBack) navController.popBackStack() else viewModel.checkGoWhichVerificationPage()
+                    }
                     AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerData)
                 }
             }
@@ -206,7 +211,7 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             }
             input1.inputContent = data.dFZqoeahk
 
-            val index = viewModel.optionShowListFlow.value?.cSmAoN?.map { map ->
+            val index = viewModel.optionShowListFlow.value?.JDnuGMCy?.map { map ->
                 map.cnTVzVSsBYV
             }?.indexOf(data.XKbzBk) ?: return
             val oldIndex = estadoCivilAdapter.currentIndex

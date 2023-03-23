@@ -83,8 +83,6 @@ class AuthUserWorkViewModel @Inject constructor(
         launchUIWithDialog {
             authRepository.submitWorkInfo(pagerData, startTime)
 
-            val oldStatus = LocalCache.workCredit == 1
-
             val mineInfo = orderRepository.getUserInfo()
             LocalCache.infoCredit = mineInfo.LbF.toInt()
             LocalCache.workCredit = mineInfo.UpolPGX.toInt()
@@ -93,11 +91,7 @@ class AuthUserWorkViewModel @Inject constructor(
             LocalCache.faceCredit = mineInfo.jFJE.toInt()
             LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
 
-            if (oldStatus) {
-                _pagerEventFlow.emit(AuthPagerEvent.Finish)
-            } else {
-                _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
-            }
+            _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
         }
     }
 }

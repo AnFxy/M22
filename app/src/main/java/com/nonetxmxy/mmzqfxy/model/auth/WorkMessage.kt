@@ -9,7 +9,7 @@ data class WorkMessage(
     val Yrfwo: String, // 公司所在的城市
     val rIIWYi: String, // 公司的详细地址
     val Qnf: String, // 收入金额显示字段
-    val OsRQOT: String, // 工作职位 显示
+    val OsRQOT: String?, // 工作职位 显示
     val rFAso: String, // 工作类型
     val zuIMxSgT: String, // 工作类型 显示
     val CVZLaIndZG: String, // 收入来源类型

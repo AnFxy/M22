@@ -87,7 +87,6 @@ class AuthIdentityViewModel @Inject constructor(
     fun submitIdentifyInfo() {
         launchUIWithDialog {
             authRepository.submitIDCardInfo(pagerData, startTime)
-            val oldStatus = LocalCache.idCredit == 1
 
             val mineInfo = orderRepository.getUserInfo()
             LocalCache.infoCredit = mineInfo.LbF.toInt()
@@ -97,11 +96,7 @@ class AuthIdentityViewModel @Inject constructor(
             LocalCache.faceCredit = mineInfo.jFJE.toInt()
             LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
 
-            if (oldStatus) {
-                _pagerEventFlow.emit(AuthPagerEvent.Finish)
-            } else {
-                _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
-            }
+            _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
         }
     }
 }

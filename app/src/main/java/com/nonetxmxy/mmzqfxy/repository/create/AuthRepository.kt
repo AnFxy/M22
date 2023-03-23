@@ -50,7 +50,7 @@ class AuthRepository @Inject constructor(
         maps["NgkE"] = workMessage.WLQ
         maps["SgY"] = workMessage.TqqZwacSZ
         maps["IVqVOgnjia"] = workMessage.PrKpqCuxQ
-        maps["yc-v"] = workMessage.tLxEVr
+        maps["cpeKwj"] = workMessage.tLxEVr
         maps["jQOvw"] = workMessage.Yrfwo
         maps["dFWU"] = workMessage.rIIWYi
         maps["ndaHL"] = workMessage.BRDyVcJsB
@@ -116,7 +116,7 @@ class AuthRepository @Inject constructor(
 
         maps["ePxloBmkkQ"] = contractMessage.Cqr
         maps["jCTfmdrscW"] = contractMessage.RHaDS
-        maps["mMV"] = contractMessage.KiVk
+        maps["rnMV"] = contractMessage.KiVk
         maps["hGcQRWvNU"] = contractMessage.pRgj
         maps["kxLQ"] = contractMessage.faVW
         maps["VnqYhn"] = contractMessage.vwuan

@@ -63,9 +63,11 @@ abstract class BaseViewModel : ViewModel() {
                     PageType.CONTRACT
                 } else if (LocalCache.idCredit == 0) {
                     PageType.ID
-                } else if (LocalCache.faceCredit == 0) {
-                    PageType.FACE
-                } else if (LocalCache.bankCredit == 0) {
+                }
+//                else if (LocalCache.faceCredit == 0) {
+//                    PageType.FACE
+//                }
+                else if (LocalCache.bankCredit == 0) {
                     PageType.BANK
                 } else {
                     PageType.CONFIRM

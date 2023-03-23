@@ -4,7 +4,7 @@ data class AllTags(
     val JDnuGMCy: List<Tags>, // 婚姻状态
     val dYHUukCW: List<Tags>, // 月收入
     val PBjZodk: List<Tags>, // 教育水平等级
-    val cSmAoN: List<Tags>, // 婚姻状况
+    val cSmAoN: List<Tags>, // 性别
     val ihdXBrF: List<Tags>, // 银行卡类型
     val zHezuLsDK: List<Tags>, // 联系人关系
     val BiJe: List<Tags>, // 反馈类型

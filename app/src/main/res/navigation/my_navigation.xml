@@ -23,6 +23,10 @@
         <action
             android:id="@+id/action_myFragment_to_suggestionsFragment"
             app:destination="@id/suggestionsFragment" />
+
+        <action
+            android:id="@+id/action_myFragment_to_pay_navigation"
+            app:destination="@id/pay_navigation"/>
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -32,6 +36,10 @@
             android:name="isTab"
             android:defaultValue="true"
             app:argType="boolean" />
+
+        <action
+            android:id="@+id/action_orderListFragment_to_pay_navigation"
+            app:destination="@id/pay_navigation"/>
     </fragment>
     <fragment
         android:id="@+id/cardsFragment"
@@ -53,7 +61,23 @@
     <fragment
         android:id="@+id/allAuthFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.AllAuthFragment"
-        android:label="AllAuthFragment" />
+        android:label="AllAuthFragment" >
+        <action
+            android:id="@+id/action_allAuthFragment_to_authUserInfoFragment"
+            app:destination="@id/authUserInfoFragment" />
+        <action
+            android:id="@+id/action_allAuthFragment_to_authUserWorkFragment"
+            app:destination="@id/authUserWorkFragment" />
+        <action
+            android:id="@+id/action_allAuthFragment_to_authContactPersonFragment"
+            app:destination="@id/authContactPersonFragment" />
+        <action
+            android:id="@+id/action_allAuthFragment_to_authIdentityFragment"
+            app:destination="@id/authIdentityFragment" />
+        <action
+            android:id="@+id/action_allAuthFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutCompanyFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.AboutCompanyFragment"
@@ -66,8 +90,56 @@
     </fragment>
 
     <include app:graph="@navigation/login_navigation"/>
+    <include app:graph="@navigation/pay_navigation"/>
     <fragment
         android:id="@+id/suggestionsFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.SuggestionsFragment"
         android:label="SuggestionsFragment" />
+
+    <fragment
+        android:id="@+id/authUserInfoFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
+        android:label="AuthUserInfoFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/authUserWorkFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserWorkFragment"
+        android:label="AuthUserWorkFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/authContactPersonFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthContactPersonFragment"
+        android:label="AuthContactPersonFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/authIdentityFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthIdentityFragment"
+        android:label="AuthIdentityFragment" >
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean"/>
+
+    </fragment>
 </navigation>

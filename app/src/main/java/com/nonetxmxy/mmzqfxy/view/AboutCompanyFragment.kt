@@ -13,8 +13,10 @@ import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAboutCompanyBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AboutCompanyViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+@AndroidEntryPoint
 class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, AboutCompanyViewModel>() {
 
     private val viewModel: AboutCompanyViewModel by viewModels()

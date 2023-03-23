@@ -1,5 +1,7 @@
 package com.nonetxmxy.mmzqfxy.model
 
+import java.io.Serializable
+
 data class RepayMessage(
     val OEdZXUBY: Double, // 需要还款的总金额
     val XYz: Int, // 需要还款的总期数
@@ -7,7 +9,7 @@ data class RepayMessage(
     val oqiuffK: List<OrderPeriodMessage>
 )
 
-data class OrderPeriodMessage(
+class OrderPeriodMessage(
     val BANcfnGeXv: String, // 产品项目编码
     val kcUBu: Long, // 所属父订单的id
     val tTeY: Int, // 订单状态
@@ -34,6 +36,6 @@ data class OrderPeriodMessage(
     val rejC: Int, // 总期数
     val tcwHIg: Double, // 优惠金额
     val HAkD: Int, // 是否可单独还款
-) {
+) : Serializable {
     var isChecked = false
 }

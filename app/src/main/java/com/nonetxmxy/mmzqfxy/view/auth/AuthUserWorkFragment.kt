@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.StringUtils
@@ -23,6 +24,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserWorkViewModel>() {
 
     private val viewModel: AuthUserWorkViewModel by viewModels()
+
+    private val args: AuthUserWorkFragmentArgs by navArgs()
 
     override fun getViewMode() = viewModel
 
@@ -237,9 +240,10 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
             viewModel.pagerEventFlow.collect {
                 when (it) {
                     AuthPagerEvent.Finish -> navController.popBackStack()
-                    AuthPagerEvent.GoNextPage -> viewModel.checkGoWhichVerificationPage()
+                    AuthPagerEvent.GoNextPage -> {
+                        if (args.isJustBack) navController.popBackStack() else viewModel.checkGoWhichVerificationPage()
+                    }
                     AuthPagerEvent.UpdatePageView -> updatePage(viewModel.pagerData)
-
                 }
             }
         }

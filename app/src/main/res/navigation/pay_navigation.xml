@@ -7,13 +7,100 @@
     <fragment
         android:id="@+id/payFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.payback.PayFragment"
-        android:label="PayFragment" >
+        android:label="PayFragment">
         <action
             android:id="@+id/action_payFragment_to_expandFragment"
             app:destination="@id/expandFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_confirmRequestFragment"
+            app:destination="@id/confirmRequestFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_payCodeFragment"
+            app:destination="@id/payCodeFragment" />
     </fragment>
     <fragment
         android:id="@+id/expandFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.payback.ExpandFragment"
-        android:label="ExpandFragment" />
+        android:label="ExpandFragment">
+
+        <argument
+            android:name="sonOrder"
+            app:argType="com.nonetxmxy.mmzqfxy.model.OrderPeriodMessage" />
+
+        <action
+            android:id="@+id/action_expandFragment_to_payCodeFragment"
+            app:destination="@id/payCodeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/confirmRequestFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ConfirmRequestFragment"
+        android:label="ConfirmRequestFragmentRepay">
+        <action
+            android:id="@+id/action_confirmRequestFragment_to_underReviewFragment"
+            app:destination="@id/underReviewFragment"
+            app:popUpTo="@id/confirmRequestFragment"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_confirmRequestFragment_to_addCardsFragment"
+            app:destination="@id/addCardsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addCardsFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.AddCardsFragment"
+        android:label="AddCardsFragment">
+
+        <argument
+            android:name="isJustBack"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/underReviewFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment"
+        android:label="UnderReviewFragmentRepay" />
+
+    <fragment
+        android:id="@+id/payCodeFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.payback.PayCodeFragment"
+        android:label="PayCodeFragment">
+
+        <argument
+            android:name="payWayCode"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="payType"
+            android:defaultValue="1"
+            app:argType="integer" />
+
+        <argument
+            android:name="orderMainId"
+            android:defaultValue="0L"
+            app:argType="long" />
+
+        <argument
+            android:name="orderSonId"
+            android:defaultValue="0L"
+            app:argType="long" />
+
+        <argument
+            android:name="payWayName"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="proName"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <argument
+            android:name="payWayLogo"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
 </navigation>

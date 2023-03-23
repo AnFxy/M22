@@ -61,6 +61,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         }
 
         mainAdapter.onItemClick = {
+            LocalCache.currentProCode = it.ANddPfvNno
             viewModel.startNextPageFlow(it)
         }
 
