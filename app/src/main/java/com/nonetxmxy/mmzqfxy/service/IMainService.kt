@@ -2,6 +2,7 @@ package com.nonetxmxy.mmzqfxy.service
 
 import com.nonetxmxy.mmzqfxy.model.BaseResponse
 import com.nonetxmxy.mmzqfxy.model.Regions
+import com.nonetxmxy.mmzqfxy.model.RepayMessage
 import com.nonetxmxy.mmzqfxy.model.response.*
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -42,4 +43,8 @@ interface IMainService {
     // 获取历史订单列表
     @POST(NetPaths.orderList)
     suspend fun orderListGot(@Body maps: HashMap<String, String>): BaseResponse<OrderResBean>
+
+    // 获取还款页面数据
+    @POST(NetPaths.repayList)
+    suspend fun repayListGot(@Body maps: HashMap<String, String>): BaseResponse<RepayMessage>
 }

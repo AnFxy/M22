@@ -20,6 +20,8 @@ interface IBeginRepository {
 
     suspend fun doLogin(code: String): LoginBean
 
+    suspend fun doLogout()
+
     suspend fun getOptionalDirections(): AllTags
 
     suspend fun getLatestRegions(): Regions

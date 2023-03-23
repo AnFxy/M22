@@ -7,10 +7,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.MainAppAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentUnderReviewBinding
 import com.nonetxmxy.mmzqfxy.model.OrderMessage
 import com.nonetxmxy.mmzqfxy.model.ProductsBean
@@ -28,6 +30,10 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
 
     private val mainAppAdapter: MainAppAdapter by lazy {
         MainAppAdapter()
+    }
+
+    companion object {
+        val BACK = "under_review_back"
     }
 
     override fun getViewMode(): UnderReviewViewModel = viewModel
@@ -49,6 +55,12 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
         }
 
         hideAndShowHomePage()
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                callBackDataWhenDestroyed(BACK, true)
+            }
+        }
     }
 
     override fun setObserver() {

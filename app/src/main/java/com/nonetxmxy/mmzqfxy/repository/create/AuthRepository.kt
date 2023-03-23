@@ -32,8 +32,8 @@ class AuthRepository @Inject constructor(
     override suspend fun getSubmitWorkInfo(): WorkMessage {
         val maps = HashMap<String, String>()
         maps["KeL"] = BuildConfig.LANGUAGE
-        maps["CpP"] = BuildConfig.CODE
-        maps["GCRv"] = LocalCache.currentProCode
+        maps["CpP"] = LocalCache.currentProCode
+        maps["GCRv"] = BuildConfig.CODE
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "1"
         return authService.workMessageGot(maps).checkDataEmpty()
@@ -66,8 +66,8 @@ class AuthRepository @Inject constructor(
     override suspend fun getSubmitUserInfo(): UserMessage {
         val maps = HashMap<String, String>()
         maps["KeL"] = BuildConfig.LANGUAGE
-        maps["CpP"] = BuildConfig.CODE
-        maps["GCRv"] = LocalCache.currentProCode
+        maps["CpP"] = LocalCache.currentProCode
+        maps["GCRv"] = BuildConfig.CODE
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "2"
         return authService.userMessageGot(maps).checkDataEmpty()
@@ -99,8 +99,8 @@ class AuthRepository @Inject constructor(
     override suspend fun getSubmitContractInfo(): ContractMessage {
         val maps = HashMap<String, String>()
         maps["KeL"] = BuildConfig.LANGUAGE
-        maps["CpP"] = BuildConfig.CODE
-        maps["GCRv"] = LocalCache.currentProCode
+        maps["CpP"] = LocalCache.currentProCode
+        maps["GCRv"] = BuildConfig.CODE
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "3"
         return authService.contractMessageGot(maps).checkDataEmpty()
@@ -139,8 +139,8 @@ class AuthRepository @Inject constructor(
     override suspend fun getSubmitIDCardInfo(): IDMessage {
         val maps = HashMap<String, String>()
         maps["KeL"] = BuildConfig.LANGUAGE
-        maps["CpP"] = BuildConfig.CODE
-        maps["GCRv"] = LocalCache.currentProCode
+        maps["CpP"] = LocalCache.currentProCode
+        maps["GCRv"] = BuildConfig.CODE
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "4"
 
@@ -186,8 +186,8 @@ class AuthRepository @Inject constructor(
     override suspend fun getSubmitBanks(): List<BankMessage> {
         val maps = HashMap<String, String>()
         maps["KeL"] = BuildConfig.LANGUAGE
-        maps["CpP"] = BuildConfig.CODE
-        maps["GCRv"] = LocalCache.currentProCode
+        maps["CpP"] = LocalCache.currentProCode
+        maps["GCRv"] = BuildConfig.CODE
         maps["ODtRxgcSBn"] = LocalCache.token
         maps["sBKNfLNMx"] = "5"
 

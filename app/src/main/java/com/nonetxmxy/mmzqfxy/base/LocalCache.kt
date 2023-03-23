@@ -57,5 +57,52 @@ class LocalCache {
         var idCredit = 0
         var bankCredit = 0
         var faceCredit = 0
+
+        fun clearALLCache() {
+            // 是否已经登录了
+            isLogged = false
+
+            // 手机号
+            phoneNumber = ""
+
+            // token
+            token = ""
+
+            // 当前产品编码
+            currentProCode = ""
+
+            // 是否是特殊账号
+            isSAccount = false
+
+            // 是否是老用户
+            isOldMan = false
+
+            // 上一次发送验证码的时候
+            lastTimeSendCode = 0L
+
+            // 上一次发送语音验证码的时候
+            lastTimeSendVoiceCode = 0L
+
+            // 图片信息
+            photoInfo = ""
+
+            // 身份证正面图片
+            idCardTop = ""
+
+            // 身份证反面图片
+            idCardBehind = ""
+
+            // 人脸识别照片
+            facePhoto = ""
+
+            //认证
+            infoCredit = 0
+            workCredit = 0
+            contactPersonCredit = 0
+            idCredit = 0
+            bankCredit = 0
+            faceCredit = 0
+        }
     }
+
 }

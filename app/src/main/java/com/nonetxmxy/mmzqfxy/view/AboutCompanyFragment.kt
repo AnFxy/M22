@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -12,6 +13,7 @@ import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAboutCompanyBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AboutCompanyViewModel
+import kotlinx.coroutines.flow.collect
 
 class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, AboutCompanyViewModel>() {
 
@@ -26,10 +28,7 @@ class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, AboutComp
                 }
             }.setViewState<TextView>(R.id.tv_logout) {
                 setLimitClickListener {
-                    // TODO Call 登出API 成功后退出登录，并跳到登录页
-                    LocalCache.isLogged = false
-                    dialog.dismiss()
-                    navController.navigate(AboutCompanyFragmentDirections.actionAboutCompanyFragmentToLoginFragment())
+                    viewModel.doLogout()
                 }
             }
         }
@@ -48,6 +47,16 @@ class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, AboutComp
 
         binding.tvLogout.setLimitClickListener {
             logoutDialog?.show()
+        }
+    }
+
+    override fun setObserver() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.goLogin.collect {
+                LocalCache.clearALLCache()
+                logoutDialog?.dismiss()
+                navController.navigate(AboutCompanyFragmentDirections.actionAboutCompanyFragmentToLoginFragment())
+            }
         }
     }
 }

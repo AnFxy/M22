@@ -64,7 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/loan_amount"
+                android:text="@string/confirm_loan_amount"
                 android:textColor="@color/gray_666666"
                 android:textSize="14sp"/>
 
@@ -90,7 +90,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="@string/pay_date"
+                android:text="@string/request_date"
                 android:textColor="@color/gray_666666"
                 android:textSize="14sp"/>
 

@@ -4,6 +4,7 @@ import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.OrderMessage
 import com.nonetxmxy.mmzqfxy.model.ProductsBean
+import com.nonetxmxy.mmzqfxy.model.RepayMessage
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
 import com.nonetxmxy.mmzqfxy.model.response.*
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
@@ -245,5 +246,15 @@ class OrderRepository @Inject constructor(
         maps["fgRkNuvqGBn"] = confirmMessage.proId.toString()
 
         authService.applicationRequest(maps).checkCodeError()
+    }
+
+    override suspend fun getRepayData(): RepayMessage {
+        val maps = HashMap<String, String>()
+        maps["MPjhAyLvY"] = BuildConfig.CODE
+        maps["tgAPI"] = BuildConfig.LANGUAGE
+        maps["wWxfSHoRbo"] = LocalCache.currentProCode
+        maps["GFjpYB"] = LocalCache.token
+        maps["vqqb"] = "4"
+        return  mainService.repayListGot(maps).checkDataEmpty()
     }
 }

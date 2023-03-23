@@ -112,12 +112,17 @@
     <string name="repay_tips">*请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户</string>
     <string name="repay_all">待还款金额</string>
     <string name="remain_peroids">待还期数</string>
-    <string name="borrowed_amount">借入金额</string>
-    <string name="handle_amount">到手金额</string>
+    <string name="borrowed_amount">应还金额</string>
+    <string name="handle_amount">已还金额</string>
     <string name="pay_date">还款日期</string>
-    <string name="select_amount">选中的一共要还 `$`%d(含有`$`%d 减免)</string>
+    <string name="over_due_fee">逾期利息费</string>
+    <string name="reduce_money">Reducir %s</string>
+    <string name="select_amount">Reembolsar todo</string>
+    <string name="repay_reduce">(%s de reduccion)</string>
     <string name="select_all">全选</string>
     <string name="congratulation_request_again">恭喜你，\n获得了独家再贷款特权！</string>
+    <string name="remain_days">Llgara el vencimiento tras %d dias</string>
+    <string name="remain_days_over">%d dias de retraso</string>
 
     <!--展期页面-->
     <string name="expand_page_title">展期页面</string>

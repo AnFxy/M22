@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.R
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.ItemOrderListBinding
 import com.nonetxmxy.mmzqfxy.databinding.ItemOrderListEmptyBinding
 import com.nonetxmxy.mmzqfxy.model.OrderMessage
@@ -31,13 +32,16 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
 
     class OrderViewHolder(private val binding: ItemOrderListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindView(sampleOrder: OrderMessage) {
+        fun bindView(sampleOrder: OrderMessage, goRepay: () -> Unit) {
             binding.tvName.text = sampleOrder.qkpPjr
             binding.tvOrderNumber.text = "Orden ${sampleOrder.LjNAwGsqXs}"
             binding.tvAmount.text = sampleOrder.fHTnifvEC.jinE()
             binding.tvPeriod.text = "${sampleOrder.llYomqGFjAS}"
             binding.tvCycle.text = "${sampleOrder.nhgL}"
 
+            binding.tvRepay.setLimitClickListener {
+                goRepay.invoke()
+            }
 
             when (sampleOrder.snbrREWru) {
                 0, 1, 2, 3 -> {
@@ -83,7 +87,7 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
                     binding.tvRepay.setVisible(true)
 
                     binding.tvDate.text =
-                        CommonUtil.timeLongToDate(sampleOrder.sLEsJFIXygv.toLong())
+                        CommonUtil.timeLongToDate(sampleOrder.sLEsJFIXyqv.toLong())
                     binding.tvDateConstant.text =
                         Utils.getApp().getString(R.string.confirm_repay_date)
 
@@ -125,15 +129,13 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
             }
             EmptyViewHolder(emptyBinding)
         } else {
-            val itemBinding = ItemOrderListBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+            OrderViewHolder(
+                ItemOrderListBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
             )
-            itemBinding.tvRepay.setLimitClickListener {
-                goRepay.invoke()
-            }
-            OrderViewHolder(itemBinding)
         }
 
     override fun getItemCount(): Int = if (orders.isEmpty()) 1 else orders.size
@@ -146,7 +148,10 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
             holder.bindView()
         } else if (holder is OrderViewHolder) {
             val currentItem = orders[position]
-            holder.bindView(currentItem)
+            holder.bindView(currentItem) {
+                LocalCache.currentProCode = currentItem.piKSfRNing
+                goRepay.invoke()
+            }
         }
 
     }

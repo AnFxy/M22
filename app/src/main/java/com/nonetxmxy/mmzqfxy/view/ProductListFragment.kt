@@ -10,9 +10,11 @@ import com.nonetxmxy.mmzqfxy.adapters.MainAdapter
 import com.nonetxmxy.mmzqfxy.adapters.MainAppAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentProductListBinding
 import com.nonetxmxy.mmzqfxy.model.ProductsBean
 import com.nonetxmxy.mmzqfxy.tools.*
+import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.ProductListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -64,6 +66,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
 
         mainAppAdapter.onItemClick = {
             CommonUtil.goGooglePlay(activity, downloadUrl = it.XJUpUIdhWR, _packageName = it.ufKPA)
+        }
+
+        receiveCallBackDataFromLastFragment<Boolean>(UnderReviewFragment.BACK) {
+            viewModel.getConfig()
         }
 
         hideAndShowHomePage()

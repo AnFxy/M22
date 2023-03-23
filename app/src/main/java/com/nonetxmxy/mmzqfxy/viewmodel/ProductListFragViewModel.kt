@@ -31,7 +31,7 @@ class ProductListFragViewModel @Inject constructor(
         getConfig()
     }
 
-    private fun getConfig() {
+    fun getConfig() {
         launchUIWithDialog {
             val config = viewModelScope.async {
                 val configBean = beginRepository.getAppConfig()

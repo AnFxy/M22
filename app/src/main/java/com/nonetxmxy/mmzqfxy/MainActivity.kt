@@ -19,6 +19,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 
     private lateinit var navController: NavController
 
+    var specialOnBackPressed: () -> Unit = {
+        super.onBackPressed()
+    }
+
     override fun getViewMode(): MainActivityViewModel = viewModel
 
     override fun getViewBinding(): ActivityMainBinding =
@@ -50,6 +54,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
 //                navController.currentDestination?.id == it.itemId
 //            }
 //        }
+    }
+
+    override fun onBackPressed() {
+        specialOnBackPressed.invoke()
     }
 
     override fun setListener() {

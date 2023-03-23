@@ -83,6 +83,13 @@ class BeginRepository @Inject constructor(
         return beginService.login(maps).checkDataEmpty()
     }
 
+    override suspend fun doLogout() {
+        val maps = HashMap<String, String>()
+        maps["tyrL"] = LocalCache.token
+        maps["FDBHi"] = BuildConfig.CODE
+        beginService.logout(maps).checkCodeError()
+    }
+
     override suspend fun getOptionalDirections(): AllTags {
         val maps = HashMap<String, String>()
         maps["InHF"] = BuildConfig.CODE

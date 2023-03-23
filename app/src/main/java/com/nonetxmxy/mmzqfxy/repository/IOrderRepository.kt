@@ -2,6 +2,7 @@ package com.nonetxmxy.mmzqfxy.repository
 
 import com.nonetxmxy.mmzqfxy.model.OrderMessage
 import com.nonetxmxy.mmzqfxy.model.ProductsBean
+import com.nonetxmxy.mmzqfxy.model.RepayMessage
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
 import com.nonetxmxy.mmzqfxy.model.response.AppBean
 import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
@@ -19,4 +20,6 @@ interface IOrderRepository {
     suspend fun getRequestConfirmData(): ConfirmResBean
 
     suspend fun submitRequestConfirm(confirmMessage: ConfirmMessage)
+
+    suspend fun getRepayData(): RepayMessage
 }
