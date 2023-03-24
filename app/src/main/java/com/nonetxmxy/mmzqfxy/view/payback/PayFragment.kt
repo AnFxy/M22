@@ -14,6 +14,7 @@ import com.nonetxmxy.mmzqfxy.adapters.PayWayAdapter
 import com.nonetxmxy.mmzqfxy.adapters.RepayListAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
+import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayBinding
 import com.nonetxmxy.mmzqfxy.model.RepayMessage
@@ -23,12 +24,17 @@ import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.PayFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
 
     private val viewModel: PayFragViewModel by viewModels()
+
+    companion object {
+        val BACK = "pay_back"
+    }
 
     private val repayAdapter: RepayListAdapter by lazy {
         RepayListAdapter().apply {
@@ -97,6 +103,10 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
             adapter = repayAdapter
         }
 
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
+
         updateAllSelectViewStatus()
 
         binding.cbSelectAll.setOnClickListener {
@@ -121,6 +131,9 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
         receiveCallBackDataFromLastFragment<Boolean>(UnderReviewFragment.BACK) {
             viewModel.getPageData()
         }
+        receiveCallBackDataFromLastFragment<Boolean>(PayCodeFragment.BACK) {
+            viewModel.getPageData()
+        }
     }
 
     override fun setObserver() {
@@ -135,6 +148,10 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                             oqiuffK = orders
                         )
                     )
+                    if (it.OEdZXUBY <= 0) {
+                        delay(500)
+                        callBackDataWhenDestroyed(BACK, true)
+                    }
                 }
             }
         }

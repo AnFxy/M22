@@ -88,6 +88,10 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             binding.ivBehind.setActivity(it)
         }
 
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getIdentifyPageData()
+        }
+
         binding.ivTop.setStartOpenAlbumListener(object : IStartOpenAlbumListener {
             override fun onStartAlbum() {
                 photoLauncher.launch("image/*")

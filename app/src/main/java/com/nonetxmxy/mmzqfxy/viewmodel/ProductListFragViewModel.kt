@@ -10,10 +10,9 @@ import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import com.nonetxmxy.mmzqfxy.view.ProductListFragmentDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,36 +32,36 @@ class ProductListFragViewModel @Inject constructor(
 
     fun getConfig() {
         launchUIWithDialog {
-            val config = viewModelScope.async {
-                val configBean = beginRepository.getAppConfig()
-                LocalCache.serviceNumber = configBean.vMSCnEiPym ?: ""
-                LocalCache.email = configBean.Fbi ?: ""
+            coroutineScope {
+                joinAll(
+                    async {
+                        val configBean = beginRepository.getAppConfig()
+                        LocalCache.serviceNumber = configBean.vMSCnEiPym ?: ""
+                        LocalCache.email = configBean.Fbi ?: ""
+                    },
+                    async {
+                        val products = orderRepository.getProducts()
+                        LocalCache.currentProCode = products[0].ANddPfvNno
+                        this@ProductListFragViewModel.products.value = products
+                        if (LocalCache.isLogged) {
+                            val mineInfo = orderRepository.getUserInfo()
+                            LocalCache.infoCredit = mineInfo.LbF.toInt()
+                            LocalCache.workCredit = mineInfo.UpolPGX.toInt()
+                            LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
+                            LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
+                            LocalCache.faceCredit = mineInfo.jFJE.toInt()
+                            LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
+                        }
+                    },
+                    async {
+                        if (LocalCache.isLogged) {
+                            val apps = orderRepository.getAPPs()
+                            this@ProductListFragViewModel.apps.value = apps
+                        }
+                    }
+                )
             }
-            val productList = viewModelScope.async {
-                val products = orderRepository.getProducts()
-                LocalCache.currentProCode = products[0].ANddPfvNno
-                this@ProductListFragViewModel.products.value = products
-                if (LocalCache.isLogged) {
-                    val mineInfo = orderRepository.getUserInfo()
-                    LocalCache.infoCredit = mineInfo.LbF.toInt()
-                    LocalCache.workCredit = mineInfo.UpolPGX.toInt()
-                    LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
-                    LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
-                    LocalCache.faceCredit = mineInfo.jFJE.toInt()
-                    LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
-                }
-            }
-
-            val recommendList = viewModelScope.async {
-                if (LocalCache.isLogged) {
-                    val apps = orderRepository.getAPPs()
-                    this@ProductListFragViewModel.apps.value = apps
-                }
-            }
-
-            config.await()
-            productList.await()
-            recommendList.await()
+            closeLoading.emit(Unit)
         }
     }
 

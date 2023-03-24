@@ -18,7 +18,10 @@ fun <T : Any> Fragment.callBackDataWhenDestroyed(key: String, data: T, isNeedBac
 // 数据接收
 fun <T : Any> Fragment.receiveCallBackDataFromLastFragment(key: String, callBack: (T) -> Unit) {
     findNavController().currentBackStackEntry?.savedStateHandle
-        ?.getLiveData<T>(key)?.observe(viewLifecycleOwner) {
-        callBack(it)
-    }
+        ?.apply {
+            getLiveData<T>(key).observe(viewLifecycleOwner) {
+                callBack(it)
+            }
+            remove<T>(key)
+        }
 }

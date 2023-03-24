@@ -67,7 +67,6 @@ class ConfirmRequestViewModel @Inject constructor(
 
     fun getPageData() {
         launchUIWithDialog {
-
             coroutineScope {
                 joinAll(
                     async {
@@ -88,6 +87,8 @@ class ConfirmRequestViewModel @Inject constructor(
                     }
                 )
             }
+
+            closeLoading.emit(Unit)
         }
     }
 

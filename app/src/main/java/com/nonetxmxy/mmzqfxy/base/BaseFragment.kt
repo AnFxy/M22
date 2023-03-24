@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.tools.setMenuAndNavLimitClickListener
@@ -43,17 +44,6 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
                 updateLoadingViewStatus(it)
             }
         }
-
-        // 加载圈监听
-        lifecycleScope.launch {
-            mviewModel._closeLoading.collect {
-                // TODO
-//                val swipeView = binding.root.findViewById<SwipeRefreshLayout>(R.id.onlySwipe)
-//                if (swipeView?.isRefreshing == true) {
-//                    swipeView.isRefreshing = false
-//                }
-            }
-        }
     }
 
     override fun onCreateView(
@@ -86,8 +76,18 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
                 }
         }
 
-//        val swipeView = binding.root.findViewById<SwipeRefreshLayout>(R.id.onlySwipe)
-//        swipeView?.setColorSchemeResources(R.color.primary_color)
+        val refreshIt = binding.root.findViewById<SwipeRefreshLayout>(R.id.m_refresh)
+        refreshIt?.setColorSchemeResources(R.color.yellow_f5c83b)
+
+        // 加载圈监听
+        viewLifecycleOwner.lifecycleScope.launch {
+            mviewModel._closeLoading.collect {
+                val refresh = binding.root.findViewById<SwipeRefreshLayout>(R.id.m_refresh)
+                if (refresh?.isRefreshing == true) {
+                    refresh.isRefreshing = false
+                }
+            }
+        }
 
         return binding.root
     }

@@ -20,9 +20,10 @@ class OrderListFragViewModel @Inject constructor(
         requestOrders()
     }
 
-    private fun requestOrders() {
+    fun requestOrders() {
         launchUIWithDialog {
             _orders.value = orderRepository.getUserOrders(false)
+            closeLoading.emit(Unit)
         }
     }
 }

@@ -69,6 +69,10 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
     }
 
     private fun initListener() {
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
+
         binding.includeAuthBottom.enviarBtn.setOnClickListener {
             if (checkData()) {
                 viewModel.submitWorkInfo()

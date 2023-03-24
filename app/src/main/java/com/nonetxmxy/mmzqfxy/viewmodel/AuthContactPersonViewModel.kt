@@ -47,12 +47,13 @@ class AuthContactPersonViewModel @Inject constructor(
         getPageData()
     }
 
-    private fun getPageData() {
+    fun getPageData() {
         launchUIWithDialog {
             _optionShowListFlow.emit(beginRepository.getOptionalDirections())
             if (LocalCache.contactPersonCredit == 1) {
                 _pagerDataFlow.emit(authRepository.getSubmitContractInfo())
             }
+            closeLoading.emit(Unit)
         }
     }
 

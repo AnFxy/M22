@@ -12,83 +12,89 @@
         android:layout_height="wrap_content"
         android:background="@color/white" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/m_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:overScrollMode="never">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
-
-            <include
-                android:id="@+id/includeAuthTitle"
-                layout="@layout/include_auth_top_title" />
+            android:layout_marginHorizontal="12dp"
+            android:overScrollMode="never">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_10_radius_white"
-                android:orientation="vertical">
-                <!--教育程度-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/commonSelect1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:select_title="Nivel educativo" />
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="15dp"
-                    android:text="@string/estado_civil" />
-                <!--婚姻状态-->
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                <include
+                    android:id="@+id/includeAuthTitle"
+                    layout="@layout/include_auth_top_title" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="25dp"
                     android:layout_marginTop="12dp"
-                    android:overScrollMode="never" />
-                <!--孩子数量-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/commonSelect2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    app:select_title="Numero de hijos" />
+                    android:background="@drawable/shape_10_radius_white"
+                    android:orientation="vertical">
+                    <!--教育程度-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/commonSelect1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        app:select_title="Nivel educativo" />
 
-                <!--家庭住址-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/commonSelect3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:select_title="Dirección de domicilio"
-                    app:select_type="address" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:text="@string/estado_civil" />
+                    <!--婚姻状态-->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginTop="12dp"
+                        android:overScrollMode="never" />
+                    <!--孩子数量-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/commonSelect2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        app:select_title="Numero de hijos" />
 
-                <!--详细街道-->
-                <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
-                    android:id="@+id/input1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    app:enter_title="Calle detallada (** Comunidad ** Calle ** Número)" />
+                    <!--家庭住址-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/commonSelect3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:select_title="Dirección de domicilio"
+                        app:select_type="address" />
+
+                    <!--详细街道-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
+                        android:id="@+id/input1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        app:enter_title="Calle detallada (** Comunidad ** Calle ** Número)" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <include
+                    android:id="@+id/includeAuthBottom"
+                    layout="@layout/include_auth_bottom" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <include
-                android:id="@+id/includeAuthBottom"
-                layout="@layout/include_auth_bottom" />
+        </ScrollView>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </ScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

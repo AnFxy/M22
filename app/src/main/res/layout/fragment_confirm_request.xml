@@ -28,361 +28,368 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/m_refresh"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/m_toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/container_logo_and_name"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="19dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/iv_logo"
-                    android:layout_width="27dp"
-                    android:layout_height="27dp"
-                    android:src="@mipmap/logo" />
-
-                <TextView
-                    android:id="@+id/tv_pro_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="xxxxxx"
-                    android:textColor="@color/gray_333333"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/container_amount_days"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/white_16"
-                android:orientation="horizontal"
-                android:paddingHorizontal="25dp"
-                android:paddingVertical="20dp"
-                app:layout_constraintTop_toBottomOf="@id/container_logo_and_name">
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
+                    android:id="@+id/container_logo_and_name"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/white_16"
+                    android:layout_marginTop="19dp"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_logo"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:src="@mipmap/logo" />
 
                     <TextView
+                        android:id="@+id/tv_pro_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/confirm_loan_amount"
-                        android:textColor="@color/gray_666666"
-                        android:textSize="14sp" />
-
-                    <CheckBox
-                        android:id="@+id/tv_loan_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/confirm_box"
-                        android:drawableRight="@mipmap/xialajiantou"
-                        android:drawablePadding="11dp"
-                        android:gravity="center"
-                        android:paddingVertical="7dp"
-                        android:paddingStart="34dp"
-                        android:paddingEnd="8dp"
-                        android:text="$x,xxx"
-                        android:button="@null"
+                        android:layout_marginStart="8dp"
+                        android:text="xxxxxx"
                         android:textColor="@color/gray_333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/white_16"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/confirm_loan_amount"
-                        android:textColor="@color/gray_666666"
-                        android:textSize="14sp" />
-
-                    <CheckBox
-                        android:id="@+id/tv_loan_days"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/confirm_box"
-                        android:drawableRight="@mipmap/xialajiantou"
-                        android:drawablePadding="11dp"
-                        android:gravity="center"
-                        android:paddingVertical="7dp"
-                        android:paddingStart="34dp"
-                        android:paddingEnd="8dp"
-                        android:text="$x,xxx"
-                        android:button="@null"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/container_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/white_16"
-                android:orientation="vertical"
-                android:paddingHorizontal="25dp"
-                android:paddingVertical="20dp"
-                app:layout_constraintTop_toBottomOf="@id/container_amount_days">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/confirm_detail"
-                    android:textColor="@color/gray_666666"
-                    android:textSize="13sp" />
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container1"
+                    android:id="@+id/container_amount_days"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_fixed1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_value1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_fixed2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_value2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_fixed3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_value3"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_fixed4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_value4"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/container5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_fixed5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tv_value5"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="end"
-                        android:text="xxxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp" />
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <ImageView
-                    android:id="@+id/iv_expand"
-                    android:layout_width="18dp"
-                    android:layout_height="10dp"
-                    android:src="@mipmap/xiala"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="12dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="20dp"
-                    android:text="@string/confirm_modify_bank"
-                    android:textColor="@color/gray_666666"
-                    android:textSize="13sp" />
+                    android:background="@drawable/white_16"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="25dp"
+                    android:paddingVertical="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/container_logo_and_name">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_16"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirm_loan_amount"
+                            android:textColor="@color/gray_666666"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/tv_loan_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/confirm_box"
+                            android:drawableRight="@mipmap/xialajiantou"
+                            android:drawablePadding="11dp"
+                            android:gravity="center"
+                            android:paddingVertical="7dp"
+                            android:paddingStart="34dp"
+                            android:paddingEnd="8dp"
+                            android:text="$x,xxx"
+                            android:button="@null"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/white_16"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/confirm_loan_amount"
+                            android:textColor="@color/gray_666666"
+                            android:textSize="14sp" />
+
+                        <CheckBox
+                            android:id="@+id/tv_loan_days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/confirm_box"
+                            android:drawableRight="@mipmap/xialajiantou"
+                            android:drawablePadding="11dp"
+                            android:gravity="center"
+                            android:paddingVertical="7dp"
+                            android:paddingStart="34dp"
+                            android:paddingEnd="8dp"
+                            android:text="$x,xxx"
+                            android:button="@null"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/container_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/gray_5"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="10dp">
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/white_16"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="25dp"
+                    android:paddingVertical="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/container_amount_days">
 
                     <TextView
-                        android:id="@+id/tv_bank_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="xxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_gravity="center"
+                        android:text="@string/confirm_detail"
+                        android:textColor="@color/gray_666666"
+                        android:textSize="13sp" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/container1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_fixed1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/container2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_fixed2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/container3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_fixed3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/container4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_fixed4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/container5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="17dp"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_fixed5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_value5"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:text="xxxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <ImageView
+                        android:id="@+id/iv_expand"
+                        android:layout_width="18dp"
+                        android:layout_height="10dp"
+                        android:src="@mipmap/xiala"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"/>
 
                     <TextView
-                        android:id="@+id/tv_bank_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="xxxx"
-                        android:textColor="@color/gray_333333"
-                        android:textSize="14sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tv_bank_name" />
-
-                    <TextView
-                        android:id="@+id/tv_change"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/yellow_3"
-                        android:paddingHorizontal="6dp"
-                        android:paddingVertical="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
                         android:text="@string/confirm_modify_bank"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:textColor="@color/gray_666666"
+                        android:textSize="13sp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/gray_5"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="10dp">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                        <TextView
+                            android:id="@+id/tv_bank_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="xxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/enviarBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/shape_btn_enable_bg"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="@string/enviar"
-                android:textColor="@color/gray_333333"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="40dp"
-                app:layout_constraintTop_toBottomOf="@id/container_detail"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                        <TextView
+                            android:id="@+id/tv_bank_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="xxxx"
+                            android:textColor="@color/gray_333333"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tv_bank_name" />
+
+                        <TextView
+                            android:id="@+id/tv_change"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/yellow_3"
+                            android:paddingHorizontal="6dp"
+                            android:paddingVertical="5dp"
+                            android:text="@string/confirm_modify_bank"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <TextView
+                    android:id="@+id/enviarBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_btn_enable_bg"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:text="@string/enviar"
+                    android:textColor="@color/gray_333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="40dp"
+                    app:layout_constraintTop_toBottomOf="@id/container_detail"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

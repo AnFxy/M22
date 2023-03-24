@@ -23,6 +23,7 @@ class CardsFragViewModel @Inject constructor(
     fun getAllBanks() {
         launchUIWithDialog {
             _cards.value = authRepository.getSubmitBanks()
+            closeLoading.emit(Unit)
         }
     }
 }

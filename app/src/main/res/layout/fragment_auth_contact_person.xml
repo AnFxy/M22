@@ -12,124 +12,129 @@
         android:layout_height="wrap_content"
         android:background="@color/white" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/m_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:overScrollMode="never">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
-
-            <include
-                android:id="@+id/includeAuthTitle"
-                layout="@layout/include_auth_top_title" />
+            android:layout_marginHorizontal="12dp"
+            android:overScrollMode="never">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_10_radius_white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="Contacto 1"
-                    android:textColor="@color/color_00230b"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                <include
+                    android:id="@+id/includeAuthTitle"
+                    layout="@layout/include_auth_top_title" />
 
-                <!--联系人1phone-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact1Phone"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:drawableEnd="@mipmap/lianxiren"
-                    app:select_title="@string/numero_telefono"
-                    app:select_type="contacto" />
-                <!--联系人1name-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact1Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:select_title="@string/nombre"
-                    app:select_type="contacto"
-                    app:tvIconVisibility="false" />
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_10_radius_white"
+                    android:orientation="vertical">
 
-                <!--联系人1关系-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact1Relacion"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:text="Contacto 1"
+                        android:textColor="@color/color_00230b"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!--联系人1phone-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact1Phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableEnd="@mipmap/lianxiren"
+                        app:select_title="@string/numero_telefono"
+                        app:select_type="contacto" />
+                    <!--联系人1name-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact1Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:select_title="@string/nombre"
+                        app:select_type="contacto"
+                        app:tvIconVisibility="false" />
+
+                    <!--联系人1关系-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact1Relacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        app:select_title="@string/relación"
+                        app:select_type="general" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!--联系人2-->
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    app:select_title="@string/relación"
-                    app:select_type="general" />
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_10_radius_white"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:text="Contacto 2"
+                        android:textColor="@color/color_00230b"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!--联系人2phone-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact2Phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:drawableEnd="@mipmap/lianxiren"
+                        app:select_title="@string/numero_telefono"
+                        app:select_type="contacto" />
+                    <!--联系人2name-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact2Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:select_title="@string/nombre"
+                        app:select_type="contacto"
+                        app:tvIconVisibility="false" />
+                    <!--联系人2关系-->
+                    <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
+                        android:id="@+id/contact2Relacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        app:select_title="@string/relación"
+                        app:select_type="general" />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <include
+                    android:id="@+id/includeAuthBottom"
+                    layout="@layout/include_auth_bottom" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
+        </ScrollView>
 
-            <!--联系人2-->
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/shape_10_radius_white"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:text="Contacto 2"
-                    android:textColor="@color/color_00230b"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <!--联系人2phone-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact2Phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:drawableEnd="@mipmap/lianxiren"
-                    app:select_title="@string/numero_telefono"
-                    app:select_type="contacto" />
-                <!--联系人2name-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact2Name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:select_title="@string/nombre"
-                    app:select_type="contacto"
-                    app:tvIconVisibility="false" />
-                <!--联系人2关系-->
-                <com.nonetxmxy.mmzqfxy.customer_view.CommonSelectView
-                    android:id="@+id/contact2Relacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    app:select_title="@string/relación"
-                    app:select_type="general" />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <include
-                android:id="@+id/includeAuthBottom"
-                layout="@layout/include_auth_bottom" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-    </ScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

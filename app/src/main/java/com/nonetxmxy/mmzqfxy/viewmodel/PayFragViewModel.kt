@@ -42,6 +42,7 @@ class PayFragViewModel @Inject constructor(
                     }
                 )
             }
+            closeLoading.emit(Unit)
         }
     }
 }

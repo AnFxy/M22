@@ -31,6 +31,7 @@ abstract class BaseViewModel : ViewModel() {
         } catch (e: Exception) {
             ErrorHandleUtil.handleError(e)
             loadingEvent.emit(false)
+            closeLoading.emit(Unit)
         }
     }
 

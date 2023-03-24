@@ -106,6 +106,10 @@ class ConfirmRequestFragment :
             viewModel.getPageData()
         }
 
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
+
         binding.ivExpand.setLimitClickListener {
             viewModel.isClose = false
             binding.ivExpand.setVisible(false)

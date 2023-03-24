@@ -71,6 +71,12 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     }
 
     private fun initListener() {
+
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
+
+
         binding.includeAuthBottom.enviarBtn.setOnClickListener {
             if (checkData()) {
                 viewModel.submitInfo()

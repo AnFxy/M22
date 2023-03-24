@@ -39,6 +39,10 @@ class CardsFragment : BaseFragment<FragmentCardsBinding, CardsFragViewModel>() {
             viewModel.getAllBanks()
         }
 
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getAllBanks()
+        }
+
         binding.rvCards.adapter = this.adapter
         binding.tvAddCards.apply {
             setLimitClickListener {

@@ -87,6 +87,10 @@ class AuthContactPersonFragment :
                 viewModel.submitContractPerson()
             }
         }
+
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
     }
 
     private fun openAddressBook() {

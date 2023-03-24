@@ -60,6 +60,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
             }
         }
 
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getConfig()
+        }
+
         mainAdapter.onItemClick = {
             LocalCache.currentProCode = it.ANddPfvNno
             viewModel.startNextPageFlow(it)
@@ -98,11 +102,6 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
                 navController.navigate(it)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
     }
 
     private fun setSingleProductView(product: ProductsBean) {

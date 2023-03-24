@@ -43,6 +43,7 @@ class UnderReviewViewModel @Inject constructor(
                     }
                 )
             }
+            closeLoading.emit(Unit)
         }
     }
 }

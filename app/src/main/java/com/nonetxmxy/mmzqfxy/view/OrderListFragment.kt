@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.OrderListAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentOrderListBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
+import com.nonetxmxy.mmzqfxy.view.payback.PayCodeFragment
+import com.nonetxmxy.mmzqfxy.view.payback.PayFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.OrderListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,6 +56,11 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
         FragmentOrderListBinding.inflate(inflater, parent, false)
 
     override fun setLayout() {
+
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.requestOrders()
+        }
+
         binding.rvOrder.apply {
             layoutManager = LinearLayoutManager(this@OrderListFragment.context)
             adapter = this@OrderListFragment.adapter
@@ -64,6 +72,10 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
             setLimitClickListener {
                 navController.popBackStack()
             }
+        }
+
+        receiveCallBackDataFromLastFragment<Boolean>(PayFragment.BACK) {
+            viewModel.requestOrders()
         }
 
     }

@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayCodeBinding
 import com.nonetxmxy.mmzqfxy.model.PayCodeMessage
 import com.nonetxmxy.mmzqfxy.tools.jinE
@@ -26,6 +28,10 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
     private val viewModel: PayCodeViewModel by viewModels()
 
     private val args: PayCodeFragmentArgs by navArgs()
+
+    companion object {
+        val BACK = "pay_code_back"
+    }
 
     override fun getViewMode(): PayCodeViewModel = viewModel
 
@@ -42,6 +48,12 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
             sonId = args.orderSonId,
             payType = args.payType
         )
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                callBackDataWhenDestroyed(BACK, true)
+            }
+        }
     }
 
     override fun setObserver() {

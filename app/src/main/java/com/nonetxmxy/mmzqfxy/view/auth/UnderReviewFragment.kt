@@ -22,6 +22,8 @@ import com.nonetxmxy.mmzqfxy.tools.jinE
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.UnderReviewViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReviewViewModel>() {
@@ -48,6 +50,10 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
         binding.rvApp.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = mainAppAdapter
+        }
+
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
         }
 
         mainAppAdapter.onItemClick = {
@@ -100,7 +106,12 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
                 binding.tvStatus.setTextColor(Color.parseColor("#F06047"))
                 binding.tvStatusDes.text = getString(R.string.refused_des)
             }
-            else -> navController.popBackStack()
+            else -> {
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(500)
+                    callBackDataWhenDestroyed(BACK, true)
+                }
+            }
         }
 
         Glide.with(this).load(productsBean.EgjWfY).into(binding.ivLogo)

@@ -60,7 +60,7 @@ class AuthUserInfoViewModel @Inject constructor(
         getPageData()
     }
 
-    private fun getPageData() {
+    fun getPageData() {
         launchUIWithDialog {
             coroutineScope {
                 joinAll(async {
@@ -73,6 +73,7 @@ class AuthUserInfoViewModel @Inject constructor(
                     _pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
                 }
             }
+            closeLoading.emit(Unit)
         }
     }
 
