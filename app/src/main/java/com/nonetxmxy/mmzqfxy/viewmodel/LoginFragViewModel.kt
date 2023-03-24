@@ -2,6 +2,7 @@ package com.nonetxmxy.mmzqfxy.viewmodel
 
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,10 +16,6 @@ class LoginFragViewModel @Inject constructor(
     val inputNumber = MutableStateFlow<String>("")
 
     val goPage = MutableSharedFlow<Unit>()
-
-    init {
-
-    }
 
     fun updateInputNumber(number: String) {
         inputNumber.value = number

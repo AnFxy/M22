@@ -17,6 +17,7 @@ import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthContactPersonBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.ContactPersonUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthContactPersonViewModel
@@ -32,7 +33,7 @@ class AuthContactPersonFragment :
                 val contactInfo = ContactPersonUtil.getOneContactData(Utils.getApp(), it)
                 val phone = contactInfo[ContactPersonUtil.KEY_PHONE]
                 val name = contactInfo[ContactPersonUtil.KEY_CONTACT]
-                if (!phone.isNullOrEmpty() && !name.isNullOrEmpty()) {
+                if (!phone.isNullOrEmpty() && !name.isNullOrEmpty() && CommonUtil.checkPhone(phone)) {
                     viewModel.updateContactData(selectContact1, phone, name)
                 }
             }

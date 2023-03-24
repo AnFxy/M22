@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toTopOf="@id/nv_bottom"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1"
-        app:navGraph="@navigation/main_navigation" />
+        app:navGraph="@navigation/startup_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nv_bottom"

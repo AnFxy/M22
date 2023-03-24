@@ -2,17 +2,18 @@ package com.nonetxmxy.mmzqfxy.tools
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
 import java.sql.Date
 import java.sql.Timestamp
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 
 class CommonUtil {
     companion object {
+
+        val MOXICO_PHONE_ADD_52 = "(\\+528)\\d{9}\$"
+        val MOXICO_PHONE_52 = "(528)\\d{9}\$"
+        val MOXICO_PHONE = "(8)\\d{9}\$"
+
         fun goGooglePlay(
             activity: FragmentActivity?,
             downloadUrl: String,
@@ -46,5 +47,22 @@ class CommonUtil {
 
             return SimpleDateFormat("dd/MM/yyyy").format(date)
         }
+
+        fun checkPhone(phoneNumber: String) =
+            (phoneNumber.matches(Regex(MOXICO_PHONE)) ||
+                    phoneNumber.matches(Regex(MOXICO_PHONE_52)) ||
+                    phoneNumber.matches(Regex(MOXICO_PHONE_ADD_52)))
+
+        fun formatPhone(phoneNumber: String) =
+            if (checkPhone(phoneNumber)) {
+                val noAdd = phoneNumber.replace("+", "")
+                if (noAdd.startsWith("8")) {
+                    "52$noAdd"
+                } else {
+                    noAdd
+                }
+            } else {
+                phoneNumber
+            }
     }
 }

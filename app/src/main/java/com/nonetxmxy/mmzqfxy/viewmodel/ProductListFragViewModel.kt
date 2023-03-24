@@ -53,12 +53,12 @@ class ProductListFragViewModel @Inject constructor(
                             LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
                         }
                     },
-                    async {
-                        if (LocalCache.isLogged) {
-                            val apps = orderRepository.getAPPs()
-                            this@ProductListFragViewModel.apps.value = apps
-                        }
-                    }
+//                    async {
+//                        if (LocalCache.isLogged) {
+//                            val apps = orderRepository.getAPPs(false)
+//                            this@ProductListFragViewModel.apps.value = apps
+//                        }
+//                    }
                 )
             }
             closeLoading.emit(Unit)

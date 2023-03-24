@@ -11,7 +11,7 @@ interface IOrderRepository {
 
     suspend fun getProducts(): List<ProductsBean>
 
-    suspend fun getAPPs(): List<AppBean>
+    suspend fun getAPPs(isReviewing: Boolean): List<AppBean>
 
     suspend fun getUserInfo(): MineInfo
 

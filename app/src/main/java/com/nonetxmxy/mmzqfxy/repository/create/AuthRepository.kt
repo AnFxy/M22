@@ -9,6 +9,7 @@ import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.service.IAuthService
 import com.nonetxmxy.mmzqfxy.service.IFileUploadService
 import com.nonetxmxy.mmzqfxy.service.IMainService
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil.Companion.formatPhone
 import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
@@ -115,10 +116,10 @@ class AuthRepository @Inject constructor(
         maps["SxVgVauNC"] = "3"
 
         maps["ePxloBmkkQ"] = contractMessage.Cqr
-        maps["jCTfmdrscW"] = contractMessage.RHaDS
+        maps["jCTfmdrscW"] = formatPhone(contractMessage.RHaDS)
         maps["rnMV"] = contractMessage.KiVk
         maps["hGcQRWvNU"] = contractMessage.pRgj
-        maps["kxLQ"] = contractMessage.faVW
+        maps["kxLQ"] = formatPhone(contractMessage.faVW)
         maps["VnqYhn"] = contractMessage.vwuan
         maps["XgpY"] = (System.currentTimeMillis() - startTime).toString()
         authService.userMessageSent(maps).checkCodeError()
@@ -161,8 +162,8 @@ class AuthRepository @Inject constructor(
         maps["eCqBul"] = idMessage.ZdKyAmeCGxL
         maps["BVH"] = idMessage.ExHTUA
         maps["dGvdqaNow"] = (System.currentTimeMillis() - startTime).toString()
-        maps["iwJZ"] = idMessage.JkfImZtlQ
-        maps["cslvRKltzMO"] = idMessage.Tjq
+        maps["yHJskdf"] = idMessage.JkfImZtlQ
+        maps["OuiodsJSD"] = idMessage.Tjq
         authService.idMessageSent(maps).checkCodeError()
     }
 

@@ -39,7 +39,7 @@ class UnderReviewViewModel @Inject constructor(
                             orderRepository.getUserOrders(true)[0]
                     },
                     async {
-                        _appsData.value = orderRepository.getAPPs()
+                        _appsData.value = orderRepository.getAPPs(true)
                     }
                 )
             }

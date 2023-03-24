@@ -11,6 +11,7 @@ import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.FragmentLoginBinding
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.LoginFragViewModel
@@ -53,7 +54,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragViewModel>() {
             if (!privacyChecked) {
                 ToastUtils.showShort(getText(R.string.agree_tips))
             } else {
-                viewModel.beginToLogin()
+                if (CommonUtil.checkPhone(binding.editNumber.text.toString())) {
+                    viewModel.beginToLogin()
+                } else {
+                    ToastUtils.showShort(getText(R.string.input_phone_number_tips))
+                }
             }
         }
     }

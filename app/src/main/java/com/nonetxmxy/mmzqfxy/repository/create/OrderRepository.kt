@@ -40,12 +40,13 @@ class OrderRepository @Inject constructor(
         return mainService.productsList(maps).checkDataEmpty().soNLPDaZSdh
     }
 
-    override suspend fun getAPPs(): List<AppBean> {
+    override suspend fun getAPPs(isUnderReview: Boolean): List<AppBean> {
         val maps = HashMap<String, String>()
         maps["ElH"] = BuildConfig.CODE
         maps["bMQUAlD"] = BuildConfig.LANGUAGE
         maps["emrccuSydv"] = LocalCache.token
         maps["mIdVQD"] = LocalCache.currentProCode
+        maps["SzcwfTdRKEP"] = if (isUnderReview) "2" else "1"
         return mainService.appsRecommend(maps).checkDataEmpty().ymeF
     }
 
