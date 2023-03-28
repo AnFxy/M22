@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -57,7 +58,24 @@ class AboutCompanyFragment : BaseFragment<FragmentAboutCompanyBinding, AboutComp
             viewModel.goLogin.collect {
                 LocalCache.clearALLCache()
                 logoutDialog?.dismiss()
-                navController.navigate(AboutCompanyFragmentDirections.actionAboutCompanyFragmentToLoginFragment())
+
+                // 你可以按想要的路由退回去，然后再跳到指定目的地
+                navController.popBackStack()
+
+                navController.navigate(
+                    R.id.product_list_navigation,
+                    null,
+                    NavOptions.Builder()
+                        .setRestoreState(true)
+                        .setPopUpTo(
+                            R.id.productListFragment,
+                            false,
+                            true
+                        )
+                        .build()
+                )
+
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
             }
         }
     }

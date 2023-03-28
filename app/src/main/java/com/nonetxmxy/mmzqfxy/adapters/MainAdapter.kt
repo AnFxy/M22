@@ -77,7 +77,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             }
 
             binding.root.setLimitClickListener {
-                doIt.invoke()
+                if (productsBean.ZnXsyPioYz == 1) {
+                    doIt.invoke()
+                }
             }
         }
     }

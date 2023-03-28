@@ -11,11 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.setupWithNavController
-import com.blankj.utilcode.constant.PermissionConstants
-import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -26,12 +24,12 @@ import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthIdentityBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.model.PhotoType
+import com.nonetxmxy.mmzqfxy.tools.FaceCameraUtil
 import com.nonetxmxy.mmzqfxy.tools.PreventMultiClickListener
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthIdentityViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 @AndroidEntryPoint
 class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdentityViewModel>() {
@@ -96,6 +94,13 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
                     when (viewModel.photoType.value) {
                         PhotoType.TOP_CAME -> binding.ivTop.setImageData(IDPhotoView.CAMERA_REQUEST_CODE_TOP)
                         PhotoType.BEHIND_CAME -> binding.ivBehind.setImageData(IDPhotoView.CAMERA_REQUEST_CODE_BEHIND)
+                        PhotoType.FACE -> {
+                            FaceCameraUtil(context) {
+                                // 当图片链接获取到后，上传面部识别
+                                LocalCache.facePhoto = it
+                                viewModel.submitFace()
+                            }.setImageData()
+                        }
                         else -> {}
                     }
                 }
@@ -139,7 +144,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
         binding.ivTop.setStartCameraListener(object : IStartCameraListener {
             override fun onStartCamera() {
-                cameraLauncher.launch(HandlePhoto.createImageUri(context))
+                cameraLauncher.launch(HandlePhoto.createImageUri(context), )
                 viewModel.photoType.value = PhotoType.TOP_CAME
             }
         })
@@ -162,6 +167,13 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             if (checkData()) {
                 viewModel.submitIdentifyInfo()
             }
+        }
+
+        // 人脸识别
+        binding.ivFaceCheck.setLimitClickListener {
+            cameraLauncher.launch(HandlePhoto.createImageUri(context))
+            viewModel.photoType.value = PhotoType.FACE
+            viewModel.updateFaceTime()
         }
     }
 
@@ -205,6 +217,12 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
                     PageType.FACE -> {}
                     PageType.CONFIRM -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToConfirmRequestFragment())
                 }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.setFacePic.collect {
+                Glide.with(this@AuthIdentityFragment).load(LocalCache.photoInfo).into(binding.ivFaceCheck)
             }
         }
     }
@@ -309,11 +327,10 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             return false
         }
 
-// TODO
-//        if (LocalCache.faceCredit == 0) {
-//            ToastUtils.showShort(getString(R.string.please_face_check))
-//            return false
-//        }
+        if (LocalCache.faceCredit == 0) {
+            ToastUtils.showShort(getString(R.string.please_face_check))
+            return false
+        }
 
         return true
     }

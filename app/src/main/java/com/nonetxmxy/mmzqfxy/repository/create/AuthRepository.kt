@@ -14,7 +14,6 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(
     private val authService: IAuthService,
-    private val mainService: IMainService,
     private val fileUploadService: IFileUploadService
 ) : IAuthRepository {
 
@@ -180,7 +179,7 @@ class AuthRepository @Inject constructor(
         maps["UbcFWGd"] = ""
         maps["khTM"] = (System.currentTimeMillis() - startTime).toString()
         // 活体认证的结果
-        maps["DLqhRMDy"] = ""
+//        maps["DLqhRMDy"] = ""
         authService.faceSent(maps).checkCodeError()
     }
 

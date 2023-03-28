@@ -41,6 +41,9 @@ class AuthIdentityViewModel @Inject constructor(
         Tjq = ""
     )
 
+    private val _setFacePic = MutableSharedFlow<Unit>()
+    val setFacePic: SharedFlow<Unit> = _setFacePic
+
     init {
         startTime = System.currentTimeMillis()
         getIdentifyPageData()
@@ -98,6 +101,26 @@ class AuthIdentityViewModel @Inject constructor(
             LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
 
             _pagerEventFlow.emit(AuthPagerEvent.GoNextPage)
+        }
+    }
+
+    fun updateFaceTime() {
+        faceTime = System.currentTimeMillis()
+    }
+
+    fun submitFace() {
+        launchUIWithDialog {
+            authRepository.submitFaceInfo(faceTime)
+
+            val mineInfo = orderRepository.getUserInfo()
+            LocalCache.infoCredit = mineInfo.LbF.toInt()
+            LocalCache.workCredit = mineInfo.UpolPGX.toInt()
+            LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
+            LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
+            LocalCache.faceCredit = mineInfo.jFJE.toInt()
+            LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
+
+            _setFacePic.emit(Unit)
         }
     }
 }
