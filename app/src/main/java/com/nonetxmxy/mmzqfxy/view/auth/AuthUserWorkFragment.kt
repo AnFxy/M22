@@ -1,7 +1,10 @@
 package com.nonetxmxy.mmzqfxy.view.auth
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -9,14 +12,19 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
 import com.nonetxmxy.mmzqfxy.adapters.GridLayoutManagerItemDecoration
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthUserWorkBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.model.auth.WorkMessage
+import com.nonetxmxy.mmzqfxy.tools.PreventMultiClickListener
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserWorkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,6 +55,31 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
         adapter
     }
 
+    private val authDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_auth)
+            dialog.setViewState<ImageView>(R.id.iv_close) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_continue) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_abandonar) {
+                setLimitClickListener {
+                    navController.popBackStack()
+                    dialog.dismiss()
+                }
+            }
+            dialog
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isHiddenStatus = true
+    }
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -56,7 +89,11 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
     )
 
     override fun FragmentAuthUserWorkBinding.setLayout() {
-        mToolbar.setupWithNavController(navController)
+        mToolbar.setNavigationOnClickListener(object : PreventMultiClickListener() {
+            override fun onSafeClick() {
+                activity?.onBackPressed()
+            }
+        })
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
 
         includeAuthTitle.image.setImageResource(R.mipmap.jinbi1)
@@ -64,6 +101,16 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.addItemDecoration(GridLayoutManagerItemDecoration(38f))
         recyclerView.adapter = sourceIncomeAdapter
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                if (LocalCache.fourAuth()) {
+                    navController.popBackStack()
+                } else {
+                    authDialogSet?.show()
+                }
+            }
+        }
 
         initListener()
     }
@@ -129,7 +176,6 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     binding.commonSelect1.selectTitle
                 )
             )
-            binding.commonSelect1.showOptionDialog()
             return false
         }
         if (viewModel.pagerData.CVZLaIndZG.isEmpty()) {
@@ -213,7 +259,7 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
             ToastUtils.showShort(
                 StringUtils.format(
                     StringUtils.getString(R.string.input_error_hint),
-                    "Dirección de la empresa"
+                    "Calle detallada (** Comunidad ** Calle ** Número)"
                 )
             )
             binding.scrollView.smoothScrollTo(0, binding.input3.top)

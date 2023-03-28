@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.MainAdapter
 import com.nonetxmxy.mmzqfxy.adapters.MainAppAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -13,6 +14,7 @@ import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentProductListBinding
 import com.nonetxmxy.mmzqfxy.model.ProductsBean
+import com.nonetxmxy.mmzqfxy.model.SubtitleInfo
 import com.nonetxmxy.mmzqfxy.tools.*
 import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.ProductListFragViewModel
@@ -41,6 +43,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         FragmentProductListBinding.inflate(inflater, parent, false)
 
     override fun FragmentProductListBinding.setLayout() {
+
+        cusMenu = {
+            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToNotifyFragment())
+        }
 
         binding.rvPro.apply {
             layoutManager = LinearLayoutManager(context)
@@ -77,6 +83,36 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
             viewModel.getConfig()
         }
 
+        binding.rtMain.setData(listOf(
+            SubtitleInfo(
+                icon = R.mipmap.touxiang_3,
+                message = "Paga súper rápido, y me ayuda muchooo"
+            ),
+            SubtitleInfo(
+                icon = R.mipmap.touxiang_2,
+                message = "¡Bravo! Todo está muy detallado"
+            )
+        ))
+
+        binding.rtMain1.setData(listOf(
+            SubtitleInfo(
+                icon = R.mipmap.touxiang_1,
+                message = "Really niceee application! Strongly recommended!! "
+            )
+        ))
+        binding.rtMain1.setHiddenIt(false)
+
+        binding.rtMain2.setData(listOf(
+            SubtitleInfo(
+                icon = R.mipmap.touxiang_4,
+                message = "Paga súper rápido, y me ayuda muchooo"
+            ),
+            SubtitleInfo(
+                icon = R.mipmap.touxiang_5,
+                message = "Es muy útil"
+            )
+        ))
+
         hideAndShowHomePage()
     }
 
@@ -109,7 +145,7 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         binding.tvTitle.text = product.eFV
         binding.tvAmount.text = product.FCmiye.toDouble().jinE()
         binding.tvDays.text = product.OJjgAEGVuO.toInt().days()
-        binding.tvRate.text = ">=${product.edVaOsmgaab}"
+        binding.tvRate.text = "≥${product.edVaOsmgaab}"
     }
 
     private fun hideAndShowHomePage() {
@@ -121,5 +157,6 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         binding.rvApp.setVisible(LocalCache.isLogged && !LocalCache.isSAccount)
         binding.dividerRv.setVisible(LocalCache.isLogged && !LocalCache.isSAccount)
         binding.rvPro.setVisible(LocalCache.isLogged && !LocalCache.isSAccount)
+        binding.containerDanmu.setVisible(LocalCache.isSAccount || !LocalCache.isLogged)
     }
 }

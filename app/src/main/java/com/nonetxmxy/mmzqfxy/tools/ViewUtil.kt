@@ -43,4 +43,4 @@ fun Toolbar.setMenuAndNavLimitClickListener(navClickBlock: () -> Unit, menuClick
 fun Number.jinE(): String =
     "$".plus(NumberFormat.getNumberInstance(Locale("es", "PE")).format(this))
 
-fun Int.days() = "$this dias"
+fun Int.days() = "$this días"

@@ -62,8 +62,8 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             }
 
-            binding.tvLoanAmount.text = order.cyJ.jinE()
-            binding.tvLoanDate.text = CommonUtil.timeLongToDate(order.eQEBh.toLong())
+            binding.tvLoanAmount.text = (order.cyJ ?: 0.0).jinE()
+            binding.tvLoanDate.text = CommonUtil.timeLongToDate(order.eQEBh?.toLong() ?: 0)
         }
     }
 
@@ -74,7 +74,7 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             goRequestAgain: () -> Unit,
             isCanRequestAgain: Boolean
         ) {
-            LocalCache.currentProCode = order.BANcfnGeXv
+            LocalCache.currentProCode = order.BANcfnGeXv ?: ""
             binding.tvRequestAgainText.setLimitClickListener {
                 goRequestAgain.invoke()
             }
@@ -91,14 +91,14 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             onItemCheckedChanged: () -> Unit
         ) {
             binding.tvPeriod.text = "Periodo ${order.PXsQKJs}"
-            binding.tvOrder.text = "Orden ${order.eJwh}"
+            binding.tvOrder.text = "Orden ${order.eJwh ?: 0}"
 
-            if (order.fLk >= 0) {
+            if ((order.fLk ?: 0) >= 0) {
                 binding.tvStatusDays.apply {
-                    text = String.format(
-                        getString(R.string.remain_days),
-                        order.fLk
-                    )
+                    text = if ((order.fLk ?: 0) > 0)
+                        String.format(getString(R.string.remain_days), order.fLk)
+                    else
+                        "Vence hoy"
                     setTextColor(Color.parseColor("#FFA700"))
                 }
                 binding.containerOrderItem.setBackgroundResource(R.drawable.white_16)
@@ -113,23 +113,23 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.containerOrderItem.setBackgroundResource(R.drawable.red_border_16)
             }
 
-            binding.tvBorrowedAmount.text = order.jgCtnsRuLhN.jinE()
-            binding.tvHandleAmount.text = order.WJgjPYFKSKZ.jinE()
-            binding.tvLoanDate.text = CommonUtil.timeLongToDate(order.eQEBh.toLong())
-            binding.tvOverFee.text = order.VHXe.jinE()
+            binding.tvBorrowedAmount.text = (order.jgCtnsRuLhN ?: 0.0).jinE()
+            binding.tvHandleAmount.text = (order.WJgjPYFKSKZ ?: 0.0).jinE()
+            binding.tvLoanDate.text = CommonUtil.timeLongToDate(order.eQEBh?.toLong() ?: 0)
+            binding.tvOverFee.text = (order.VHXe ?: 0.0).jinE()
             binding.tvReduce.text = String.format(
                 getString(R.string.reduce_money),
-                order.tcwHIg.jinE()
+                (order.tcwHIg ?: 0.0).jinE()
             )
 
             // 控件的可见性
-            binding.tvReduce.setVisible(order.tcwHIg > 0)
-            binding.containerOverFee.setVisible(order.fLk < 0)
+            binding.tvReduce.setVisible((order.tcwHIg ?: 0.0) > 0)
+            binding.containerOverFee.setVisible((order.fLk ?: 0) < 0)
             binding.tvPay.setVisible(order.HAkD == 1)
             binding.tvExpand.setVisible(order.BHWg == 1)
 
             binding.tvPay.setLimitClickListener {
-                toRepay?.invoke(order.eJwh)
+                toRepay?.invoke(order.eJwh ?: 0)
             }
             binding.tvExpand.setLimitClickListener {
                 toExpand?.invoke(order)

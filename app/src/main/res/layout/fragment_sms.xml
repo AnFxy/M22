@@ -90,7 +90,7 @@
         android:paddingVertical="11dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:text="@string/login"
+        android:text="@string/continuar"
         android:gravity="center"
         android:enabled="false"
         android:background="@drawable/login_button"

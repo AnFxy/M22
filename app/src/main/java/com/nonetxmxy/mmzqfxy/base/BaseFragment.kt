@@ -1,9 +1,13 @@
 package com.nonetxmxy.mmzqfxy.base
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -11,15 +15,21 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewbinding.ViewBinding
+import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.PhoneUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setMenuAndNavLimitClickListener
 import kotlinx.coroutines.launch
+import java.net.URLEncoder
 
 abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
 
     lateinit var binding: T
 
     var isHiddenStatus = false
+    var cusMenu: (() -> Unit)? = null
 
     lateinit var navController: NavController
 
@@ -33,6 +43,57 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
     private val requestDataLoadDialog: RxDialogSet? by lazy {
         context?.let {
             RxDialogSet.provideDialog(it, R.layout.dia_loading)
+        }
+    }
+
+    // 客服弹框
+    private val cusDialog: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_cus)
+            dialog.setViewState<LinearLayoutCompat>(R.id.container_wa) {
+                setLimitClickListener {
+                    // 调用WhatsApp
+                    val i = Intent(Intent.ACTION_VIEW)
+                    val whatsAppUrl =
+                        "https://api.whatsapp.com/send?phone=${LocalCache.serviceNumber}&text=${
+                            URLEncoder.encode(
+                                "",
+                                "UTF-8"
+                            )
+                        }"
+                    i.setPackage("com.whatsapp")
+                    i.data = Uri.parse(whatsAppUrl)
+                    if (i.resolveActivity(this@BaseFragment.activity?.packageManager!!) != null) {
+                        startActivity(i)
+                    } else {
+                        val isGoogleInstalled = AppUtils.isAppInstalled("com.android.vending")
+                        if (isGoogleInstalled) {
+                            val googleMarketLink = Uri.parse("market://details?id=com.whatsapp")
+                            val intent = Intent(Intent.ACTION_VIEW, googleMarketLink)
+                            intent.setPackage("com.android.vending")
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        } else {
+                            ToastUtils.showShort("No se puede abrir!")
+                        }
+                    }
+                    dialog.dismiss()
+                }
+            }.setViewState<LinearLayoutCompat>(R.id.container_tel) {
+                setLimitClickListener {
+                    // 调用系统电话
+                    if (LocalCache.serviceNumber.isNotEmpty()) {
+                        PhoneUtils.dial(LocalCache.serviceNumber)
+                        dialog.dismiss()
+                    } else {
+                        ToastUtils.showShort("Fallo la obtencion del numero de telefono del servicioal cliente.")
+                    }
+                }
+            }.setViewState<TextView>(R.id.tv_i_know) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }
         }
     }
 
@@ -67,10 +128,7 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
                         activity?.onBackPressed()
                     }, {
                         activity?.let {
-//                            SuperHandleUtils.showCustomerServiceDialog(
-//                                it,
-//                                BaseCache.customerServiceNumber
-//                            )
+                            cusMenu?.invoke() ?: cusDialog?.show()
                         }
                     })
                 }

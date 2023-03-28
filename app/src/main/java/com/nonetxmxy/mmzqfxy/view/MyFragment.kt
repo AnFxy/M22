@@ -3,12 +3,14 @@ package com.nonetxmxy.mmzqfxy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.databinding.FragmentMyBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.MyFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
@@ -50,6 +52,25 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
 
         binding.containerFeedback.setLimitClickListener {
             navController.navigate(MyFragmentDirections.actionMyFragmentToSuggestionsFragment())
+        }
+
+        binding.mRefresh.setOnRefreshListener {
+            viewModel.getPageData()
+        }
+    }
+
+    override fun setObserver() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.pagerData.collect {
+                it?.let { repayMessage ->
+                    // 有要还的订单
+                    if (repayMessage.OEdZXUBY > 0) {
+                        // 判断是否逾期来显示不同风格
+
+                        // TODO 点击后跳转到 还款页面，
+                    }
+                }
+            }
         }
     }
 }

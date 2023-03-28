@@ -3,13 +3,13 @@
     <item
         android:id="@+id/product_list_navigation"
         android:icon="@drawable/nav_first"
-        android:title="首页" />
+        android:title="Inicio" />
     <item
         android:id="@+id/order_list_navigation"
         android:icon="@drawable/nav_second"
-        android:title="历史" />
+        android:title="Factura" />
     <item
         android:id="@+id/my_navigation"
         android:icon="@drawable/nav_third"
-        android:title="我的" />
+        android:title="Yo" />
 </menu>

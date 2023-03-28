@@ -2,6 +2,8 @@ package com.nonetxmxy.mmzqfxy.view.auth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -10,15 +12,20 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
 //import com.nonetxmxy.mmzqfxy.adapters.AuthPageDataSelectAdapter
 import com.nonetxmxy.mmzqfxy.adapters.GridLayoutManagerItemDecoration
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthUserInfoBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.model.auth.UserMessage
+import com.nonetxmxy.mmzqfxy.tools.PreventMultiClickListener
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 //import com.nonetxmxy.mmzqfxy.model.SelfData
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +36,28 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     private val viewModel: AuthUserInfoViewModel by viewModels()
 
     private val args: AuthUserInfoFragmentArgs by navArgs()
+
+    private val authDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_auth)
+            dialog.setViewState<ImageView>(R.id.iv_close) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_continue) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_abandonar) {
+                setLimitClickListener {
+                    navController.popBackStack()
+                    dialog.dismiss()
+                }
+            }
+            dialog
+        }
+
+    }
 
     private val estadoCivilAdapter by lazy {
         val adapter = AuthPageDataSelectAdapter()
@@ -58,7 +87,11 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
 
     override fun FragmentAuthUserInfoBinding.setLayout() {
 
-        mToolbar.setupWithNavController(navController)
+        mToolbar.setNavigationOnClickListener(object : PreventMultiClickListener() {
+            override fun onSafeClick() {
+                activity?.onBackPressed()
+            }
+        })
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
 
         includeAuthTitle.image.setImageResource(R.mipmap.jinbi2)
@@ -90,13 +123,23 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
         }
         binding.commonSelect2.clickOptionItemBlock = {
             viewModel.pagerData = viewModel.pagerData.copy(
-                AnmkImJZjp = it.TuJpAVA, iJH = it.cnTVzVSsBYV
+                AnmkImJZjp = it.TuJpAVA, ijH = it.cnTVzVSsBYV
             )
         }
         binding.commonSelect3.addressSelectOKBlock = { province: String, city: String ->
             viewModel.pagerData = viewModel.pagerData.copy(
                 qLh = province, URCcx = city
             )
+        }
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                if (LocalCache.fourAuth()) {
+                    navController.popBackStack()
+                } else {
+                    authDialogSet?.show()
+                }
+            }
         }
     }
 
@@ -111,7 +154,6 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     binding.commonSelect1.selectTitle
                 )
             )
-            binding.commonSelect1.showOptionDialog()
             return false
         }
         if (viewModel.pagerData.kaAT.isEmpty()) {
@@ -131,7 +173,6 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     binding.commonSelect2.selectTitle
                 )
             )
-            binding.commonSelect2.showOptionDialog()
             return false
         }
         if (viewModel.pagerData.qLh.isEmpty() || viewModel.pagerData.URCcx.isEmpty()) {
@@ -141,7 +182,6 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
                     binding.commonSelect3.selectTitle
                 )
             )
-            binding.commonSelect3.showAddressSelectDialog()
             return false
         }
 
@@ -210,8 +250,8 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     //读取用户提交内容
     private fun updatePage(data: UserMessage) {
         binding.apply {
-            commonSelect1.selectContent = data.vnQBj
-            commonSelect2.selectContent = data.AnmkImJZjp
+            commonSelect1.selectContent = data.xzwqCVcwQ
+            commonSelect2.selectContent = data.ijH
             if (data.qLh.isNotEmpty() || data.URCcx.isNotEmpty()) {
                 commonSelect3.selectContent = "${data.qLh}/${data.URCcx}"
             }

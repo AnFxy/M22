@@ -28,6 +28,11 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
 
     private val adapter: OrderListAdapter by lazy {
         OrderListAdapter({
+
+            if (!orderArgs.isTab) {
+                navController.popBackStack()
+            }
+
             navController.navigate(
                 R.id.product_list_navigation,
                 null,
@@ -61,6 +66,10 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
             viewModel.requestOrders()
         }
 
+        if (!orderArgs.isTab) {
+            binding.tvTitle.text = "Mi préstamo"
+        }
+
         binding.rvOrder.apply {
             layoutManager = LinearLayoutManager(this@OrderListFragment.context)
             adapter = this@OrderListFragment.adapter
@@ -77,13 +86,16 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
         receiveCallBackDataFromLastFragment<Boolean>(PayFragment.BACK) {
             viewModel.requestOrders()
         }
-
     }
 
     override fun setObserver() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.orders.collect {
-                adapter.orders = it
+                if (orderArgs.isTab) {
+                    adapter.orders = it.filter { item -> item.snbrREWru in listOf(5) }
+                } else {
+                    adapter.orders = it
+                }
             }
         }
     }

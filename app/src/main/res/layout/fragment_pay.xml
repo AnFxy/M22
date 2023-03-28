@@ -231,7 +231,7 @@
             android:enabled="false"
             android:gravity="center"
             android:paddingVertical="15dp"
-            android:text="@string/repay"
+            android:text="@string/repay_it_all"
             android:textColor="@color/gray_532e00"
             android:textSize="16sp"
             android:textStyle="bold"

@@ -64,7 +64,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                     PayFragmentDirections.actionPayFragmentToPayCodeFragment(
                         payWayCode = code,
                         payType = viewModel.payType,
-                        orderMainId = viewModel.pagerData.value?.oqiuffK!![0].kcUBu,
+                        orderMainId = viewModel.pagerData.value?.oqiuffK!![0].kcUBu ?: 0,
                         orderSonId = viewModel.sonId ?: 0L,
                         payWayName = name,
                         proName = viewModel.pagerData.value?.oqiuffK!![0].IAtgc,
@@ -123,7 +123,8 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                 viewModel.payType = 5
             } else {
                 viewModel.payType = 1
-                viewModel.sonId = repayAdapter.datas.first { it.isChecked && it.CZusa in listOf(0, 2) }.eJwh
+                viewModel.sonId =
+                    repayAdapter.datas.first { it.isChecked && it.CZusa in listOf(0, 2) }.eJwh
             }
             payWayDialog?.show()
         }
@@ -152,6 +153,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                         delay(500)
                         callBackDataWhenDestroyed(BACK, true)
                     }
+                    updateAllSelectViewStatus()
                 }
             }
         }
@@ -185,8 +187,8 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
         binding.tvPay.isEnabled =
             (needPayCheckedItems.size == 1 && needPayCheckedItems[0].HAkD == 1) || isAllSelected
 
-        val totalPayAmount = needPayCheckedItems.sumOf { it.QhNNScsTT }
-        val totalReduceAmount = needPayCheckedItems.sumOf { it.tcwHIg }
+        val totalPayAmount = needPayCheckedItems.sumOf { it.QhNNScsTT ?: 0.0 }
+        val totalReduceAmount = needPayCheckedItems.sumOf { it.tcwHIg ?: 0.0 }
 
         val reduceText =
             if (totalReduceAmount > 0)

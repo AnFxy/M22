@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,6 +16,7 @@ import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
@@ -24,6 +26,7 @@ import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthIdentityBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.model.PhotoType
+import com.nonetxmxy.mmzqfxy.tools.PreventMultiClickListener
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthIdentityViewModel
@@ -39,6 +42,27 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
     private lateinit var photoLauncher: ActivityResultLauncher<String>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
+
+    private val authDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_auth)
+            dialog.setViewState<ImageView>(R.id.iv_close) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_continue) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_abandonar) {
+                setLimitClickListener {
+                    navController.popBackStack()
+                    dialog.dismiss()
+                }
+            }
+            dialog
+        }
+    }
 
     override fun getViewMode() = viewModel
 
@@ -79,13 +103,27 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
     }
 
     override fun FragmentAuthIdentityBinding.setLayout() {
-        mToolbar.setupWithNavController(navController)
+        mToolbar.setNavigationOnClickListener(object : PreventMultiClickListener() {
+            override fun onSafeClick() {
+                activity?.onBackPressed()
+            }
+        })
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
         includeAuthTitle.image.setImageResource(R.mipmap.jinbi4)
 
         activity?.let {
             binding.ivTop.setActivity(it)
             binding.ivBehind.setActivity(it)
+        }
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                if (LocalCache.fourAuth()) {
+                    navController.popBackStack()
+                } else {
+                    authDialogSet?.show()
+                }
+            }
         }
 
         binding.mRefresh.setOnRefreshListener {
@@ -192,7 +230,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         binding.inputFaName.inputContent = viewModel.pagerData.JkfImZtlQ
         binding.inputMaName.inputContent = viewModel.pagerData.Tjq
         binding.inputIdNumber.inputContent = viewModel.pagerData.ExHTUA
-        binding.inputRfcNumber.inputContent = viewModel.pagerData.DEyLxCETnd
+        binding.inputRfcNumber.inputContent = viewModel.pagerData.DEyLxCETnd ?: ""
     }
 
     private fun checkData(): Boolean {

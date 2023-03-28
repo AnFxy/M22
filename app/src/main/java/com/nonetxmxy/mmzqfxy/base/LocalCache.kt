@@ -58,6 +58,9 @@ class LocalCache {
         var bankCredit = 0
         var faceCredit = 0
 
+        fun fourAuth() =
+            infoCredit == 1 && workCredit == 1 && contactPersonCredit == 1 && idCredit == 1
+
         fun clearALLCache() {
             // 是否已经登录了
             isLogged = false

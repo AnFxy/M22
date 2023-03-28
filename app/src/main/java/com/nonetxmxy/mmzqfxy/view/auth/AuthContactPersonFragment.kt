@@ -2,6 +2,8 @@ package com.nonetxmxy.mmzqfxy.view.auth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,13 +14,17 @@ import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
+import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.LocalCache
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAuthContactPersonBinding
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.ContactPersonUtil
+import com.nonetxmxy.mmzqfxy.tools.PreventMultiClickListener
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthContactPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,11 +39,40 @@ class AuthContactPersonFragment :
                 val contactInfo = ContactPersonUtil.getOneContactData(Utils.getApp(), it)
                 val phone = contactInfo[ContactPersonUtil.KEY_PHONE]
                 val name = contactInfo[ContactPersonUtil.KEY_CONTACT]
-                if (!phone.isNullOrEmpty() && !name.isNullOrEmpty() && CommonUtil.checkPhone(phone)) {
+                if (!phone.isNullOrEmpty() && !name.isNullOrEmpty() &&
+                    CommonUtil.checkPhone(phone) &&
+                    phone != LocalCache.phoneNumber &&
+                    phone != "+${LocalCache.phoneNumber}" &&
+                    phone != LocalCache.phoneNumber.substring(2)
+                ) {
                     viewModel.updateContactData(selectContact1, phone, name)
+                } else {
+                    ToastUtils.showShort("Por favor, rellene el número de teléfono correcto.")
                 }
             }
         }
+
+    private val authDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_auth)
+            dialog.setViewState<ImageView>(R.id.iv_close) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_continue) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }.setViewState<TextView>(R.id.tv_abandonar) {
+                setLimitClickListener {
+                    navController.popBackStack()
+                    dialog.dismiss()
+                }
+            }
+            dialog
+        }
+
+    }
 
     private val viewModel: AuthContactPersonViewModel by viewModels()
 
@@ -54,9 +89,23 @@ class AuthContactPersonFragment :
     )
 
     override fun FragmentAuthContactPersonBinding.setLayout() {
-        mToolbar.setupWithNavController(navController)
+        mToolbar.setNavigationOnClickListener(object : PreventMultiClickListener() {
+            override fun onSafeClick() {
+                activity?.onBackPressed()
+            }
+        })
         mToolbar.setNavigationIcon(R.mipmap.fanhui)
         includeAuthTitle.image.setImageResource(R.mipmap.jinbi3)
+
+        activity?.let {
+            (it as MainActivity).specialOnBackPressed = {
+                if (LocalCache.fourAuth()) {
+                    navController.popBackStack()
+                } else {
+                    authDialogSet?.show()
+                }
+            }
+        }
 
         contact1Phone.contactPersonOKBlock = {
             selectContact1 = true

@@ -83,7 +83,9 @@ class ConfirmRequestFragment :
             }.setViewState<TextView>(R.id.tv_add_cards) {
                 setLimitClickListener {
                     navController.navigate(
-                        ConfirmRequestFragmentDirections.actionConfirmRequestFragmentToAddCardsFragment(true)
+                        ConfirmRequestFragmentDirections.actionConfirmRequestFragmentToAddCardsFragment(
+                            true
+                        )
                     )
                     dialog.dismiss()
                 }
@@ -111,8 +113,7 @@ class ConfirmRequestFragment :
         }
 
         binding.ivExpand.setLimitClickListener {
-            viewModel.isClose = false
-            binding.ivExpand.setVisible(false)
+            viewModel.updateCloseStatus()
             updatePage(viewModel.pagerData.value)
         }
 
@@ -219,18 +220,18 @@ class ConfirmRequestFragment :
             e.printStackTrace()
         }
 
-        if (viewModel.isClose) {
+        if (viewModel.isClose.value) {
             binding.tvFixed1.text = getString(R.string.confirm_need_repay_amount)
             binding.tvValue1.text = confirmMessage.needPayWhenDateOver.jinE()
 
             binding.tvFixed2.text = getString(R.string.confirm_repay_date)
             binding.tvValue2.text = confirmMessage.payDate
-
+            binding.ivExpand.setImageResource(R.mipmap.xiala)
         } else {
             binding.tvFixed1.text = getString(R.string.confirm_loan_amount)
             binding.tvValue1.text = confirmMessage.requestAmount.jinE()
 
-            binding.tvFixed2.text = getString(R.string.confirm_get_money_account)
+            binding.tvFixed2.text = getString(R.string.confirm_handle_amount)
             binding.tvValue2.text = confirmMessage.handAmount.jinE()
 
             binding.tvFixed3.text = getString(R.string.confirm_rate_amount)
@@ -241,11 +242,12 @@ class ConfirmRequestFragment :
 
             binding.tvFixed5.text = getString(R.string.confirm_need_repay_amount)
             binding.tvValue5.text = confirmMessage.needPayWhenDateOver.jinE()
+            binding.ivExpand.setImageResource(R.mipmap.xiala_a)
         }
 
-        binding.container3.setVisible(!viewModel.isClose)
-        binding.container4.setVisible(!viewModel.isClose)
-        binding.container5.setVisible(!viewModel.isClose)
+        binding.container3.setVisible(!viewModel.isClose.value)
+        binding.container4.setVisible(!viewModel.isClose.value)
+        binding.container5.setVisible(!viewModel.isClose.value)
 
         binding.tvBankName.text = confirmMessage.bankName
         binding.tvBankNumber.text = confirmMessage.bankNumber

@@ -1,5 +1,6 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
+import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
@@ -77,10 +78,14 @@ class AuthContactPersonViewModel @Inject constructor(
         if (selectContact1) {
             if (phone != pagerDataFlow.value.faVW) {
                 _pagerDataFlow.value = pagerDataFlow.value.copy(RHaDS = phone, KiVk = name)
+            } else {
+                ToastUtils.showShort("El número de contacto no se puede repetir.")
             }
         } else {
             if (phone != pagerDataFlow.value.RHaDS) {
                 _pagerDataFlow.value = pagerDataFlow.value.copy(faVW = phone, vwuan = name)
+            } else {
+                ToastUtils.showShort("El número de contacto no se puede repetir.")
             }
         }
     }

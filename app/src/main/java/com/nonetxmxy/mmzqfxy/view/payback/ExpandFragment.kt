@@ -48,8 +48,8 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
                     ExpandFragmentDirections.actionExpandFragmentToPayCodeFragment(
                         payWayCode = code,
                         payType = 2,
-                        orderMainId = args.sonOrder.kcUBu,
-                        orderSonId = args.sonOrder.eJwh,
+                        orderMainId = args.sonOrder.kcUBu ?: 0,
+                        orderSonId = args.sonOrder.eJwh ?: 0,
                         payWayName = name,
                         proName = args.sonOrder.IAtgc,
                         payWayLogo = logo
@@ -76,10 +76,10 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
         }
 
         try {
-            binding.tvExpandDays.text = args.sonOrder.nMq.days()
-            binding.tvExpandFee.text = args.sonOrder.sZOWLJOMQ.jinE()
-            binding.tvNeedPay.text = args.sonOrder.ccnN.jinE()
-            binding.tvPayDate.text = CommonUtil.timeLongToDate(args.sonOrder.PHBPS.toLong())
+            binding.tvExpandDays.text = (args.sonOrder.nMq ?: 0).days()
+            binding.tvExpandFee.text = (args.sonOrder.sZOWLJOMQ ?: 0.0).jinE()
+            binding.tvNeedPay.text = (args.sonOrder.ccnN ?: 0.0).jinE()
+            binding.tvPayDate.text = CommonUtil.timeLongToDate(args.sonOrder.PHBPS?.toLong() ?: 0)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -87,7 +87,7 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
         binding.tvExpandConfirm.apply {
             isEnabled = args.sonOrder.fxhOFanoPe == 1
             setLimitClickListener {
-                viewModel.doConfirmExpanded(args.sonOrder.eJwh)
+                viewModel.doConfirmExpanded(args.sonOrder.eJwh ?: 0)
             }
         }
     }

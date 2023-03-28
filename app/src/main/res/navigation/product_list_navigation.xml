@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_productListFragment_to_underReviewFragment"
             app:destination="@id/underReviewFragment" />
+        <action
+            android:id="@+id/action_productListFragment_to_notifyFragment"
+            app:destination="@id/notifyFragment" />
     </fragment>
 
 
@@ -33,5 +36,9 @@
         android:id="@+id/underReviewFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment"
         android:label="UnderReviewFragmentPro" />
+    <fragment
+        android:id="@+id/notifyFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.NotifyFragment"
+        android:label="NotifyFragment" />
 
 </navigation>

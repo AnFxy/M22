@@ -52,7 +52,7 @@
                 android:id="@+id/tv_expand_days"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xx dias"
+                android:text="xx diás"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 android:textColor="@color/gray_532e00"

@@ -64,5 +64,16 @@ class CommonUtil {
             } else {
                 phoneNumber
             }
+
+        fun bankFormat(bankNumber: String)  =
+            bankNumber.mapIndexed { index, char ->
+                if ((index+1) % 4 == 0) {
+                    "$char "
+                } else {
+                    char
+                }
+            }.joinToString("")
+
+
     }
 }

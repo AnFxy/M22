@@ -102,6 +102,8 @@ class AllAuthFragment : BaseFragment<FragmentAllAuthBinding, AllAuthFragViewMode
                     )
                 )
             } else {
+                navController.popBackStack()
+
                 navController.navigate(
                     R.id.product_list_navigation,
                     null,

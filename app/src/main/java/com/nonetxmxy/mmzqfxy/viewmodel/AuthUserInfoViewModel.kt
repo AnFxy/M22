@@ -44,7 +44,7 @@ class AuthUserInfoViewModel @Inject constructor(
         URCcx = "",
         dFZqoeahk = "",
         XKbzBk = "",
-        iJH = "",
+        ijH = "",
         xzwqCVcwQ = "",
         NylJoZfP = "",
         hFHaKOITD = "",

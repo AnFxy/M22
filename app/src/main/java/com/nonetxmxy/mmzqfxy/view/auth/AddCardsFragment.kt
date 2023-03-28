@@ -2,18 +2,21 @@ package com.nonetxmxy.mmzqfxy.view.auth
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigator
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentAddCardsBinding
 import com.nonetxmxy.mmzqfxy.model.PageType
+import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.viewmodel.AddCardsFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,8 +43,8 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
     override fun setLayout() {
         binding.mToolbar.setupWithNavController(navController)
         binding.mToolbar.setNavigationIcon(R.mipmap.fanhui)
-        binding.includeAuthTitle.image.setImageResource(R.mipmap.jinbi5)
-        binding.includeAuthTitle.tvSecurityTips.text = getString(R.string.add_bank_tips)
+        binding.image.setImageResource(R.mipmap.jinbi5)
+        binding.tvSecurityTips.text = getString(R.string.add_bank_tips)
 
         binding.rgBankType.setOnCheckedChangeListener { _, p1 ->
             viewModel.optionalDirection.value?.let {
@@ -62,7 +65,23 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
 
         binding.includeAuthBottom.enviarBtn.setLimitClickListener {
             if (checkData()) {
-                viewModel.submitBank()
+                context?.let {
+                    val dialogSet = RxDialogSet.provideDialog(it, R.layout.dia_bank_confirm)
+                    dialogSet.setViewState<ImageView>(R.id.iv_close) {
+                        setLimitClickListener {
+                            dialogSet.dismiss()
+                        }
+                    }.setViewState<TextView>(R.id.tv_bank_name) {
+                        text = " ${viewModel.pagerData.TtoUz}"
+                    }.setViewState<TextView>(R.id.tv_bank_number) {
+                        text = CommonUtil.bankFormat(viewModel.pagerData.zUbbNgrgLl)
+                    }.setViewState<TextView>(R.id.tv_confirm) {
+                        setLimitClickListener {
+                            viewModel.submitBank()
+                            dialogSet.dismiss()
+                        }
+                    }.show()
+                }
             }
         }
     }

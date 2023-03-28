@@ -10,7 +10,16 @@
         android:id="@+id/m_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white" />
+        android:background="@color/white" >
+
+        <TextView
+            style="@style/SimpleToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/card_message" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -25,9 +34,66 @@
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
-            <include
-                android:id="@+id/includeAuthTitle"
-                layout="@layout/include_auth_top_title" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_10_radius_white"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/shape_auth_title"
+                    android:gravity="center_vertical"
+                    android:padding="10dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/anquan" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:text="Protegeremos su información y no divulgaremos
+su información de contacto a ningún tercero sin
+su permiso."
+                        android:textColor="@color/gray_333333"
+                        android:textSize="11sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="*"
+                        android:textColor="@color/color_06047"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_security_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Por favor, compruebe cuidadosamente si la cuenta receptora es su cuenta."
+                        android:textColor="@color/gray_999999"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -41,15 +107,15 @@
                     android:id="@+id/tv_bank_type_title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/bank_type"
-                    android:paddingHorizontal="15dp"/>
+                    android:paddingHorizontal="15dp"
+                    android:text="@string/bank_type" />
 
                 <RadioGroup
                     android:id="@+id/rg_bank_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
                     android:paddingHorizontal="25dp">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
@@ -57,23 +123,23 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@drawable/bank_type_selector"
                         android:button="@null"
-                        android:paddingVertical="13dp"
-                        android:text="@string/bank_xinyong"
                         android:gravity="center"
-                        android:background="@drawable/bank_type_selector"/>
+                        android:paddingVertical="13dp"
+                        android:text="@string/bank_xinyong" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/tv_card2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:button="@null"
-                        android:paddingVertical="13dp"
-                        android:text="@string/bank_save"
-                        android:gravity="center"
                         android:layout_marginStart="38dp"
-                        android:background="@drawable/bank_type_selector"/>
+                        android:layout_weight="1"
+                        android:background="@drawable/bank_type_selector"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:paddingVertical="13dp"
+                        android:text="@string/bank_save" />
 
                 </RadioGroup>
 
@@ -81,16 +147,16 @@
                     android:id="@+id/commonSelect1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:select_title="@string/bank_name"
                     android:layout_marginTop="15dp"
-                    app:select_type="bank"/>
+                    app:select_title="@string/bank_name"
+                    app:select_type="bank" />
 
                 <com.nonetxmxy.mmzqfxy.customer_view.InputInfoView
                     android:id="@+id/input1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    app:enter_title="@string/bank_number"/>
+                    app:enter_title="@string/bank_number" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

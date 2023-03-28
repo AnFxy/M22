@@ -208,7 +208,7 @@
         android:background="@drawable/yellow_6"
         android:gravity="center"
         android:paddingVertical="11dp"
-        android:text="@string/apply"
+        android:text="@string/apply_now"
         android:textColor="@color/gray_532e00"
         android:textSize="16sp"
         android:textStyle="bold"

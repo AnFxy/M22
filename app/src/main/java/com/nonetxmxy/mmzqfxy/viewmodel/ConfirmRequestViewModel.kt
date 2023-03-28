@@ -8,6 +8,8 @@ import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
+import com.nonetxmxy.mmzqfxy.tools.days
+import com.nonetxmxy.mmzqfxy.tools.jinE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -47,7 +49,8 @@ class ConfirmRequestViewModel @Inject constructor(
     )
     val pagerData: StateFlow<ConfirmMessage> = _pagerData
 
-    var isClose = true
+    private val _isClose = MutableStateFlow(true)
+    val isClose: StateFlow<Boolean> = _isClose
 
     private val _goVerifiPage = MutableSharedFlow<Unit>()
     val goVerifiPage: SharedFlow<Unit> = _goVerifiPage
@@ -78,7 +81,7 @@ class ConfirmRequestViewModel @Inject constructor(
                         resBean?.let {
                             // 钱数需要去重
                             moneyDatas =
-                                it.SsxAXO.map { item -> item.zrCuab.toString() }.toSet().toList()
+                                it.SsxAXO.map { item -> item.zrCuab.jinE() }.toSet().toList()
                             // 默认选中第一个钱数
                             moneySelectedName = moneyDatas[0]
                             // 设置天数 和发送通知UI数据
@@ -96,18 +99,22 @@ class ConfirmRequestViewModel @Inject constructor(
         resBean?.let {
             // 根据钱数去过滤天数
             if (selectName.isEmpty()) {
-                daysDatas = it.SsxAXO.filter { item -> item.zrCuab.toString() == moneySelectedName }
-                    .map { item -> item.qUSFV }
+                daysDatas = it.SsxAXO.filter { item -> item.zrCuab.jinE() == moneySelectedName }
+                    .map { item -> item.qUSFV.toInt().days() }
             }
             // 默认选中第一个天数
             daySelectedName = selectName.ifEmpty { daysDatas[0] }
 
             // 这个时候发送通知，告诉UI层去更新数据
             val targetItem = it.SsxAXO.indexOfFirst { item ->
-                item.zrCuab.toString() == moneySelectedName && item.qUSFV == daySelectedName
+                item.zrCuab.jinE() == moneySelectedName && item.qUSFV.toInt().days() == daySelectedName
             }
             updateSelectItem(if (isInit) 0 else targetItem)
         }
+    }
+
+    fun updateCloseStatus() {
+        _isClose.value = !isClose.value
     }
 
     private fun updateSelectItem(index: Int = 0) {

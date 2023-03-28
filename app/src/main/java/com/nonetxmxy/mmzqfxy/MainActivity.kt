@@ -26,6 +26,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         super.onBackPressed()
     }
 
+    companion object {
+        val SPECIAL_PAGE_LIST = listOf(
+            "AuthUserInfoFragment",
+            "AuthUserWorkFragment",
+            "AuthContactPersonFragment",
+            "AuthIdentityFragment",
+            "UnderReviewFragment",
+            "PayCodeFragment"
+        )
+    }
+
     override fun getViewMode(): MainActivityViewModel = viewModel
 
     override fun getViewBinding(): ActivityMainBinding =
@@ -40,7 +51,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
         navController.addOnDestinationChangedListener(this)
 
         binding.nvBottom.setOnItemSelectedListener {
-            if (!LocalCache.isLogged) {
+            if (!LocalCache.isLogged && it.itemId != R.id.product_list_navigation) {
                 navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
                 false
             } else {
@@ -60,7 +71,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     }
 
     override fun onBackPressed() {
-        specialOnBackPressed.invoke()
+        val curLabelName = navController.currentDestination?.label ?: ""
+        if (curLabelName in SPECIAL_PAGE_LIST) {
+            specialOnBackPressed.invoke()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun setListener() {

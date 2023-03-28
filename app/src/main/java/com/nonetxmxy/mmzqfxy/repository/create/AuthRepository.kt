@@ -54,7 +54,7 @@ class AuthRepository @Inject constructor(
         maps["cpeKwj"] = workMessage.tLxEVr
         maps["jQOvw"] = workMessage.Yrfwo
         maps["dFWU"] = workMessage.rIIWYi
-        maps["ndaHL"] = workMessage.BRDyVcJsB
+        maps["ndaHL"] = workMessage.BRDyVcJsB ?: ""
         maps["uEJ"] = (System.currentTimeMillis() - startTime).toString()
         maps["coFMHP"] = workMessage.rFAso
         maps["GsJIwGClOu"] = workMessage.CVZLaIndZG
@@ -84,15 +84,15 @@ class AuthRepository @Inject constructor(
 
         maps["kmNlaD"] = userMessage.kaAT
         maps["pYbfyaXf"] = userMessage.AnmkImJZjp
-        maps["NBzaoHqhZ"] = userMessage.hFHaKOITD
+        maps["NBzaoHqhZ"] = userMessage.hFHaKOITD ?: ""
         maps["SfZH"] = userMessage.vnQBj
         maps["FelINBmQMY"] = userMessage.qLh
         maps["oBHFXVd"] = userMessage.URCcx
         maps["zNy"] = userMessage.dFZqoeahk
         maps["AwiuWtMMtWk"] = (System.currentTimeMillis() - startTime).toString()
-        maps["tUAjCeFxZsB"] = userMessage.URXdUgWGz
-        maps["SfxZ"] = userMessage.keMI
-        maps["MVDYu"] = userMessage.OnDO
+        maps["tUAjCeFxZsB"] = userMessage.URXdUgWGz ?: ""
+        maps["SfxZ"] = userMessage.keMI ?: ""
+        maps["MVDYu"] = userMessage.OnDO ?: ""
 
         authService.userMessageSent(maps).checkCodeError()
     }
@@ -159,7 +159,7 @@ class AuthRepository @Inject constructor(
         maps["YtLuQhNj"] = idMessage.AgzmxkTVhrb
         maps["qYDHsyFec"] = idMessage.MpOHLbXEBT
         maps["NhGm"] = idMessage.fOEEzcNxpv
-        maps["eCqBul"] = idMessage.ZdKyAmeCGxL
+        maps["eCqBul"] = idMessage.ZdKyAmeCGxL ?: ""
         maps["BVH"] = idMessage.ExHTUA
         maps["dGvdqaNow"] = (System.currentTimeMillis() - startTime).toString()
         maps["yHJskdf"] = idMessage.JkfImZtlQ

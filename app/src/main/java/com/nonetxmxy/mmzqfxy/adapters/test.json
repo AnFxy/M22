@@ -1,33 +1,51 @@
 {
-  "wE4NhGmFv": "SANCHEZ ALVA DONALDO",
-  "aIISxVgVauNCZY": "4",
-  "oINdGvdqaNowTK": "24441",
-  "QPdiwJZ98": "JACK",
-  "1LySuaCySYzmEn85": "ESP",
-  "IJ5lSpaLNb0V": "FOIN",
-  "Kj6YCdqIog": "MXC",
-  "PdvYtLuQhNjPN": "http:\/\/192.168.0.245:7606\/file\/download\/6bf17aba-335d-4554-a0e0-f41d974ee568.jpg",
-  "3aXBVHEg": "SAAD980006HMCNLN07",
-  "w9VkbsHvqIc": "166cbb80338d484c8788d46b6458e213",
-  "8mIeCqBulWK": "",
-  "MHzcslvRKltzMOx9": "BOB",
-  "WBBqYDHsyFec8A": "http:\/\/192.168.0.245:7606\/file\/download\/b80554f2-953c-4d6d-ba78-556a8f8de6f3.jpg"
-}
-
-{
   "code": 1,
   "data": {
-    "ExHTUA": "SAAD980006HMCNLN07",
-    "MpOHLbXEBT": "http://192.168.0.245:7606/file/download/b80554f2-953c-4d6d-ba78-556a8f8de6f3.jpg",
-    "fOEEzcNxpv": "SANCHEZ ALVA DONALDO",
-    "JkfImZtlQ": "",
-    "DEyLxCETnd": "",
-    "Tjq": "",
-    "gKiAP": "",
-    "GKPoxepe": "",
-    "ZdKyAmeCGxL": "",
-    "aNFqORfCZpt": "",
-    "AgzmxkTVhrb": "http://192.168.0.245:7606/file/download/6bf17aba-335d-4554-a0e0-f41d974ee568.jpg"
+    "xmYDzadg": {
+      "LbF": "1",
+      "NJO": "1",
+      "TcNB": "SANCHEZ ALVA DONALDO",
+      "ZxsKeqM": "1",
+      "yDVrDaYTmXY": "1",
+      "jFJE": "0",
+      "RoS": "528400400406",
+      "UpolPGX": "1",
+      "hAB": 0,
+      "wGYcO": 0
+    },
+    "XOdj": [
+      {
+        "QAbbtL": "1",
+        "cgah": "personalCredit",
+        "FnNXBuRHYR": "Informacion Personal"
+      },
+      {
+        "QAbbtL": "1",
+        "cgah": "workCredit",
+        "FnNXBuRHYR": "Información de la Familia"
+      },
+      {
+        "QAbbtL": "1",
+        "cgah": "contactCredit",
+        "FnNXBuRHYR": "Información del contacto"
+      },
+      {
+        "QAbbtL": "1",
+        "cgah": "identityCredit",
+        "FnNXBuRHYR": "Información de identidad"
+      },
+      {
+        "QAbbtL": "1",
+        "cgah": "bankCredit",
+        "FnNXBuRHYR": "Información Bancaria"
+      },
+      {
+        "QAbbtL": "0",
+        "cgah": "faceCredit",
+        "FnNXBuRHYR": "Información de reconocimiento facial"
+      }
+    ],
+    "GpE": 0
   },
   "message": "Operación exitosa"
 }

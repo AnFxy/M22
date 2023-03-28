@@ -1,14 +1,21 @@
-<resources>
-    <string name="app_name">MexiCredi</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">MexiCrédi</string>
 
-    <!--启动页-->
+    <!--启动页
+á
+ú
+ó
+é
+í
+
+-->
     <string name="tips_dia_title">披露标题</string>
     <string name="tips_dia_content">巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</string>
-    <string name="tips_dia_cancel">取消</string>
-    <string name="tips_dia_confirm">确定</string>
+    <string name="tips_dia_cancel">Salir</string>
+    <string name="tips_dia_confirm">Aceptar</string>
     <string name="update_dia_title">更新标题</string>
-    <string name="update_next">下次更新</string>
-    <string name="update_now">现在更新</string>
+    <string name="update_next">Rechazada</string>
+    <string name="update_now">De acuerdo</string>
 
 
     <string name="selector_hint">Por favor elige</string>
@@ -17,8 +24,8 @@
     <string name="enviar">Enviar</string>
     <string name="estado_civil">Estado civil</string>
     <string name="fuente_de_ingresos">Fuente de ingresos</string>
-    <string name="select_province">请选择省份</string>
-    <string name="select_city">请选择城市</string>
+    <string name="select_province">Por favor, elija la provincia</string>
+    <string name="select_city">Por favor, elija la ciudad</string>
     <string name="numero_telefono">Número de teléfono</string>
     <string name="nombre">Nombre</string>
     <string name="relación">Relación</string>
@@ -27,57 +34,58 @@
     <string name="selector_error_hint">Por favor elige %s</string>
     <string name="input_error_hint">Por favor completa %s</string>
     <string name="internationall_number">+51</string>
-    <string name="permission_hint">需要授予权限</string>
+    <string name="permission_hint">Necesidad de conceder competencias</string>
 
 
     <!--首页-->
-    <string name="home_title">首页标题</string>
-    <string name="banner_content">Banner提示语</string>
-    <string name="apply">现在申请</string>
-    <string name="cycle_days">借款天数</string>
-    <string name="rate">借款利率</string>
+    <string name="home_title">@string/app_name</string>
+    <string name="banner_content">Préstamo Confiable y\n Transparente</string>
+    <string name="apply">Aplicar</string>
+    <string name="cycle_days">Días de préstamo</string>
+    <string name="rate">Tipo de interés diario</string>
     <string name="over_due">逾期还款</string>
     <string name="open_app">Descargar La APP</string>
     <string name="text_divider">Recomendado para usted</string>
 
     <!--我的页面-->
-    <string name="his">贷款历史</string>
-    <string name="card">银行卡</string>
-    <string name="verifi">信息认证</string>
-    <string name="privacy">隐私政策</string>
-    <string name="my">关于我们</string>
-    <string name="feedback">意见反馈</string>
+    <string name="his">Récord de préstamo</string>
+    <string name="card">Tarjeta bancaria</string>
+    <string name="verifi">Datos personales</string>
+    <string name="privacy">Ley de Protección de Datos</string>
+    <string name="my">Sobre nosotros</string>
+    <string name="feedback">Añadir comentario</string>
     <string name="us_order_des">你有一笔订单已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！</string>
 
     <!--贷款历史页面-->
-    <string name="loan_amount">借款金额</string>
-    <string name="loan_period">借款期数</string>
-    <string name="loan_cycle">借款周期</string>
+    <string name="loan_amount">Cantidad prestada</string>
+    <string name="loan_period">Períodos de préstamo</string>
+    <string name="loan_cycle">Días de préstamo</string>
     <string name="request_date">Tiempo de solicitud</string>
-    <string name="on_reviewing">审核中</string>
-    <string name="refused">审核失败</string>
-    <string name="reviewing_pass">审核通过</string>
-    <string name="on_reviewing_des">审核中</string>
-    <string name="refused_des">审核失败</string>
-    <string name="reviewing_pass_des">审核通过</string>
-    <string name="repay_days">%d 天后到期</string>
-    <string name="overdue_days">%d dia de retraso</string>
-    <string name="repay">还款</string>
-    <string name="expand">展期</string>
-    <string name="no_order_tips">没有任何借款订单呢！</string>
+    <string name="on_reviewing">Verificando</string>
+    <string name="refused">Auditoría fallida</string>
+    <string name="reviewing_pass">Revisión aprobada</string>
+    <string name="on_reviewing_des">1 minuto como mínimo, por favor espere pacientemente</string>
+    <string name="refused_des">Podría volver a intentarlo después de 7 días</string>
+    <string name="reviewing_pass_des">La acreditación de fondos está en curso, por favor, vigile el cambio del saldo de la cuenta</string>
+    <string name="overdue_days">%d días de retraso</string>
+    <string name="repay">Reembolsar</string>
+    <string name="expand">Retrasar el reembolso</string>
+    <string name="no_order_tips">Actualmente no le queda\nningún préstamo por pagar.</string>
+    <string name="his_to_apply">Prestar</string>
 
     <!--银行卡列表页面-->
-    <string name="cards">银行卡列表</string>
-    <string name="add_cards">添加银行卡</string>
-    <string name="no_any_cards_tips">你还没有任何银行卡！</string>
+    <string name="cards">Cuenta bancaria</string>
+    <string name="add_cards">Añadir cuenta bancaria</string>
+    <string name="no_any_cards_tips">No ha agregado ninguna tarjeta bancaria</string>
 
     <!--全部认证信息-->
-    <string name="personal_message">个人信息</string>
-    <string name="work_message">工作信息</string>
-    <string name="contract_message">联系人信息</string>
-    <string name="id_message">身份证信息</string>
-    <string name="card_message">银行卡信息</string>
-    <string name="all_message">认证信息</string>
+    <string name="personal_message">Datos personales</string>
+    <string name="work_message">Información laboral</string>
+    <string name="contract_message">Datos de contactos</string>
+    <string name="id_message">Datos de identidad</string>
+    <string name="card_message">Cuenta bancaria</string>
+    <string name="all_message">Información personal</string>
+    <string name="apply_now">Solicitar ahora</string>
 
     <!--关于我们-->
     <string name="about_us_title">关于我们</string>
@@ -91,14 +99,17 @@
     <!--登录页面-->
     <string name="login_page_title">@string/app_name</string>
     <string name="guding_52">+52</string>
-    <string name="input_phone_number_tips">请输入正确的手机号</string>
-    <string name="privacy_tips">请阅读并同意营私协议</string>
-    <string name="agree_tips">请先阅读并同意隐私协议！</string>
-    <string name="send_vcode_tips">向手机号 %s 发送验证码</string>
-    <string name="send">发送</string>
+    <string name="input_phone_number_tips">Introduzca el número de teléfono correcto</string>
+    <string name="privacy_tips">He leído y acepto el la Política de Privacidad.</string>
+    <string name="agree_tips">Por favor lea y acepte la Política de Privacidad</string>
+    <string name="send_vcode_tips">Se ha enviado el código de verificación por SMS al +%s</string>
+    <string name="send">Enviar</string>
     <string name="login">Login</string>
-    <string name="send_voice_code">发送语音验证码</string>
-    <string name="send_voice_code_on_clock">发送语音验证码(%2d)</string>
+    <string name="continuar">Continuar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="abandon">Abandonar</string>
+    <string name="send_voice_code">Obtener un código de verificación de voz</string>
+    <string name="send_voice_code_on_clock">Obtener un código de verificación de voz(%2d)</string>
 
     <!--意见反馈页面-->
     <string name="sugges_text">添加评论</string>
@@ -108,21 +119,22 @@
     <string name="sugges_text_hint">请输入你的意见，请输入你的意见，请输入你的意见，请输入你的意见</string>
 
     <!--还款页面-->
-    <string name="repay_page_title">还款页面</string>
-    <string name="repay_tips">*请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户.请确保还款通过官方的支付方式，不转让给私人账户</string>
-    <string name="repay_all">待还款金额</string>
-    <string name="remain_peroids">待还期数</string>
-    <string name="borrowed_amount">应还金额</string>
-    <string name="handle_amount">已还金额</string>
-    <string name="pay_date">还款日期</string>
+    <string name="repay_page_title">Detalles del orden</string>
+    <string name="repay_tips">*Por favor, asegúrese de que los reembolsos se realizan médiante metodos oficiales de pago yno se transfierena cuentas privadas.</string>
+    <string name="repay_all">Importe total pendiente de pago</string>
+    <string name="remain_peroids">Número de períodos de reembolso</string>
+    <string name="borrowed_amount">Importe pendiente de reembolsar</string>
+    <string name="handle_amount">Importe reembolsado</string>
+    <string name="pay_date">Fecha de reembolsar</string>
     <string name="over_due_fee">逾期利息费</string>
     <string name="reduce_money">Reducir %s</string>
     <string name="select_amount">Reembolsar todo</string>
     <string name="repay_reduce">(%s de reduccion)</string>
-    <string name="select_all">全选</string>
+    <string name="select_all">Totalidad</string>
+    <string name="repay_it_all">Reembolsar íntegro</string>
     <string name="congratulation_request_again">恭喜你，\n获得了独家再贷款特权！</string>
-    <string name="remain_days">Llgara el vencimiento tras %d dias</string>
-    <string name="remain_days_over">%d dias de retraso</string>
+    <string name="remain_days">Llgara el vencimiento tras %d días</string>
+    <string name="remain_days_over">%d días de retraso</string>
 
     <!--展期页面-->
     <string name="expand_page_title">展期页面</string>
@@ -138,8 +150,8 @@
     <string name="pay_tag_common">Comision de reemboslo adicional</string>
 
     <!--身份证认证页面-->
-    <string name="id_card_top_des">Subir la frontal</string>
-    <string name="id_card_behind_des">Subir la trasera</string>
+    <string name="id_card_top_des">Parte delantera</string>
+    <string name="id_card_behind_des">Parte trasera</string>
     <string name="card_need_tips">Ejemplo de error de carga de fotos</string>
     <string name="face_title">Reconocimiento facial</string>
     <string name="face_tips">Para garantizar la seguridad de su information, elreconnocimiento facial es necesario para verificar suidentidad</string>
@@ -157,24 +169,25 @@
     <string name="add_bank_tips">Para facilitar el acceso al prestamo, le aconsejamos que utilice su propia cuenta bancaria</string>
     <string name="bank_type">Tipo de cuenta</string>
     <string name="bank_name">nombre del banco</string>
-    <string name="bank_number">La tarjeta bancaria fue enlazada por los otros, por favor cambie otra tarjeta</string>
+    <string name="bank_number">Número de tarjeta bancaria</string>
     <string name="bank_xinyong">Clabe</string>
     <string name="bank_save">Debit Card</string>
 
     <!--确认额度页面-->
-    <string name="confirm_title">Confirmacion del prestamo</string>
+    <string name="confirm_title">Confirmación del préstamo</string>
     <string name="confirm_loan_amount">Cantidad prestada</string>
-    <string name="confirm_loan_days">Dias de prestamo</string>
+    <string name="confirm_loan_days">Días de préstamo</string>
     <string name="confirm_handle_amount">Cantidad recibida</string>
     <string name="confirm_detail">Detalles</string>
     <string name="confirm_rate_amount">intereses y comisiones</string>
     <string name="confirm_repay_date">Fecha de reembolsar</string>
-    <string name="confirm_need_repay_amount">Importe pendiente de pago</string>
+    <string name="confirm_need_repay_amount">Importe pendiente de reembolsar</string>
     <string name="confirm_get_money_account">Cuenta receptora</string>
     <string name="confirm_modify_bank">Cambiar</string>
 
     <!--还款渠道-->
     <string name="payway_title">Metodo de reembolso</string>
+    <string name="notification">Avisos</string>
 
     <!--还款码页面-->
     <string name="pay_code_title">SPEI</string>
@@ -190,5 +203,19 @@
 
     <!--状态页-->
     <string name="under_review_title">Detalles de orden</string>
+
+    <!--弹框-->
+    <string name="dia_cus_title">Servicio oficial de atencion al cliente</string>
+    <string name="dia_cus_wa">WA</string>
+    <string name="dia_cus_phone">Telefono</string>
+    <string name="dia_cus_know">Entiendo</string>
+    <string name="dia_auth_content">Casi terminado, el mas alto $30,000, esta seguro de que quiere abandonar ahora</string>
+    <string name="dia_auth_abandon">Abandonar</string>
+    <string name="dia_bank_name">Nombre del banco :</string>
+    <string name="dia_bank_content">La tarjeta bancaria fue enlazada por los otros, por favor cambie otra tarjeta:</string>
+    <string name="dia_bank_warning">*Para poder solicitar prestamo con exito, asegurese de que su informacion de cuenta es valida</string>
+    <string name="dia_pay_prevent">Se generara intereses de penalizacion al superar la fecha de vencimiento.</string>
+    <string name="dia_pay_think_again">Estoy pensando</string>
+    <string name="dia_spei">Los gastos de gestion adicionales que esta casi pagado son cobrados por las tiendas de conveniencia, no por nues tra plataforma.</string>
 
 </resources>
