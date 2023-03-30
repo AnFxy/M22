@@ -18,4 +18,9 @@ object FinalKeys {
     val ID_TOP = "id_top"
     val ID_BeHIND = "id_behind"
     val FACE_PHOTO = "face_photo"
+    val LONG_LOCATION = "long_location"
+    val LATI_LOCATION = "lati_location"
+    val ACCESS_KEY = "access_key"
+    val SECRET_KEY = "secret_key"
+    val FACE_LIVENESS_ID = "face_liveness_id"
 }

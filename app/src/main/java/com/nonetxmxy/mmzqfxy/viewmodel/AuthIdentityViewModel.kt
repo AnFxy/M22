@@ -6,6 +6,7 @@ import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.PhotoType
 import com.nonetxmxy.mmzqfxy.model.auth.IDMessage
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthIdentityViewModel @Inject constructor(
     private val authRepository: IAuthRepository,
-    private val orderRepository: IOrderRepository
+    private val orderRepository: IOrderRepository,
+    private val beginRepository: IBeginRepository
 ) : BaseViewModel() {
 
     private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
@@ -43,6 +45,9 @@ class AuthIdentityViewModel @Inject constructor(
 
     private val _setFacePic = MutableSharedFlow<Unit>()
     val setFacePic: SharedFlow<Unit> = _setFacePic
+
+    private val _startFace = MutableSharedFlow<Unit>()
+    val startFace: SharedFlow<Unit> = _startFace
 
     init {
         startTime = System.currentTimeMillis()
@@ -108,8 +113,36 @@ class AuthIdentityViewModel @Inject constructor(
         faceTime = System.currentTimeMillis()
     }
 
-    fun submitFace() {
+    fun submitFaceWithCamera() {
         launchUIWithDialog {
+            authRepository.submitFaceInfo(faceTime)
+
+            val mineInfo = orderRepository.getUserInfo()
+            LocalCache.infoCredit = mineInfo.LbF.toInt()
+            LocalCache.workCredit = mineInfo.UpolPGX.toInt()
+            LocalCache.contactPersonCredit = mineInfo.NJO.toInt()
+            LocalCache.idCredit = mineInfo.yDVrDaYTmXY.toInt()
+            LocalCache.faceCredit = mineInfo.jFJE.toInt()
+            LocalCache.bankCredit = mineInfo.ZxsKeqM.toInt()
+
+            _setFacePic.emit(Unit)
+        }
+    }
+
+    fun getFaceConfig() {
+        launchUIWithDialog {
+            val faceConfig = beginRepository.getFaceConfig().xAVbNF
+            LocalCache.faceAccessKey = faceConfig.paTbpP
+            LocalCache.faceSecretKey = faceConfig.zZwHc
+
+            _startFace.emit(Unit)
+        }
+    }
+
+    fun uploadFacePic(picStr: String) {
+        launchUIWithDialog {
+            val fileUpResult = authRepository.uploadFile(picStr, "jpg").checkDataEmpty()
+            LocalCache.facePhoto = fileUpResult.url
             authRepository.submitFaceInfo(faceTime)
 
             val mineInfo = orderRepository.getUserInfo()

@@ -25,4 +25,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "M_17"
 include ':app'
-
+include ':liveness-androidx'

@@ -116,6 +116,13 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+
+    implementation files('libs/core-3.5.aar')
+    implementation files('libs/liveness-detection-2.1.1.aar')
+
+    implementation project(':liveness-androidx')
+
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'

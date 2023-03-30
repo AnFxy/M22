@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.PermissionUtils
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.CardsAdapter
@@ -201,6 +203,28 @@ class ConfirmRequestFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.banks.collect {
                 bankCardAdapter.orders = it
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.permission.collect {
+                PermissionUtils.permission(
+                    PermissionConstants.CONTACTS,
+                    PermissionConstants.SMS,
+                    PermissionConstants.PHONE,
+                ).callback(
+                    object : PermissionUtils.FullCallback {
+                        override fun onGranted(granted: MutableList<String>) {
+                            viewModel.uploadExtraData()
+                        }
+
+                        override fun onDenied(
+                            deniedForever: MutableList<String>,
+                            denied: MutableList<String>
+                        ) {
+                        }
+                    }
+                ).request()
             }
         }
     }

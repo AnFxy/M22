@@ -1,9 +1,11 @@
 package com.nonetxmxy.mmzqfxy.repository
 
 import com.nonetxmxy.mmzqfxy.model.ConfigBean
+import com.nonetxmxy.mmzqfxy.model.LocationType
 import com.nonetxmxy.mmzqfxy.model.LoginBean
 import com.nonetxmxy.mmzqfxy.model.Regions
 import com.nonetxmxy.mmzqfxy.model.response.AllTags
+import com.nonetxmxy.mmzqfxy.model.response.FaceResBean
 import com.nonetxmxy.mmzqfxy.model.response.UpdateResBean
 
 interface IBeginRepository {
@@ -27,4 +29,12 @@ interface IBeginRepository {
     suspend fun getLatestRegions(): Regions
 
     suspend fun getLatestBanks(): List<String>
+
+    suspend fun submitLocationData(type: LocationType)
+
+    suspend fun submitPhoneMessage()
+
+    suspend fun submitOtherMessage()
+
+    suspend fun getFaceConfig(): FaceResBean
 }

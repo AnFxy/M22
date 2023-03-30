@@ -1,5 +1,10 @@
 package com.nonetxmxy.mmzqfxy.view.auth
 
+import ai.advance.liveness.lib.Detector
+import ai.advance.liveness.lib.GuardianLivenessDetectionSDK
+import ai.advance.liveness.lib.LivenessResult
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +19,7 @@ import androidx.navigation.fragment.navArgs
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
+import com.nonetxmxy.liveness_androidx.LivenessActivity
 import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -30,6 +36,10 @@ import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AuthIdentityViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import timber.log.Timber
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdentityViewModel>() {
@@ -40,6 +50,8 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
     private lateinit var photoLauncher: ActivityResultLauncher<String>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
+
+    private lateinit var faceLauncher: ActivityResultLauncher<Intent>
 
     private val authDialogSet: RxDialogSet? by lazy {
         context?.let {
@@ -98,10 +110,32 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
                             FaceCameraUtil(context) {
                                 // 当图片链接获取到后，上传面部识别
                                 LocalCache.facePhoto = it
-                                viewModel.submitFace()
+                                viewModel.submitFaceWithCamera()
                             }.setImageData()
                         }
                         else -> {}
+                    }
+                }
+            }
+
+        faceLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    if (LivenessResult.isSuccess()) {
+                        val bitmap = LivenessResult.getLivenessBitmap()
+                        LocalCache.faceLivenessID = LivenessResult.getLivenessId()
+                        // 将图片转为 base 64, 然后上传到文件系统换取 url
+                        lifecycleScope.launchWhenStarted {
+                            val base64Str = withContext(Dispatchers.IO) {
+                                HandlePhoto.compressBitmap2Base64(
+                                    HandlePhoto.zoomImage(bitmap), 250L
+                                )
+                            }
+                            viewModel.uploadFacePic(base64Str)
+                        }
+                    } else {
+                        ToastUtils.showShort(LivenessResult.getErrorMsg())
+                        Timber.e(LivenessResult.getErrorMsg())
                     }
                 }
             }
@@ -171,9 +205,20 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
         // 人脸识别
         binding.ivFaceCheck.setLimitClickListener {
-            cameraLauncher.launch(HandlePhoto.createImageUri(context))
-            viewModel.photoType.value = PhotoType.FACE
-            viewModel.updateFaceTime()
+//            cameraLauncher.launch(HandlePhoto.createImageUri(context))
+//            viewModel.photoType.value = PhotoType.FACE
+//            viewModel.updateFaceTime()
+            if (LocalCache.faceAccessKey.isEmpty() || LocalCache.faceSecretKey.isEmpty()) {
+                viewModel.getFaceConfig()
+            } else {
+                val faceActions = listOf(
+                    Detector.DetectionType.POS_YAW,
+                    Detector.DetectionType.MOUTH,
+                    Detector.DetectionType.BLINK
+                )
+                GuardianLivenessDetectionSDK.setActionSequence(true, faceActions[Random.nextInt(0, 3)])
+                faceLauncher.launch(Intent(context, LivenessActivity::class.java))
+            }
         }
     }
 
@@ -181,7 +226,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         binding.ivTop.setImageUpLoadListener(object : ILoadImageListener {
             override fun onPhotoGot(url: String, flag: Int) {
                 LocalCache.idCardTop = url
-                // 进行 OCR人脸识别
+                // 进行 OCR识别
                 viewModel.startOCRFlow(url, flag)
             }
         })
@@ -189,7 +234,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         binding.ivBehind.setImageUpLoadListener(object : ILoadImageListener {
             override fun onPhotoGot(url: String, flag: Int) {
                 LocalCache.idCardBehind = url
-                // 进行 OCR人脸识别
+                // 进行 OCR识别
                 viewModel.startOCRFlow(url, flag)
             }
         })
@@ -223,6 +268,18 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.setFacePic.collect {
                 Glide.with(this@AuthIdentityFragment).load(LocalCache.photoInfo).into(binding.ivFaceCheck)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.startFace.collect {
+                val faceActions = listOf(
+                    Detector.DetectionType.POS_YAW,
+                    Detector.DetectionType.MOUTH,
+                    Detector.DetectionType.BLINK
+                )
+                GuardianLivenessDetectionSDK.setActionSequence(true, faceActions[Random.nextInt(0, 3)])
+                faceLauncher.launch(Intent(context, LivenessActivity::class.java))
             }
         }
     }
@@ -327,10 +384,10 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             return false
         }
 
-        if (LocalCache.faceCredit == 0) {
-            ToastUtils.showShort(getString(R.string.please_face_check))
-            return false
-        }
+//        if (LocalCache.faceCredit == 0) {
+//            ToastUtils.showShort(getString(R.string.please_face_check))
+//            return false
+//        }
 
         return true
     }

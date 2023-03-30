@@ -39,6 +39,10 @@ class EmptyAuthFragment : BaseFragment<FragmentEmptyBinding, EmptyAuthViewModel>
             }
         }
 
-        viewModel.checkGoWhichVerificationPage()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.finishPage.collect {
+                navController.popBackStack()
+            }
+        }
     }
 }

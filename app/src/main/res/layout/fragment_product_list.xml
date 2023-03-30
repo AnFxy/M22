@@ -38,6 +38,17 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <ImageView
+        android:id="@+id/iv_banner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/banner"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="h, 165:53"
+        app:layout_constraintTop_toBottomOf="@id/m_toolbar" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/m_refresh"
         android:layout_width="match_parent"
@@ -45,34 +56,20 @@
         app:layout_constraintTop_toBottomOf="@id/m_toolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/iv_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@mipmap/banner"
-                    android:visibility="gone"
-                    app:layout_constraintDimensionRatio="h, 165:53"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="wrap_content"
+                android:paddingTop="65dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/container_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="60dp"
                     android:visibility="gone"
                     android:background="@drawable/yellow_border_16"
-                    app:layout_constraintTop_toBottomOf="@id/iv_banner">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
                         android:id="@+id/container_title"
@@ -240,7 +237,6 @@
                     android:id="@+id/rv_pro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="65dp"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <LinearLayout
@@ -278,11 +274,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    app:layout_constraintTop_toBottomOf="@id/divider_rv"/>
+                    app:layout_constraintTop_toBottomOf="@id/divider_rv"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </ScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

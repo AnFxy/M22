@@ -4,6 +4,7 @@ import com.nonetxmxy.mmzqfxy.model.BaseResponse
 import com.nonetxmxy.mmzqfxy.model.ConfigBean
 import com.nonetxmxy.mmzqfxy.model.LoginBean
 import com.nonetxmxy.mmzqfxy.model.response.BanksResBean
+import com.nonetxmxy.mmzqfxy.model.response.FaceResBean
 import com.nonetxmxy.mmzqfxy.model.response.UpdateResBean
 import com.nonetxmxy.mmzqfxy.model.response.UseTypeResBean
 import retrofit2.http.Body
@@ -42,4 +43,8 @@ interface IBeginService {
     // 获取所有银行名字
     @POST(NetPaths.banks)
     suspend fun banksGot(@Body map: HashMap<String, String>): BaseResponse<BanksResBean>
+
+    // 获取人脸密钥
+    @POST(NetPaths.advanceKey)
+    suspend fun faceConfigGot(@Body map: HashMap<String, String>): BaseResponse<FaceResBean>
 }

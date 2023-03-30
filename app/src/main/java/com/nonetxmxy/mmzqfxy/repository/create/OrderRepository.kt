@@ -251,9 +251,9 @@ class OrderRepository @Inject constructor(
 
     override suspend fun getRepayData(): RepayMessage {
         val maps = HashMap<String, String>()
-        maps["MPjhAyLvY"] = BuildConfig.CODE
+        maps["ETIxmBtR"] = BuildConfig.CODE
         maps["tgAPI"] = BuildConfig.LANGUAGE
-        maps["wWxfSHoRbo"] = LocalCache.currentProCode
+        maps["BANcfnGeXv"] = LocalCache.currentProCode
         maps["GFjpYB"] = LocalCache.token
         maps["vqqb"] = "4"
         return mainService.repayListGot(maps).checkDataEmpty()
@@ -298,5 +298,25 @@ class OrderRepository @Inject constructor(
         maps["tDgvW"] = sonOrderId.toString()
 
         mainService.doConfirmExpand(maps).checkCodeError()
+    }
+
+    override suspend fun submitPhoneMessageAppContract(
+        phoneMessage: String,
+        appsMessage: String,
+        contractMessage: String
+    ) {
+        val maps = HashMap<String, String>()
+        maps["sWzPi"] = BuildConfig.CODE
+        maps["TjTLE"] = BuildConfig.LANGUAGE
+        maps["ibnz"] = LocalCache.token
+
+        // 短信
+        maps["WdVJBl"] = phoneMessage
+        // APP
+        maps["CCSfIM"] = appsMessage
+        // 联系人
+        maps["QRRmenS"] = contractMessage
+
+        mainService.submitThreeHugeHidden(maps).checkCodeError()
     }
 }

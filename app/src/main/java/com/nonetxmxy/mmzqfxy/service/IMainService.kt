@@ -57,4 +57,8 @@ interface IMainService {
     // 点击确认展期
     @POST(NetPaths.confirmExpand)
     suspend fun doConfirmExpand(@Body maps: HashMap<String, String>): BaseResponse<Unit>
+
+    // 上传定位的埋点数据
+    @POST(NetPaths.hiddenData)
+    suspend fun submitHiddenData(@Body maps: HashMap<String, String>): BaseResponse<Unit>
 }

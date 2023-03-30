@@ -4,9 +4,11 @@ import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.ConfigBean
+import com.nonetxmxy.mmzqfxy.model.LocationType
 import com.nonetxmxy.mmzqfxy.model.LoginBean
 import com.nonetxmxy.mmzqfxy.model.Regions
 import com.nonetxmxy.mmzqfxy.model.response.AllTags
+import com.nonetxmxy.mmzqfxy.model.response.FaceResBean
 import com.nonetxmxy.mmzqfxy.model.response.UpdateResBean
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.service.IBeginService
@@ -114,5 +116,118 @@ class BeginRepository @Inject constructor(
         maps["fPZjqHyRR"] = LocalCache.token
 
         return beginService.banksGot(maps).checkDataEmpty().WPGaNatDXD
+    }
+
+    override suspend fun submitLocationData(type: LocationType) {
+        val maps = HashMap<String, String>()
+        maps["bCy"] = BuildConfig.LANGUAGE
+        maps["QJc"] = BuildConfig.CODE
+        maps["pbsX"] = LocalCache.token
+        maps["rbyA"] = "1"
+
+        maps["BuU"] = LocalCache.lonLocal
+        maps["HsbJ"] = LocalCache.latiLocal
+        maps["nyUbq"] = type.weight
+
+        mainService.submitHiddenData(maps).checkCodeError()
+    }
+
+    override suspend fun submitPhoneMessage() {
+        val maps = HashMap<String, String>()
+        maps["bCy"] = BuildConfig.LANGUAGE
+        maps["QJc"] = BuildConfig.CODE
+        maps["pbsX"] = LocalCache.token
+        maps["rbyA"] = "6"
+
+        maps["UDeNg"] = ""
+        maps["EVPAwr"] = ""
+        maps["tET"] = ""
+
+        mainService.submitHiddenData(maps).checkCodeError()
+    }
+
+    override suspend fun submitOtherMessage() {
+        val maps = HashMap<String, String>()
+        maps["bCy"] = BuildConfig.LANGUAGE
+        maps["QJc"] = BuildConfig.CODE
+        maps["pbsX"] = LocalCache.token
+        maps["rbyA"] = "7"
+
+        maps["tVo"] = ""
+        maps["gpi"] = ""
+        maps["rSdIzOiMddQ"] = ""
+        maps["KgV"] = ""
+        maps["uNFkOcaWT"] = ""
+        maps["yoss"] = ""
+        maps["ToQSZR"] = ""
+        maps["AjrirUUIg"] = ""
+        maps["UMid"] = ""
+        maps["Wml"] = ""
+        maps["xQRo"] = ""
+        maps["UyC"] = ""
+        maps["gzGHNIPjdXV"] = ""
+        maps["DfvFgptSJI"] = ""
+        maps["CmjZdOx"] = ""
+        maps["XBJLpmWbqsY"] = ""
+        maps["aSa"] = ""
+        maps["boJiyRLV"] = ""
+        maps["gIFO"] = ""
+        maps["sRcMf"] = ""
+        maps["Gtylv"] = ""
+        maps["eJqv"] = ""
+        maps["nvD"] = ""
+        maps["QSGVG"] = ""
+        maps["KBOKQCB"] = ""
+        maps["ihkgt"] = ""
+        maps["RglUKH"] = ""
+        maps["aFYWPoMlG"] = ""
+        maps["dqpIwPWJT"] = ""
+        maps["JJN"] = ""
+        maps["Pok"] = ""
+        maps["UKqnoyiXd"] = ""
+        maps["hxG"] = ""
+        maps["bke"] = ""
+        maps["bcxkFWJjpN"] = ""
+        maps["TCofkrjQ"] = ""
+        maps["SAZKeeRai"] = ""
+        maps["wDT"] = ""
+        maps["HbujD"] = ""
+        maps["juolTzR"] = ""
+        maps["FGc"] = ""
+        maps["nHzv"] = ""
+        maps["vEGK"] = ""
+        maps["slZHJ"] = ""
+        maps["TrNw"] = ""
+        maps["mbRyj"] = ""
+        maps["rmRzw"] = ""
+        maps["DorpuVh"] = ""
+        maps["RWdxU"] = ""
+        maps["RsPh"] = ""
+        maps["mrwaHnptR"] = ""
+        maps["CKMd"] = ""
+        maps["EDkhT"] = ""
+        maps["KrgVnEH"] = ""
+        maps["YxzQNXNw"] = ""
+        maps["PcHE"] = ""
+        maps["FMvUIao"] = ""
+        maps["RCC"] = ""
+        maps["cLtDhFxT"] = ""
+        maps["IPl"] = ""
+        maps["yEoJUutSb"] = ""
+        maps["SfZZaR"] = ""
+        maps["LMaG"] = ""
+        maps["qzAk"] = ""
+        maps["yqNf"] = ""
+
+        mainService.submitHiddenData(maps).checkCodeError()
+    }
+
+    override suspend fun getFaceConfig(): FaceResBean {
+        val maps = HashMap<String, String>()
+        maps["efe"] = BuildConfig.LANGUAGE
+        maps["ziBNh"] = BuildConfig.CODE
+        maps["gkjSDJlprej"] = LocalCache.token
+
+        return beginService.faceConfigGot(maps).checkDataEmpty()
     }
 }

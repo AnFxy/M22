@@ -31,4 +31,10 @@ interface IOrderRepository {
     ): PayCodeMessage
 
     suspend fun doConfirmExpand(sonOrderId: Long)
+
+    suspend fun submitPhoneMessageAppContract(
+        phoneMessage: String,
+        appsMessage: String,
+        contractMessage: String
+    )
 }

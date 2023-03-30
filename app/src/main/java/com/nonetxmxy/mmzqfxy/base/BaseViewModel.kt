@@ -22,7 +22,10 @@ abstract class BaseViewModel : ViewModel() {
     val _baseGoPage: SharedFlow<PageType> = baseGoPage
 
     //运行在UI线程的协程
-    fun launchUIWithDialog(block: suspend CoroutineScope.() -> Unit) = viewModelScope.launch {
+    fun launchUIWithDialog(
+        block: suspend CoroutineScope.() -> Unit,
+        onError: suspend CoroutineScope.() -> Unit
+    ) = viewModelScope.launch {
         try {
             // loading事件只在BaseActivity中消费
             loadingEvent.emit(true)
@@ -32,8 +35,11 @@ abstract class BaseViewModel : ViewModel() {
             ErrorHandleUtil.handleError(e)
             loadingEvent.emit(false)
             closeLoading.emit(Unit)
+            onError()
         }
     }
+
+    fun launchUIWithDialog(block: suspend CoroutineScope.() -> Unit) = launchUIWithDialog(block, {})
 
     // 没有加载框，可自定义启动时，出错时，结束时 UI需要做的事情
     fun launchUI(

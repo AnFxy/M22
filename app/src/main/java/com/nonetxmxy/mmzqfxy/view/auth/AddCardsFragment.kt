@@ -41,7 +41,6 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
         FragmentAddCardsBinding.inflate(inflater, parent, false)
 
     override fun setLayout() {
-        binding.mToolbar.setupWithNavController(navController)
         binding.mToolbar.setNavigationIcon(R.mipmap.fanhui)
         binding.image.setImageResource(R.mipmap.jinbi5)
         binding.tvSecurityTips.text = getString(R.string.add_bank_tips)
@@ -165,6 +164,11 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
                 )
             )
             binding.scrollView.smoothScrollTo(0, binding.input1.top)
+            return false
+        }
+
+        if (viewModel.pagerData.RhgBNBzglD == "40" && viewModel.pagerData.zUbbNgrgLl.length != 18) {
+            ToastUtils.showShort("Introduzca una tarjeta bancaria de 18 digitos de longitud.")
             return false
         }
 

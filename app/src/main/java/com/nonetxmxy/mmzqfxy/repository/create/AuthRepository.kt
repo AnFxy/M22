@@ -175,11 +175,11 @@ class AuthRepository @Inject constructor(
         maps["SxVgVauNC"] = "6"
 
         maps["BVWVRt"] = LocalCache.facePhoto
-        // 活体认证ID TODO
-        maps["UbcFWGd"] = ""
+        // 活体认证ID
+        maps["UbcFWGd"] = LocalCache.faceLivenessID
         maps["khTM"] = (System.currentTimeMillis() - startTime).toString()
         // 活体认证的结果
-//        maps["DLqhRMDy"] = ""
+        maps["DLqhRMDy"] = "1"
         authService.faceSent(maps).checkCodeError()
     }
 

