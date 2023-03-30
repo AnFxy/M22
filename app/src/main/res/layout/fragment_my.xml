@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="@string/his"
+                        android:text="@string/mine_his"
                         android:layout_marginTop="15dp"
                         android:textColor="@color/gray_333333"/>
                 </LinearLayout>
@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="@string/card"
+                        android:text="@string/mine_card"
                         android:layout_marginTop="15dp"
                         android:textColor="@color/gray_333333"/>
                 </LinearLayout>
@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="@string/verifi"
+                        android:text="@string/mine_verifi"
                         android:layout_marginTop="15dp"
                         android:textColor="@color/gray_333333"/>
                 </LinearLayout>
@@ -173,7 +173,7 @@
                     android:textSize="12sp"
                     android:layout_marginStart="20dp"
                     android:textColor="@color/gray_333333"
-                    android:text="@string/privacy"/>
+                    android:text="@string/mine_privacy"/>
             </LinearLayout>
 
             <LinearLayout
@@ -200,7 +200,7 @@
                     android:textSize="12sp"
                     android:layout_marginStart="20dp"
                     android:textColor="@color/gray_333333"
-                    android:text="@string/feedback"/>
+                    android:text="@string/mine_feedback"/>
             </LinearLayout>
 
             <LinearLayout
@@ -227,7 +227,7 @@
                     android:textSize="12sp"
                     android:layout_marginStart="20dp"
                     android:textColor="@color/gray_333333"
-                    android:text="@string/my"/>
+                    android:text="@string/mine_my"/>
             </LinearLayout>
 
             <TextView

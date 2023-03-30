@@ -12,7 +12,7 @@ object NetPaths {
     // 提交 Feed Back
     const val feedBack = "/rbqxeeoakk"
     // 获取活体认证SDK中所需要的密钥
-    const val advanceKey = "/aaczlnnswypa/bpmnizycorex"
+    const val advanceKey = "/gjabxz/kkuvjc"
     // 获取行政规划
     const val regions = "/pcdopfpcqwadk/lrwcpplbnvuch"
     // 提交三大件埋点

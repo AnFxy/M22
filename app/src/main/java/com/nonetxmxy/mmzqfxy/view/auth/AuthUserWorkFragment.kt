@@ -1,10 +1,12 @@
 package com.nonetxmxy.mmzqfxy.view.auth
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -155,12 +157,9 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                 tLxEVr = province, Yrfwo = city
             )
         }
-
     }
 
-
     private fun checkData(): Boolean {
-        binding.root.clearFocus()
 
         viewModel.pagerData = viewModel.pagerData.copy(
             TqqZwacSZ = binding.input1.editValue,
@@ -240,7 +239,6 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     "Nombre de la empresa"
                 )
             )
-            binding.scrollView.smoothScrollTo(0, binding.input2.top)
             return false
         }
 
@@ -251,7 +249,6 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     "Dirección de la empresa"
                 )
             )
-            binding.scrollView.smoothScrollTo(0, binding.commonSelect5.top)
             return false
         }
 
@@ -262,7 +259,6 @@ class AuthUserWorkFragment : BaseFragment<FragmentAuthUserWorkBinding, AuthUserW
                     "Calle detallada (** Comunidad ** Calle ** Número)"
                 )
             )
-            binding.scrollView.smoothScrollTo(0, binding.input3.top)
             return false
         }
         return true

@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="60dp"
-                    android:visibility="gone"
+
                     android:background="@drawable/yellow_border_16"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -92,7 +92,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
-                            android:text="产品名字"
+                            android:text="xxxxx"
                             android:textColor="@color/gray_333333"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="$300,000"
+                        android:text="$20,000,000"
                         android:textColor="@color/gray_532e00"
                         android:textSize="32sp"
                         android:textStyle="bold"
@@ -195,7 +195,7 @@
                         android:background="@drawable/yellow_6"
                         android:gravity="center"
                         android:paddingVertical="11dp"
-                        android:text="@string/apply"
+                        android:text="Solicitar"
                         android:textColor="@color/gray_532e00"
                         android:textSize="16sp"
                         android:textStyle="bold"

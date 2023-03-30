@@ -17,7 +17,9 @@ import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayCodeBinding
 import com.nonetxmxy.mmzqfxy.model.PayCodeMessage
+import com.nonetxmxy.mmzqfxy.tools.CopyUtil
 import com.nonetxmxy.mmzqfxy.tools.jinE
+import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.PayCodeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +55,10 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
             (it as MainActivity).specialOnBackPressed = {
                 callBackDataWhenDestroyed(BACK, true)
             }
+        }
+
+        binding.tvCopy.setLimitClickListener {
+            CopyUtil.copyToClipboard(viewModel.pagerData.value?.QWZRFcNqe ?: "")
         }
     }
 

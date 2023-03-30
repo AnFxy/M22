@@ -9,11 +9,11 @@
 í
 
 -->
-    <string name="tips_dia_title">披露标题</string>
-    <string name="tips_dia_content">巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉</string>
-    <string name="tips_dia_cancel">Salir</string>
-    <string name="tips_dia_confirm">Aceptar</string>
-    <string name="update_dia_title">更新标题</string>
+    <string name="tips_dia_title">xxxxxx</string>
+    <string name="tips_dia_content">xxxxxxxxxxxxxxxxxx</string>
+    <string name="tips_dia_cancel">Rechazada</string>
+    <string name="tips_dia_confirm">De acuerdo</string>
+    <string name="update_dia_title">xxxxxxxxx</string>
     <string name="update_next">Rechazada</string>
     <string name="update_now">De acuerdo</string>
 
@@ -42,8 +42,8 @@
     <string name="banner_content">Préstamo Confiable y\n Transparente</string>
     <string name="apply">Aplicar</string>
     <string name="cycle_days">Días de préstamo</string>
-    <string name="rate">Tipo de interés diario</string>
-    <string name="over_due">逾期还款</string>
+    <string name="rate">Tipo de interés</string>
+    <string name="over_due">Atrasado</string>
     <string name="open_app">Descargar La APP</string>
     <string name="text_divider">Recomendado para usted</string>
 
@@ -56,9 +56,18 @@
     <string name="feedback">Añadir comentario</string>
     <string name="us_order_des">你有一笔订单已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！</string>
 
+    <!--我的页面唯一-->
+    <string name="mine_his">Mi préstamo</string>
+    <string name="mine_card">Cuenta bancaria</string>
+    <string name="mine_verifi">Información personal</string>
+    <string name="mine_privacy">Acuerdo de Privacidad</string>
+    <string name="mine_my">Sobre nosotros</string>
+    <string name="mine_feedback">Comentarios</string>
+
     <!--贷款历史页面-->
+    <string name="his_title">Factura</string>
     <string name="loan_amount">Cantidad prestada</string>
-    <string name="loan_period">Períodos de préstamo</string>
+    <string name="loan_period">Período</string>
     <string name="loan_cycle">Días de préstamo</string>
     <string name="request_date">Tiempo de solicitud</string>
     <string name="on_reviewing">Verificando</string>
@@ -91,10 +100,10 @@
     <string name="about_us_title">关于我们</string>
     <string name="company_name">公司名</string>
     <string name="company_des">公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</string>
-    <string name="logout">登出</string>
-    <string name="logout_dialog_des">确定要登出吗？</string>
-    <string name="logout_dialog_cancel">取消</string>
-    <string name="logout_dialog_confirm">登出</string>
+    <string name="logout">Cancelación</string>
+    <string name="logout_dialog_des">¿Estás seguro de que quiere abandonarlo ahora?</string>
+    <string name="logout_dialog_cancel">Cancelar</string>
+    <string name="logout_dialog_confirm">Confirmar salida</string>
 
     <!--登录页面-->
     <string name="login_page_title">@string/app_name</string>
@@ -126,7 +135,7 @@
     <string name="borrowed_amount">Importe pendiente de reembolsar</string>
     <string name="handle_amount">Importe reembolsado</string>
     <string name="pay_date">Fecha de reembolsar</string>
-    <string name="over_due_fee">逾期利息费</string>
+    <string name="over_due_fee">Tasa de vencimiento</string>
     <string name="reduce_money">Reducir %s</string>
     <string name="select_amount">Reembolsar todo</string>
     <string name="repay_reduce">(%s de reduccion)</string>
@@ -137,15 +146,16 @@
     <string name="remain_days_over">%d días de retraso</string>
 
     <!--展期页面-->
-    <string name="expand_page_title">展期页面</string>
-    <string name="expand_days">展期天数</string>
-    <string name="expand_details">展期细节</string>
-    <string name="expand_fee">延期费用</string>
-    <string name="need_pay">支付总费用</string>
-    <string name="expand_date">延期后还款日期</string>
-    <string name="expand_tips">支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。支付延期费用后，必须进入应用程序并单机确认延期，否则将不被视为延期。</string>
-    <string name="expand_confirm">确认展期</string>
-    <string name="pay_way">还款通道</string>
+    <string name="expand_page_title">Prórroga de préstamo</string>
+    <string name="expand_days">Días de prórroga</string>
+    <string name="expand_details">Detalles de la prórroga</string>
+    <string name="expand_fee">Tasa de prórroga</string>
+    <string name="need_pay">Importe pagado</string>
+    <string name="expand_date">Fecha de reembolso tras prórroga</string>
+    <string name="expand_tips">Despues de haber liquidado su tarifa va a tener mas tiempo de prolongacion (6 días), por favor vaya a la app, para confirmar este monto de tiempo, si no lo confirmar no puede realizar la prorroga de su prestamo actual, recuerde que es un monto independiente de su deuda, no se tomara como parte de la misma.</string>
+    <string name="expand_confirm">Comfirmar la prórroga de reembolso</string>
+    <string name="expand_confirm_not">Comfirmado</string>
+    <string name="pay_way">Canal de pago</string>
     <string name="pay_tag_recommend">Recomendado</string>
     <string name="pay_tag_common">Comision de reemboslo adicional</string>
 
@@ -166,7 +176,7 @@
 
     <!--银行卡添加页面-->
     <string name="add_bank_card_title">Datos personales</string>
-    <string name="add_bank_tips">Para facilitar el acceso al prestamo, le aconsejamos que utilice su propia cuenta bancaria</string>
+    <string name="add_bank_tips">Por favor, compruebe cuidadosamente si la cuenta receptora es su cuenta.</string>
     <string name="bank_type">Tipo de cuenta</string>
     <string name="bank_name">nombre del banco</string>
     <string name="bank_number">Número de tarjeta bancaria</string>
@@ -177,9 +187,9 @@
     <string name="confirm_title">Confirmación del préstamo</string>
     <string name="confirm_loan_amount">Cantidad prestada</string>
     <string name="confirm_loan_days">Días de préstamo</string>
-    <string name="confirm_handle_amount">Cantidad recibida</string>
+    <string name="confirm_handle_amount">Importe acreditado</string>
     <string name="confirm_detail">Detalles</string>
-    <string name="confirm_rate_amount">intereses y comisiones</string>
+    <string name="confirm_rate_amount">Intereses + tasa de servicio</string>
     <string name="confirm_repay_date">Fecha de reembolsar</string>
     <string name="confirm_need_repay_amount">Importe pendiente de reembolsar</string>
     <string name="confirm_get_money_account">Cuenta receptora</string>
@@ -194,7 +204,7 @@
     <string name="pay_code_warning">*Por favor, asegurese de que los reembolsos se realizan mediante metodos oficianles de pago y no se transfieren a cuentas privadas.</string>
     <string name="pay_way_fixed">Metodo de reembolso</string>
     <string name="spei_des">Recomendar SPEI, no tiene tarifa de servicio adicional</string>
-    <string name="spei_warning">Si elige %s, tiene un costo de 25 pesos de servicio adicional</string>
+    <string name="spei_warning">Elegir %s, tiene un costo de 25 pesos de servicio adicional</string>
     <string name="code_fixed">Codigo de pago</string>
     <string name="pay_amount">Importe restante</string>
     <string name="pro_name">Nombre del producto</string>

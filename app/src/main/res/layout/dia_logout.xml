@@ -44,7 +44,7 @@
             android:id="@+id/tv_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
+            android:text="@string/logout_dialog_confirm"
             android:gravity="center"
             android:textSize="16sp"
             android:textStyle="bold"

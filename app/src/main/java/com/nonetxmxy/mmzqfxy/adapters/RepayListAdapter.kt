@@ -15,6 +15,7 @@ import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.jinE
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
+import kotlin.math.abs
 
 class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -106,7 +107,7 @@ class RepayListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.tvStatusDays.apply {
                     text = String.format(
                         getString(R.string.remain_days_over),
-                        order.fLk
+                        abs(order.fLk ?: 0)
                     )
                     setTextColor(Color.parseColor("#F06047"))
                 }

@@ -1,5 +1,6 @@
 package com.nonetxmxy.mmzqfxy.view.auth
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -18,6 +19,7 @@ import com.nonetxmxy.mmzqfxy.databinding.FragmentAddCardsBinding
 import com.nonetxmxy.mmzqfxy.model.PageType
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
+import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.AddCardsFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,10 +42,18 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
     ): FragmentAddCardsBinding =
         FragmentAddCardsBinding.inflate(inflater, parent, false)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isHiddenStatus = true
+    }
+
     override fun setLayout() {
         binding.mToolbar.setNavigationIcon(R.mipmap.fanhui)
         binding.image.setImageResource(R.mipmap.jinbi5)
         binding.tvSecurityTips.text = getString(R.string.add_bank_tips)
+
+        binding.containerSecurity.setVisible(!arguments.isJustBack)
+        binding.image.setVisible(!arguments.isJustBack)
 
         binding.rgBankType.setOnCheckedChangeListener { _, p1 ->
             viewModel.optionalDirection.value?.let {
@@ -169,6 +179,11 @@ class AddCardsFragment : BaseFragment<FragmentAddCardsBinding, AddCardsFragViewM
 
         if (viewModel.pagerData.RhgBNBzglD == "40" && viewModel.pagerData.zUbbNgrgLl.length != 18) {
             ToastUtils.showShort("Introduzca una tarjeta bancaria de 18 digitos de longitud.")
+            return false
+        }
+
+        if (viewModel.pagerData.RhgBNBzglD == "3" && viewModel.pagerData.zUbbNgrgLl.length != 16) {
+            ToastUtils.showShort("Introduzca una tarjeta bancaria de 16 digitos de longitud.")
             return false
         }
 

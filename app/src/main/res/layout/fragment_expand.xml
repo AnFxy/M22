@@ -139,7 +139,7 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:text="@string/need_pay"
+                        android:text="@string/handle_amount"
                         android:textColor="@color/gray_333333"
                         android:textSize="12sp"/>
 

@@ -84,6 +84,8 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isHiddenStatus = true
+
         photoLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let {
                 when (viewModel.photoType.value) {

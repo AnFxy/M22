@@ -11,5 +11,5 @@
     <item
         android:id="@+id/my_navigation"
         android:icon="@drawable/nav_third"
-        android:title="Yo" />
+        android:title="Cuenta" />
 </menu>

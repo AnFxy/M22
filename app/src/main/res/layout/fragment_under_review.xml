@@ -144,7 +144,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="@string/confirm_loan_amount"
+                                android:text="@string/confirm_need_repay_amount"
                                 android:textSize="14sp" />
 
                             <TextView

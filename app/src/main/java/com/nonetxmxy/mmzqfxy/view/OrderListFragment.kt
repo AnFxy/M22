@@ -15,7 +15,6 @@ import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentOrderListBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
-import com.nonetxmxy.mmzqfxy.view.payback.PayCodeFragment
 import com.nonetxmxy.mmzqfxy.view.payback.PayFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.OrderListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint

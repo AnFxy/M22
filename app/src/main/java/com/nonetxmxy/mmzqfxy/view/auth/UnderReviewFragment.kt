@@ -119,6 +119,11 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
         binding.tvLoanAmount.text = productsBean.fHTnifvEC.jinE()
         binding.tvLoanDays.text = productsBean.nhgL.days()
         binding.tvLoanDate.text = CommonUtil.timeLongToDate(productsBean.JuRZheDh.toLong())
+
+        // 隐藏控件
+        binding.containerMessage.setVisible(productsBean.snbrREWru != 6)
+        binding.dividerRv.setVisible(productsBean.snbrREWru != 6)
+        binding.rvApp.setVisible(productsBean.snbrREWru != 6)
     }
 
     private fun hideAndShowHomePage() {

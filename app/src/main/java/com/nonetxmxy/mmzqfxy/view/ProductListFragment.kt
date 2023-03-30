@@ -17,6 +17,7 @@ import com.nonetxmxy.mmzqfxy.model.ProductsBean
 import com.nonetxmxy.mmzqfxy.model.SubtitleInfo
 import com.nonetxmxy.mmzqfxy.tools.*
 import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
+import com.nonetxmxy.mmzqfxy.view.payback.PayFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.ProductListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -45,7 +46,11 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
     override fun FragmentProductListBinding.setLayout() {
 
         cusMenu = {
-            navController.navigate(ProductListFragmentDirections.actionProductListFragmentToNotifyFragment())
+            if (LocalCache.isLogged) {
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToNotifyFragment())
+            } else {
+                navController.navigate(ProductListFragmentDirections.actionProductListFragmentToLoginNavigation())
+            }
         }
 
         binding.rvPro.apply {
@@ -80,6 +85,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
         }
 
         receiveCallBackDataFromLastFragment<Boolean>(UnderReviewFragment.BACK) {
+            viewModel.getConfig()
+        }
+
+        receiveCallBackDataFromLastFragment<Boolean>(PayFragment.BACK) {
             viewModel.getConfig()
         }
 
@@ -141,11 +150,20 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
     }
 
     private fun setSingleProductView(product: ProductsBean) {
-        Glide.with(this).load(product.MScSWMj).into(binding.ivLogo)
-        binding.tvTitle.text = product.eFV
-        binding.tvAmount.text = product.FCmiye.toDouble().jinE()
-        binding.tvDays.text = product.OJjgAEGVuO.toInt().days()
-        binding.tvRate.text = "≥${product.edVaOsmgaab}"
+
+        if (LocalCache.isSAccount) {
+            Glide.with(this).load(product.MScSWMj).into(binding.ivLogo)
+            binding.tvTitle.text = product.eFV
+            binding.tvAmount.text = product.FCmiye.toDouble().jinE()
+            binding.tvDays.text = product.OJjgAEGVuO.toInt().days()
+            binding.tvRate.text = "≥${product.edVaOsmgaab}"
+        } else {
+            binding.ivLogo.setImageResource(R.mipmap.jinbi)
+            binding.tvTitle.text = "Importe máximo del préstamo"
+            binding.tvAmount.text = "$20,000,000"
+            binding.tvDays.text = "120 días"
+            binding.tvRate.text = "≥0.1%"
+        }
     }
 
     private fun hideAndShowHomePage() {

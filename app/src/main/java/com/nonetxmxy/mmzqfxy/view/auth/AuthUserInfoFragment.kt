@@ -1,5 +1,6 @@
 package com.nonetxmxy.mmzqfxy.view.auth
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -84,6 +85,11 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
     ) = FragmentAuthUserInfoBinding.inflate(
         inflater, parent, false
     )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isHiddenStatus = true
+    }
 
     override fun FragmentAuthUserInfoBinding.setLayout() {
 

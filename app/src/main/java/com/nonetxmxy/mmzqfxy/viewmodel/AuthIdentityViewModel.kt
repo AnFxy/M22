@@ -55,12 +55,12 @@ class AuthIdentityViewModel @Inject constructor(
     }
 
     fun getIdentifyPageData() {
-        if (LocalCache.idCredit == 1) {
-            launchUIWithDialog {
+        launchUIWithDialog {
+            if (LocalCache.idCredit == 1) {
                 pagerData = authRepository.getSubmitIDCardInfo()
                 _pagerEventFlow.emit(AuthPagerEvent.UpdatePageView)
-                closeLoading.emit(Unit)
             }
+            closeLoading.emit(Unit)
         }
     }
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.PayWayAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -78,7 +79,7 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
         try {
             binding.tvExpandDays.text = (args.sonOrder.nMq ?: 0).days()
             binding.tvExpandFee.text = (args.sonOrder.sZOWLJOMQ ?: 0.0).jinE()
-            binding.tvNeedPay.text = (args.sonOrder.ccnN ?: 0.0).jinE()
+            binding.tvNeedPay.text = (args.sonOrder.WJgjPYFKSKZ ?: 0.0).jinE()
             binding.tvPayDate.text = CommonUtil.timeLongToDate(args.sonOrder.PHBPS?.toLong() ?: 0)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -86,6 +87,17 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
 
         binding.tvExpandConfirm.apply {
             isEnabled = args.sonOrder.fxhOFanoPe == 1
+            text =
+                if (args.sonOrder.fxhOFanoPe == 1)
+                    getString(R.string.expand_confirm)
+                else
+                    getString(R.string.expand_confirm_not)
+            setTextColor(
+                if (args.sonOrder.fxhOFanoPe == 1)
+                    Utils.getApp().getColor(R.color.gray_532e00)
+                else
+                    Utils.getApp().getColor(R.color.gray_333333)
+            )
             setLimitClickListener {
                 viewModel.doConfirmExpanded(args.sonOrder.eJwh ?: 0)
             }
