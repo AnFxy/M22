@@ -98,7 +98,10 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
 
         viewLifecycleOwner.lifecycleScope.launch {
             mainViewModel.refreshPage.collect {
-                viewModel.requestOrders()
+                if (it !in viewModel.eventsList) {
+                    viewModel.requestOrders()
+                    viewModel.eventsList.add(it)
+                }
             }
         }
     }

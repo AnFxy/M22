@@ -4,18 +4,24 @@ import android.graphics.Typeface
 import android.text.Html
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.style.ClickableSpan
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.blankj.utilcode.util.SpanUtils
+import com.blankj.utilcode.util.SpanUtils.ALIGN_CENTER
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
+import com.nonetxmxy.mmzqfxy.base.RxDialogSet
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayCodeBinding
 import com.nonetxmxy.mmzqfxy.model.PayCodeMessage
 import com.nonetxmxy.mmzqfxy.tools.CopyUtil
@@ -36,6 +42,35 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
 
     override fun getViewMode(): PayCodeViewModel = viewModel
 
+    private val questionRxDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_question_pay_code)
+            dialog.setViewState<TextView>(R.id.tv_i_know) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }
+            dialog
+        }
+    }
+
+    private val payCodeLimitRxDialogSet: RxDialogSet? by lazy {
+        context?.let {
+            val dialog = RxDialogSet.provideDialog(it, R.layout.dia_pay_code_limit)
+            dialog.setViewState<TextView>(R.id.tv_i_know) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                    navController.popBackStack()
+                    mainViewModel.sendRefreshEvent()
+                }
+            }.setViewState<TextView>(R.id.tv_think_again) {
+                setLimitClickListener {
+                    dialog.dismiss()
+                }
+            }
+        }
+    }
+
     override fun getViewBinding(
         inflater: LayoutInflater,
         parent: ViewGroup?
@@ -52,8 +87,7 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
 
         activity?.let {
             (it as MainActivity).specialOnBackPressed = {
-                navController.popBackStack()
-                mainViewModel.sendRefreshEvent()
+                payCodeLimitRxDialogSet?.show()
             }
         }
 
@@ -81,10 +115,23 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
         htmlBuilder.setSpan(StyleSpan(Typeface.BOLD), 11, 15, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         binding.tvSpiTitle.text = htmlBuilder
-        binding.tvSpiContent.text = String.format(
-            getString(R.string.spei_warning),
-            args.payWayName
-        )
+
+        val builder =
+            SpanUtils.with(binding.tvSpiContent).appendImage(R.mipmap.wenhao).setClickSpan(
+                object : ClickableSpan() {
+                    override fun onClick(p0: View) {
+                        questionRxDialogSet?.show()
+                    }
+                }
+            ).setVerticalAlign(ALIGN_CENTER).append("  ")
+                .append(
+                    String.format(
+                        getString(R.string.spei_warning),
+                        args.payWayName
+                    )
+                ).create()
+
+        binding.tvSpiContent.text = builder
 
         Glide.with(this).load(payCodeMessage.munR).into(binding.ivCode)
         Glide.with(this).load(args.payWayLogo).into(binding.ivPayWay)

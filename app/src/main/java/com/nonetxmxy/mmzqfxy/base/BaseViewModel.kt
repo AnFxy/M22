@@ -21,6 +21,9 @@ abstract class BaseViewModel : ViewModel() {
     protected val baseGoPage = MutableSharedFlow<PageType>()
     val _baseGoPage: SharedFlow<PageType> = baseGoPage
 
+    // 限制一个事件 在一个页面只消费一次
+    val eventsList = ArrayList<Long>()
+
     //运行在UI线程的协程
     fun launchUIWithDialog(
         block: suspend CoroutineScope.() -> Unit,

@@ -111,6 +111,7 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.payChannel.collect {
                 payWayAdapter.payWays = it
+                viewModel.selectCode(args.sonOrder.kcUBu ?: 0, args.sonOrder.eJwh ?: 0)
             }
         }
 
@@ -118,6 +119,12 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
             viewModel.closeAndBackPage.collect {
                 mainViewModel.sendRefreshEvent()
                 navController.popBackStack()
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.needUpdate.collect {
+                payWayAdapter.payWays = viewModel.payChannel.value
             }
         }
     }

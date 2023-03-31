@@ -102,7 +102,6 @@
                         android:id="@+id/tv_spi_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@mipmap/wenhao"
                         android:drawablePadding="4dp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

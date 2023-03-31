@@ -82,7 +82,10 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             mainViewModel.refreshPage.collect {
-                viewModel.getPageData()
+                if (it !in viewModel.eventsList) {
+                    viewModel.getPageData()
+                    viewModel.eventsList.add(it)
+                }
             }
         }
     }

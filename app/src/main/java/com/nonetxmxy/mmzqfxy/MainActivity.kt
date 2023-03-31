@@ -33,6 +33,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
             "AuthContactPersonFragment",
             "AuthIdentityFragment",
             "UnderReviewFragment",
+            "UnderReviewFragmentRepay",
+            "UnderReviewFragmentPro",
             "PayCodeFragment"
         )
     }

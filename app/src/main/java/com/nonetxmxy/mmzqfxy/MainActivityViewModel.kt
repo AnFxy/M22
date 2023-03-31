@@ -1,12 +1,10 @@
 package com.nonetxmxy.mmzqfxy
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,13 +17,15 @@ class MainActivityViewModel @Inject constructor() : BaseViewModel() {
     // 并且如果事件发送后，接收者接收到，但view销毁了，这个时候操作view就会出现空指针
     // 除非在onCreate方法中创建监听者
     // 如果缓存一个，那么当fragment重建后，就自然可以接收到缓存的事件
-    private val _refreshPage = MutableSharedFlow<Unit>(replay = 1)
-    val refreshPage: SharedFlow<Unit> = _refreshPage
+    // 如果fragment多次重建，那么就会多次消费
+    // 所以需要记录已经被消费的事件
+    private val _refreshPage = MutableSharedFlow<Long>(replay = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val refreshPage: SharedFlow<Long> = _refreshPage
 
     // 还款码页后让页面刷新
     fun sendRefreshEvent() {
         viewModelScope.launch {
-            _refreshPage.emit(Unit)
+            _refreshPage.emit(System.currentTimeMillis())
         }
     }
 }

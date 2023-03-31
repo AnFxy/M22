@@ -54,7 +54,7 @@
     <string name="privacy">Ley de Protección de Datos</string>
     <string name="my">Sobre nosotros</string>
     <string name="feedback">Añadir comentario</string>
-    <string name="us_order_des_not">Todavía le quedan pedidos sin pagar, por favor, anótelo para revisarlo.</string>
+    <string name="us_order_des_not">Tiene un pedido atrasado, por favor, pague lo antes posible.</string>
     <string name="us_order_des">Le queda orden de préstamo para pagar, por favor, revíselo ahora.</string>
 
     <!--我的页面唯一-->
@@ -228,5 +228,8 @@
     <string name="dia_pay_prevent">Se generara intereses de penalizacion al superar la fecha de vencimiento.</string>
     <string name="dia_pay_think_again">Estoy pensando</string>
     <string name="dia_spei">Los gastos de gestion adicionales que esta casi pagado son cobrados por las tiendas de conveniencia, no por nues tra plataforma.</string>
+    <string name="dia_question_pay_code">La tarifa de servicio adicional es cobrada por las tiendas express, no por nuestra plataforma.</string>
+    <string name="dia_pay_code_prevent">Se generará intereses de penalización al superar la fecha de vencimiento. \nPor favor, pague lo antes posible.</string>
+    <string name="dia_pay_code_not">Estoy pensando</string>
 
 </resources>

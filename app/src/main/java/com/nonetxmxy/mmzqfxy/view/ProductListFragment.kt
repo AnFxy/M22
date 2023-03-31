@@ -150,7 +150,10 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
 
         viewLifecycleOwner.lifecycleScope.launch {
             mainViewModel.refreshPage.collect {
-                viewModel.getConfig()
+                if (it !in viewModel.eventsList) {
+                    viewModel.getConfig()
+                    viewModel.eventsList.add(it)
+                }
             }
         }
     }

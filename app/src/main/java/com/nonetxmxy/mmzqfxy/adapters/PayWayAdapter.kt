@@ -38,7 +38,7 @@ class PayWayAdapter : RecyclerView.Adapter<PayWayAdapter.PayWayViewHolder>() {
                         Utils.getApp().getColor(R.color.gray_999999)
                 )
             }
-            binding.tvPayCode.text = payWay.jBsB
+            binding.tvPayCode.text = payWay.code
             binding.containerPayCode.setVisible(payWay.jBsB.isNotEmpty())
 
             binding.tvCopy.setLimitClickListener {

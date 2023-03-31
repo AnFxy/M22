@@ -23,6 +23,7 @@ import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
 import com.nonetxmxy.mmzqfxy.viewmodel.PayFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -44,6 +45,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                 viewModel.sonId = sonId
                 viewModel.payType = 1
                 payWayDialog?.show()
+                viewModel.selectCode()
             }
             toExpand = { order ->
                 viewModel.sonId = order.eJwh
@@ -123,6 +125,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                     repayAdapter.datas.first { it.isChecked && it.CZusa in listOf(0, 2) }.eJwh
             }
             payWayDialog?.show()
+            viewModel.selectCode()
         }
     }
 
@@ -154,7 +157,16 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             mainViewModel.refreshPage.collect {
-                viewModel.getPageData()
+                if (it !in viewModel.eventsList) {
+                    viewModel.getPageData()
+                    viewModel.eventsList.add(it)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.needUpdate.collect {
+                payWayAdapter.payWays = viewModel.payChannel.value
             }
         }
     }

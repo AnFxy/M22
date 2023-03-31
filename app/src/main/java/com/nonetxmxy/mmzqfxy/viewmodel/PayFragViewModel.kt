@@ -7,6 +7,7 @@ import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.joinAll
@@ -22,6 +23,8 @@ class PayFragViewModel @Inject constructor(
 
     private val _payChannel = MutableStateFlow<List<PayWayMessage>>(emptyList())
     val payChannel: StateFlow<List<PayWayMessage>> = _payChannel
+
+    val needUpdate = MutableSharedFlow<Unit>()
 
     var sonId: Long? = null
     var payType: Int = 1
@@ -43,6 +46,23 @@ class PayFragViewModel @Inject constructor(
                 )
             }
             closeLoading.emit(Unit)
+        }
+    }
+
+    fun selectCode() {
+        launchUIWithDialog {
+            val firstRecommend = payChannel.value.filter { it.KKEMXfGmlVt == 1 }
+            if (firstRecommend.isNotEmpty()) {
+                // 查询还款码
+                val result = orderRepository.getPayCodeMessageData(
+                    mainOrderId = pagerData.value?.oqiuffK?.get(0)?.kcUBu ?: 0,
+                    sonOrderId = sonId,
+                    payWayId = firstRecommend[0].jBsB,
+                    payType = payType
+                )
+                _payChannel.value.first { it.KKEMXfGmlVt == 1 }.code = result.QWZRFcNqe
+                needUpdate.emit(Unit)
+            }
         }
     }
 }

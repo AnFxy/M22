@@ -5,4 +5,6 @@ data class PayWayMessage (
     val Ghtm: String, // 渠道名
     val Nqlgew: String, // 渠道logoURL
     val KKEMXfGmlVt: Int, // 是否是推荐渠道 1 是 0 不是
-)
+) {
+    var code: String = ""
+}

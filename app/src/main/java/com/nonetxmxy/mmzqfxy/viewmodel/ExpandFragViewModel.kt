@@ -21,6 +21,8 @@ class ExpandFragViewModel @Inject constructor(
     private val _closeAndBackPage = MutableSharedFlow<Unit>()
     val closeAndBackPage: SharedFlow<Unit> = _closeAndBackPage
 
+    val needUpdate = MutableSharedFlow<Unit>()
+
     init {
         getPageData()
     }
@@ -28,6 +30,23 @@ class ExpandFragViewModel @Inject constructor(
     fun getPageData() {
         launchUIWithDialog {
             _payChannel.value = orderRepository.getPayWayMessageData()
+        }
+    }
+
+    fun selectCode(mainId: Long, sonId: Long) {
+        launchUIWithDialog {
+            val firstRecommend = payChannel.value.filter { it.KKEMXfGmlVt == 1 }
+            if (firstRecommend.isNotEmpty()) {
+                // 查询还款码
+                val result = orderRepository.getPayCodeMessageData(
+                    mainOrderId = mainId,
+                    sonOrderId = sonId,
+                    payWayId = firstRecommend[0].jBsB,
+                    payType = 2
+                )
+                _payChannel.value.first { it.KKEMXfGmlVt == 1 }.code = result.QWZRFcNqe
+                needUpdate.emit(Unit)
+            }
         }
     }
 
