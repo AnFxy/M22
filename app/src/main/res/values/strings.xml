@@ -54,7 +54,8 @@
     <string name="privacy">Ley de Protección de Datos</string>
     <string name="my">Sobre nosotros</string>
     <string name="feedback">Añadir comentario</string>
-    <string name="us_order_des">你有一笔订单已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！已经逾期了！</string>
+    <string name="us_order_des_not">Todavía le quedan pedidos sin pagar, por favor, anótelo para revisarlo.</string>
+    <string name="us_order_des">Le queda orden de préstamo para pagar, por favor, revíselo ahora.</string>
 
     <!--我的页面唯一-->
     <string name="mine_his">Mi préstamo</string>
@@ -134,7 +135,7 @@
     <string name="remain_peroids">Número de períodos de reembolso</string>
     <string name="borrowed_amount">Importe pendiente de reembolsar</string>
     <string name="handle_amount">Importe reembolsado</string>
-    <string name="pay_date">Fecha de reembolsar</string>
+    <string name="pay_date">Fecha de reembolso tras prórroga</string>
     <string name="over_due_fee">Tasa de vencimiento</string>
     <string name="reduce_money">Reducir %s</string>
     <string name="select_amount">Reembolsar todo</string>
@@ -152,7 +153,7 @@
     <string name="expand_fee">Tasa de prórroga</string>
     <string name="need_pay">Importe pagado</string>
     <string name="expand_date">Fecha de reembolso tras prórroga</string>
-    <string name="expand_tips">Despues de haber liquidado su tarifa va a tener mas tiempo de prolongacion (6 días), por favor vaya a la app, para confirmar este monto de tiempo, si no lo confirmar no puede realizar la prorroga de su prestamo actual, recuerde que es un monto independiente de su deuda, no se tomara como parte de la misma.</string>
+    <string name="expand_tips">Despues de haber liquidado su tarifa va a tener mas tiempo de prolongacion (6 días), por favor vaya a la app, para confirmar este monto de tiempo, si no lo confirmar no puede realizar la prórroga de su prestamo actual, recuerde que es un monto independiente de su deuda, no se tomara como parte de la misma.</string>
     <string name="expand_confirm">Comfirmar la prórroga de reembolso</string>
     <string name="expand_confirm_not">Comfirmado</string>
     <string name="pay_way">Canal de pago</string>

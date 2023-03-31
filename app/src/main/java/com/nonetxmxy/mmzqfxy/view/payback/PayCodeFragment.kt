@@ -7,14 +7,15 @@ import android.text.Spanned
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.MainActivity
+import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
-import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayCodeBinding
 import com.nonetxmxy.mmzqfxy.model.PayCodeMessage
 import com.nonetxmxy.mmzqfxy.tools.CopyUtil
@@ -29,11 +30,9 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
 
     private val viewModel: PayCodeViewModel by viewModels()
 
-    private val args: PayCodeFragmentArgs by navArgs()
+    private val mainViewModel: MainActivityViewModel by activityViewModels()
 
-    companion object {
-        val BACK = "pay_code_back"
-    }
+    private val args: PayCodeFragmentArgs by navArgs()
 
     override fun getViewMode(): PayCodeViewModel = viewModel
 
@@ -53,7 +52,8 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
 
         activity?.let {
             (it as MainActivity).specialOnBackPressed = {
-                callBackDataWhenDestroyed(BACK, true)
+                navController.popBackStack()
+                mainViewModel.sendRefreshEvent()
             }
         }
 

@@ -3,23 +3,23 @@ package com.nonetxmxy.mmzqfxy.view.payback
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.Utils
+import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.PayWayAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
-import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentExpandBinding
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.days
 import com.nonetxmxy.mmzqfxy.tools.jinE
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
-import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.ExpandFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>() {
 
     private val viewModel: ExpandFragViewModel by viewModels()
+
+    private val mainViewModel: MainActivityViewModel by activityViewModels()
+
     private val args: ExpandFragmentArgs by navArgs()
 
     private val payWayDialog: RxDialogSet? by lazy {
@@ -113,7 +116,8 @@ class ExpandFragment : BaseFragment<FragmentExpandBinding, ExpandFragViewModel>(
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.closeAndBackPage.collect {
-                callBackDataWhenDestroyed(UnderReviewFragment.BACK, true)
+                mainViewModel.sendRefreshEvent()
+                navController.popBackStack()
             }
         }
     }

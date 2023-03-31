@@ -3,19 +3,19 @@ package com.nonetxmxy.mmzqfxy.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.OrderListAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
-import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentOrderListBinding
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
-import com.nonetxmxy.mmzqfxy.view.payback.PayFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.OrderListFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,6 +24,8 @@ import kotlinx.coroutines.launch
 class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragViewModel>() {
 
     private val viewModel: OrderListFragViewModel by viewModels()
+
+    private val mainViewModel: MainActivityViewModel by activityViewModels()
 
     private val adapter: OrderListAdapter by lazy {
         OrderListAdapter({
@@ -81,10 +83,6 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
                 navController.popBackStack()
             }
         }
-
-        receiveCallBackDataFromLastFragment<Boolean>(PayFragment.BACK) {
-            viewModel.requestOrders()
-        }
     }
 
     override fun setObserver() {
@@ -95,6 +93,12 @@ class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListFragVi
                 } else {
                     adapter.orders = it
                 }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainViewModel.refreshPage.collect {
+                viewModel.requestOrders()
             }
         }
     }

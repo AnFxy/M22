@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
     NavController.OnDestinationChangedListener {
 
-    private val viewModel: MainActivityViewModel by viewModels()
+    val viewModel: MainActivityViewModel by viewModels()
 
     private lateinit var navController: NavController
 

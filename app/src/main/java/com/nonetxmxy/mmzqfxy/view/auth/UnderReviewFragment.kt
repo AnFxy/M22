@@ -3,19 +3,19 @@ package com.nonetxmxy.mmzqfxy.view.auth
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.MainActivity
+import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.MainAppAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
-import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
 import com.nonetxmxy.mmzqfxy.databinding.FragmentUnderReviewBinding
 import com.nonetxmxy.mmzqfxy.model.OrderMessage
-import com.nonetxmxy.mmzqfxy.model.ProductsBean
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
 import com.nonetxmxy.mmzqfxy.tools.days
 import com.nonetxmxy.mmzqfxy.tools.jinE
@@ -30,12 +30,10 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
 
     private val viewModel: UnderReviewViewModel by viewModels()
 
+    private val mainViewModel: MainActivityViewModel by activityViewModels()
+
     private val mainAppAdapter: MainAppAdapter by lazy {
         MainAppAdapter()
-    }
-
-    companion object {
-        val BACK = "under_review_back"
     }
 
     override fun getViewMode(): UnderReviewViewModel = viewModel
@@ -64,7 +62,8 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
 
         activity?.let {
             (it as MainActivity).specialOnBackPressed = {
-                callBackDataWhenDestroyed(BACK, true)
+                mainViewModel.sendRefreshEvent()
+                navController.popBackStack()
             }
         }
     }
@@ -87,7 +86,7 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
     }
 
     private fun updatePage(productsBean: OrderMessage) {
-        when(productsBean.snbrREWru) {
+        when (productsBean.snbrREWru) {
             0, 1, 2, 3 -> {
                 binding.ivStatus.setImageResource(R.mipmap.shenhezhong)
                 binding.tvStatus.text = getString(R.string.on_reviewing)
@@ -109,7 +108,8 @@ class UnderReviewFragment : BaseFragment<FragmentUnderReviewBinding, UnderReview
             else -> {
                 viewLifecycleOwner.lifecycleScope.launch {
                     delay(500)
-                    callBackDataWhenDestroyed(BACK, true)
+                    mainViewModel.sendRefreshEvent()
+                    navController.popBackStack()
                 }
             }
         }

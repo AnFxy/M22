@@ -4,27 +4,25 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.PayWayAdapter
 import com.nonetxmxy.mmzqfxy.adapters.RepayListAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.RxDialogSet
-import com.nonetxmxy.mmzqfxy.base.callBackDataWhenDestroyed
-import com.nonetxmxy.mmzqfxy.base.receiveCallBackDataFromLastFragment
 import com.nonetxmxy.mmzqfxy.databinding.FragmentPayBinding
 import com.nonetxmxy.mmzqfxy.model.RepayMessage
 import com.nonetxmxy.mmzqfxy.tools.jinE
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
 import com.nonetxmxy.mmzqfxy.tools.setVisible
-import com.nonetxmxy.mmzqfxy.view.auth.UnderReviewFragment
 import com.nonetxmxy.mmzqfxy.viewmodel.PayFragViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -32,9 +30,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
 
     private val viewModel: PayFragViewModel by viewModels()
 
-    companion object {
-        val BACK = "pay_back"
-    }
+    private val mainViewModel: MainActivityViewModel by activityViewModels()
 
     private val repayAdapter: RepayListAdapter by lazy {
         RepayListAdapter().apply {
@@ -128,13 +124,6 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
             }
             payWayDialog?.show()
         }
-
-        receiveCallBackDataFromLastFragment<Boolean>(UnderReviewFragment.BACK) {
-            viewModel.getPageData()
-        }
-        receiveCallBackDataFromLastFragment<Boolean>(PayCodeFragment.BACK) {
-            viewModel.getPageData()
-        }
     }
 
     override fun setObserver() {
@@ -150,8 +139,7 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
                         )
                     )
                     if (it.OEdZXUBY <= 0) {
-                        delay(500)
-                        callBackDataWhenDestroyed(BACK, true)
+                        navController.popBackStack()
                     }
                     updateAllSelectViewStatus()
                 }
@@ -161,6 +149,12 @@ class PayFragment : BaseFragment<FragmentPayBinding, PayFragViewModel>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.payChannel.collect {
                 payWayAdapter.payWays = it
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            mainViewModel.refreshPage.collect {
+                viewModel.getPageData()
             }
         }
     }
