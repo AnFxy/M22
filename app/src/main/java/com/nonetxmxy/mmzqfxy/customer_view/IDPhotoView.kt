@@ -115,6 +115,7 @@ class IDPhotoView @JvmOverloads constructor(
     companion object {
         const val ALBUM_REQUEST_CODE_TOP = 11
         const val ALBUM_REQUEST_CODE_BEHIND = 12
+        const val ALBUM_SUGGESTION = 13
         const val CAMERA_REQUEST_CODE_TOP = 21
         const val CAMERA_REQUEST_CODE_BEHIND = 22
     }
@@ -169,7 +170,7 @@ class IDPhotoView @JvmOverloads constructor(
 
     fun setImageData(requestCode: Int, uri: Uri? = null) {
         when (requestCode) {
-            ALBUM_REQUEST_CODE_TOP, ALBUM_REQUEST_CODE_BEHIND -> {
+            ALBUM_REQUEST_CODE_TOP, ALBUM_REQUEST_CODE_BEHIND, ALBUM_SUGGESTION -> {
                 val imgPath = HandlePhoto.handleImageOkKitKat(uri, context)
                 val imageType = ImageUtils.getImageType(imgPath)
                 if (imageType == null) {

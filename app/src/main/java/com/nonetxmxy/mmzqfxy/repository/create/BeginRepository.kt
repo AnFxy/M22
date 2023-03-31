@@ -222,6 +222,19 @@ class BeginRepository @Inject constructor(
         mainService.submitHiddenData(maps).checkCodeError()
     }
 
+    override suspend fun submitSuggestion(content: String, picLink: List<String>) {
+        val maps = HashMap<String, String>()
+        maps["xGZLVE"] = BuildConfig.LANGUAGE
+        maps["ruvMuv"] = BuildConfig.CODE
+        maps["Fnc"] = LocalCache.token
+        maps["Ysnd"] = LocalCache.phoneNumber
+        maps["mLuKt"] = content
+        maps["SzF"] = "5"
+        maps["cCSpH"] = picLink.joinToString(",")
+
+        mainService.submitFeedBack(maps).checkCodeError()
+    }
+
     override suspend fun getFaceConfig(): FaceResBean {
         val maps = HashMap<String, String>()
         maps["efe"] = BuildConfig.LANGUAGE

@@ -1,9 +1,12 @@
 package com.nonetxmxy.mmzqfxy.dialogs
 
 import android.content.Context
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.ScreenUtils
+import com.blankj.utilcode.util.StringUtils
 import com.nonetxmxy.mmzqfxy.adapters.BankNamesAdapter
 import com.nonetxmxy.mmzqfxy.base.BaseDialog
 import com.nonetxmxy.mmzqfxy.databinding.DiaBanksBinding
@@ -100,16 +103,26 @@ class BanksDialog @JvmOverloads constructor(
         binding.ivPickDialogClose.setOnClickListener {
             dismiss()
         }
-//        binding.eehfpafhpyEzcnhl.addTextChangedListener {
-//            val lists: List<ShowBankBean>
-//            val value = it?.toString() ?: ""
-//            lists = if (StringUtils.isEmpty(value)) {
-//                handleBlankGroup(allBlank)
-//            } else {
-//                handleSearchBlank(allBlank, value)
-//            }
-//            commPickerAdapter.setList(lists)
-//        }
+        binding.eehfpafhpyEzcnhl.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val lists: List<ShowBankBean>
+                val value = p0?.toString() ?: ""
+                lists = if (StringUtils.isEmpty(value)) {
+                    handleBlankGroup(allBlank)
+                } else {
+                    handleSearchBlank(allBlank, value)
+                }
+                commPickerAdapter.setList(lists)
+            }
+        })
 
     }
 }

@@ -4,72 +4,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="500dp"
         android:paddingHorizontal="16dp"
         android:paddingVertical="20dp"
         android:layout_marginHorizontal="30dp"
         android:background="@drawable/white_10"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:text="@string/tips_dia_title"
-            android:textColor="@color/gray_333333"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
+        <ScrollView
             android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/tips_dia_content"
-            android:textColor="@color/gray_666666"
-            android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/tips_dia_content"
+                android:textColor="@color/gray_666666"
+                android:layout_marginTop="15dp" />
 
-        <TextView
-            android:id="@+id/tv_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/gray_999999"
-            android:text="@string/tips_dia_cancel"
-            android:layout_marginTop="15dp"
-            android:paddingVertical="10dp"
-            android:gravity="center"
-            android:background="@drawable/grey_6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_confirm"
-            app:layout_constraintTop_toBottomOf="@id/tv_content"/>
+        </ScrollView>
 
-        <TextView
-            android:id="@+id/tv_confirm"
-            android:layout_width="0dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:text="@string/tips_dia_confirm"
-            android:textColor="@color/gray_532e00"
-            android:layout_marginTop="15dp"
-            android:paddingVertical="10dp"
-            android:gravity="center"
-            android:background="@drawable/yellow_6"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toEndOf="@id/tv_cancel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_content"/>
+            android:orientation="horizontal">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/gray_999999"
+                android:text="@string/tips_dia_cancel"
+                android:layout_marginTop="15dp"
+                android:paddingVertical="10dp"
+                android:gravity="center"
+                android:background="@drawable/grey_6"
+                />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="@string/tips_dia_confirm"
+                android:textColor="@color/gray_532e00"
+                android:layout_marginTop="15dp"
+                android:paddingVertical="10dp"
+                android:gravity="center"
+                android:background="@drawable/yellow_6"
+                android:layout_marginStart="16dp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

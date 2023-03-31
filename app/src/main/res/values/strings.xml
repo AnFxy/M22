@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">MexiCrédi</string>
 
     <!--启动页
@@ -9,10 +9,32 @@
 í
 
 -->
-    <string name="tips_dia_title">xxxxxx</string>
-    <string name="tips_dia_content">xxxxxxxxxxxxxxxxxx</string>
-    <string name="tips_dia_cancel">Rechazada</string>
-    <string name="tips_dia_confirm">De acuerdo</string>
+    <string name="tips_dia_content">Tenga en cuenta que con el fin de evaluar mejor su elegibilidad para utilizar el servicio MexiCrédi, tenemos que ejecutar un modelo de riesgo y calcular la cantidad que usted puede pedir prestado que coincida con sus calificaciones mediante la obtención de la siguiente información Toda la información obtenida por MexiCrédi será recopilada y enviada a través de la última tecnología de seguridad HTTPS y sólo se utilizará para evaluar la cantidad que usted puede pedir prestado, no vamos a compartir sus datos personales. personales. De acuerdo con la ley mexicana y las regulaciones de Google, MexiCrédi respetará y protegerá la privacidad de la información que compartas con nosotros durante la evaluación de tu solicitud de préstamo, y si no utilizas MexiCrédi por un largo periodo de tiempo, evaluaremos periódicamente y borraremos completamente tus datos
+La siguiente información será accesada y retenida por nosotros para calcular la cantidad que puede ser prestada de acuerdo a sus calificaciones
+\n\n1. Información telefónica de contacto
+\n\nCuando nos conceda acceso a la agenda de direcciones, recopilaremos todos los contactos de su agenda telefónica, incluyendo el nombre del contacto telefónico, el número de teléfono y la fecha en que se añadió el contacto. El objetivo de esta recopilación es construir su perfil crediticio mediante el análisis de la agenda telefónica y aumentar el número de formas en las que se puede contactar con usted. Además, esta información se utilizará para servicios antifraude en los que sea necesaria para el análisis de riesgos y, una vez finalizada la evaluación, los datos se eliminarán de nuestros servidores. La lista de contactos completa no se controlará, almacenará ni compartirá con terceros.
+\n\n2. Sistema de Posicionamiento Global (GPS)
+\n\nSiempre que utilice la App a través de su dispositivo móvil, rastrearemos y recopilaremos información sobre su ubicación geográfica en tiempo real. En algunos casos, podemos pedirle que active el Sistema de Posicionamiento Global (GPS) en su dispositivo móvil para permitirnos ofrecerle una mejor experiencia de uso de la App. Puede optar por desactivar temporalmente la información de seguimiento de geolocalización en su dispositivo móvil en cualquier momento.
+\n\n3. Información sobre las aplicaciones instaladas
+\n\nMexiCrédi recoge, almacena y monitoriza y carga información de metadatos sobre cada aplicación instalada, incluyendo los nombres de todas las aplicaciones y paquetes instalados en su dispositivo, cuándo fueron instalados y actualizados, el nombre de la versión y el código de la versión. Utilizamos esta información para evaluar su solvencia y evitar fraudes en los préstamos. MexiCrédi nunca compartirá estos datos con terceros sin su permiso. Sólo se recopilarán con su consentimiento. Sólo se utilizará para analizar su elegibilidad de préstamo, recomendar productos de préstamo adecuados para usted, gestión de riesgos y prevención del fraude, y para ningún otro propósito sin su permiso.
+\n\n4. Registros de mensajes de texto
+\n\nCuando presente una solicitud de préstamo, registraremos el contenido de todos los mensajes de texto, pero sólo procesaremos los mensajes de texto relacionados con la financiación. La información recopilada incluye el remitente, la fecha de envío y la descripción, lo que nos ayuda a identificar las distintas cuentas que posee el usuario y los patrones de flujo de caja del usuario para ayudarnos a identificar distintos perfiles de riesgo y proporcionarle una evaluación adecuada de la puntuación crediticia. No podrá utilizarse para ningún otro fin sin su permiso.
+\n\n5. Cámaras
+\n\nMexiCrédi puede pedirle que utilice su cámara para enviar un selfie o una imagen en vivo de su cara con el fin de proporcionarle una experiencia fácil/suave. Esto es para verificar su identidad y evitar que otros roben su información personal para fraude de préstamos.
+\n\n6. Calendario
+\n\nMexiCrédij recopilará y controlará la información relacionada con tus habilidades en la solicitud y la subirá encriptada con el fin de identificar y analizar tu comportamiento, orientar el riesgo de préstamos múltiples, evaluar si el préstamo puede ser procesado y ayudar a prevenir el fraude.
+\n\n7. Datos personales recogidos con fines de tratamiento
+\n\nDe conformidad con lo anterior, le informamos que al solicitar a través de MexiCrédi y proporcionar sus datos personales para acceder a los servicios crediticios de MexiCrédi, MexiCrédi tendrá acceso directo o indirecto a sus datos personales y se compromete a procesar sus datos personales en la forma descrita anteriormente, de la siguiente manera:
+\n\ta) datos de identificación
+\n\tb) datos de contacto
+\n\tc) datos profesionales
+\n\td) datos financieros
+\n\te) información de su teléfono móvil y/o aplicación. Esto incluye, pero no se limita a, información relativa a su servicio móvil, incluyendo: i) operador; ii) hábitos de consumo; iii) marca y modelo de teléfono; y iv) aplicaciones.
+\n\tf) Wifi e Internet, tipo de teléfono, memoria, información sobre la tarjeta de memoria, CPU, GAID, dirección Mac, etc.
+\n\nEstos datos pueden utilizarse para evaluar la información crediticia que solicite, verificar su identidad, evaluar y calificar su solvencia y con fines de gestión de riesgos. Toda la información que obtenemos sólo puede obtenerse sobre la base de su consentimiento y autorización. Como parte de su uso del servicio MexiCrédi, actualizaremos periódicamente la información a la que nos ha autorizado a acceder. Puede leer el acuerdo de privacidad completo en MexiCrédi
+</string>
+    <string name="tips_dia_cancel">Cancelar</string>
+    <string name="tips_dia_confirm">Aceptar</string>
     <string name="update_dia_title">xxxxxxxxx</string>
     <string name="update_next">Rechazada</string>
     <string name="update_now">De acuerdo</string>
@@ -98,7 +120,7 @@
     <string name="apply_now">Solicitar ahora</string>
 
     <!--关于我们-->
-    <string name="about_us_title">关于我们</string>
+    <string name="about_us_title">Sobre nosotros</string>
     <string name="company_name">公司名</string>
     <string name="company_des">公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍公司介绍</string>
     <string name="logout">Cancelación</string>
@@ -122,11 +144,11 @@
     <string name="send_voice_code_on_clock">Obtener un código de verificación de voz(%2d)</string>
 
     <!--意见反馈页面-->
-    <string name="sugges_text">添加评论</string>
-    <string name="sugges_pic">问题截图，促进问题解决（可选）</string>
-    <string name="sugges_phone">填写联系方式</string>
-    <string name="upload">上传</string>
-    <string name="sugges_text_hint">请输入你的意见，请输入你的意见，请输入你的意见，请输入你的意见</string>
+    <string name="sugges_text">@string/feedback</string>
+    <string name="sugges_pic">Captura de pantalla del problema para facilitar la resolución de problemas(opcional)</string>
+    <string name="sugges_phone">Contactar con el Servicio de Atención al Cliente.</string>
+    <string name="upload">Enviar</string>
+    <string name="sugges_text_hint">Por favor, introduzca sus valiosos comentarios, continuaremos mejorando el producto.</string>
 
     <!--还款页面-->
     <string name="repay_page_title">Detalles del orden</string>
@@ -142,7 +164,7 @@
     <string name="repay_reduce">(%s de reduccion)</string>
     <string name="select_all">Totalidad</string>
     <string name="repay_it_all">Reembolsar íntegro</string>
-    <string name="congratulation_request_again">恭喜你，\n获得了独家再贷款特权！</string>
+    <string name="congratulation_request_again">Felicitaciones,\npuedes volver a pedir prestado este producto.</string>
     <string name="remain_days">Llgara el vencimiento tras %d días</string>
     <string name="remain_days_over">%d días de retraso</string>
 

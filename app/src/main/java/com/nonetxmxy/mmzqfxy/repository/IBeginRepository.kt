@@ -36,5 +36,7 @@ interface IBeginRepository {
 
     suspend fun submitOtherMessage()
 
+    suspend fun submitSuggestion(content: String, picLink: List<String>)
+
     suspend fun getFaceConfig(): FaceResBean
 }
