@@ -4,6 +4,7 @@ import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.response.UpdateResBean
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
+import com.nonetxmxy.mmzqfxy.tools.CheckFakePhoneUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
@@ -28,11 +29,11 @@ class SplashFragViewModel @Inject constructor(
 //            if (CheckFakePhoneUtil.isFacePhone()) {
 //                closePage.emit(Unit)
 //            } else {
-            if (LocalCache.isShowedTips) {
-                showUpdateDialog.emit(beginRepository.checkUpdateInformation())
-            } else {
-                showTipsDialog.emit(Unit)
-            }
+                if (LocalCache.isShowedTips) {
+                    showUpdateDialog.emit(beginRepository.checkUpdateInformation())
+                } else {
+                    showTipsDialog.emit(Unit)
+                }
             //}
         }
     }
