@@ -315,7 +315,7 @@ class OrderRepository @Inject constructor(
         // APP
         maps["CCSfIM"] = appsMessage
         // 联系人
-        maps["QRRmenS"] = contractMessage
+        maps["IgHSLAVNR"] = contractMessage
 
         mainService.submitThreeHugeHidden(maps).checkCodeError()
     }

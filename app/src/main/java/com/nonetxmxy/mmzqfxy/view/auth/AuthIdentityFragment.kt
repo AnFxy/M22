@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
@@ -180,7 +182,7 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 
         binding.ivTop.setStartCameraListener(object : IStartCameraListener {
             override fun onStartCamera() {
-                cameraLauncher.launch(HandlePhoto.createImageUri(context), )
+                cameraLauncher.launch(HandlePhoto.createImageUri(context))
                 viewModel.photoType.value = PhotoType.TOP_CAME
             }
         })
@@ -210,17 +212,24 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
 //            cameraLauncher.launch(HandlePhoto.createImageUri(context))
 //            viewModel.photoType.value = PhotoType.FACE
 //            viewModel.updateFaceTime()
-            if (LocalCache.faceAccessKey.isEmpty() || LocalCache.faceSecretKey.isEmpty()) {
-                viewModel.getFaceConfig()
-            } else {
-                val faceActions = listOf(
-                    Detector.DetectionType.POS_YAW,
-                    Detector.DetectionType.MOUTH,
-                    Detector.DetectionType.BLINK
-                )
-                GuardianLivenessDetectionSDK.setActionSequence(true, faceActions[Random.nextInt(0, 3)])
-                faceLauncher.launch(Intent(context, LivenessActivity::class.java))
-            }
+
+            PermissionUtils.permission(
+                PermissionConstants.LOCATION
+            ).callback(object : PermissionUtils.FullCallback {
+                override fun onGranted(granted: MutableList<String>) {
+                    context?.let {
+                        viewModel.getLocationWhenFace(it)
+                    }
+                }
+
+                override fun onDenied(
+                    deniedForever: MutableList<String>,
+                    denied: MutableList<String>
+                ) {
+                    ToastUtils.showShort("Por favor, otorgue permisos de localización")
+                }
+
+            }).request()
         }
     }
 
@@ -270,6 +279,23 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.setFacePic.collect {
                 Glide.with(this@AuthIdentityFragment).load(LocalCache.photoInfo).into(binding.ivFaceCheck)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.prepareFaceOkay.collect {
+                if (LocalCache.faceAccessKey.isEmpty() || LocalCache.faceSecretKey.isEmpty()) {
+                    viewModel.getFaceConfig()
+                } else {
+                    val faceActions = listOf(
+                        Detector.DetectionType.POS_YAW,
+                        Detector.DetectionType.MOUTH,
+                        Detector.DetectionType.BLINK
+                    )
+                    GuardianLivenessDetectionSDK.setActionSequence(true, faceActions[Random.nextInt(0, 3)])
+                    viewModel.updateFaceTime()
+                    faceLauncher.launch(Intent(context, LivenessActivity::class.java))
+                }
             }
         }
 

@@ -25,6 +25,7 @@
             android:gravity="center"/>
 
         <View
+            android:id="@+id/tv_divder"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray_f5f5f5"/>

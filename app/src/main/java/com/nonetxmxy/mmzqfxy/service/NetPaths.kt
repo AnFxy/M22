@@ -16,7 +16,7 @@ object NetPaths {
     // 获取行政规划
     const val regions = "/pcdopfpcqwadk/lrwcpplbnvuch"
     // 提交三大件埋点
-    const val threeHugeHidden = "/cumxgiprqhhqyq/bibsuzzklsaisp"
+    const val threeHugeHidden = "/znylqhcruen/qlgbxxzeulr"
 
 
     // 获取产品列表

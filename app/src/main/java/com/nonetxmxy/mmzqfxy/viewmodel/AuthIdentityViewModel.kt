@@ -1,13 +1,16 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
+import android.content.Context
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
+import com.nonetxmxy.mmzqfxy.model.LocationType
 import com.nonetxmxy.mmzqfxy.model.PhotoType
 import com.nonetxmxy.mmzqfxy.model.auth.IDMessage
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
+import com.nonetxmxy.mmzqfxy.tools.GpsUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,11 +27,11 @@ class AuthIdentityViewModel @Inject constructor(
     private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
     val pagerEventFlow: SharedFlow<AuthPagerEvent> = _pagerEventFlow
 
-    val photoType = MutableStateFlow<PhotoType>(PhotoType.TOP_CAME)
+    val photoType = MutableStateFlow(PhotoType.TOP_CAME)
 
-    var startTime: Long = 0
+    private var startTime: Long = 0
 
-    var faceTime: Long = 0
+    private var faceTime: Long = 0
 
     var pagerData = IDMessage(
         AgzmxkTVhrb = "",
@@ -48,6 +51,9 @@ class AuthIdentityViewModel @Inject constructor(
 
     private val _startFace = MutableSharedFlow<Unit>()
     val startFace: SharedFlow<Unit> = _startFace
+
+    private val _prepareFaceOkay = MutableSharedFlow<Unit>()
+    val prepareFaceOkay: SharedFlow<Unit> = _prepareFaceOkay
 
     init {
         startTime = System.currentTimeMillis()
@@ -111,6 +117,17 @@ class AuthIdentityViewModel @Inject constructor(
 
     fun updateFaceTime() {
         faceTime = System.currentTimeMillis()
+    }
+
+    fun getLocationWhenFace(context: Context) {
+        launchUIWithDialog {
+            GpsUtil(context).location?.let {
+                LocalCache.lonLocal = it.longitude.toString()
+                LocalCache.latiLocal = it.latitude.toString()
+                beginRepository.submitLocationData(LocationType.FACE)
+            }
+            _prepareFaceOkay.emit(Unit)
+        }
     }
 
     fun submitFaceWithCamera() {

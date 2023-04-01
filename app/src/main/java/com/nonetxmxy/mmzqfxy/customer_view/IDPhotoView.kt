@@ -25,6 +25,7 @@ import com.nonetxmxy.mmzqfxy.model.PhotoInformation
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
 import com.nonetxmxy.mmzqfxy.tools.ErrorHandleUtil
 import com.nonetxmxy.mmzqfxy.tools.setLimitClickListener
+import com.nonetxmxy.mmzqfxy.tools.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.io.File
@@ -41,6 +42,9 @@ class IDPhotoView @JvmOverloads constructor(
     private var belongActivity: Activity? = null
 
     var isSelect = true
+
+    var isHiddenCamera = false
+
     private val imagePickerDialog: RxDialogSet by lazy {
         RxDialogSet.provideDialogBottom(context, R.layout.dia_photo)
     }
@@ -65,6 +69,7 @@ class IDPhotoView @JvmOverloads constructor(
         val ta = context.obtainStyledAttributes(attrs, R.styleable.IDPhotoView)
         imagePageType = ta.getInt(R.styleable.IDPhotoView_Direction, 1)
         val defaultUrl = ta.getDrawable(R.styleable.IDPhotoView_imageSrc)
+        isHiddenCamera = ta.getBoolean(R.styleable.IDPhotoView_isHiddenCamera, false)
         binding.ivFixDefaultCard.setImageDrawable(defaultUrl)
 
         binding.ivFixDefaultCard.setLimitClickListener {
@@ -137,6 +142,7 @@ class IDPhotoView @JvmOverloads constructor(
             with(imagePickerDialog) {
                 show()
                 setViewState<TextView>(R.id.tv_camera) {
+                    setVisible(!isHiddenCamera)
                     setLimitClickListener {
                         PermissionUtils.permission(
                             PermissionConstants.CAMERA,
@@ -149,6 +155,8 @@ class IDPhotoView @JvmOverloads constructor(
                             }
                         }).request()
                     }
+                }.setViewState<View>(R.id.tv_divder) {
+                    setVisible(!isHiddenCamera)
                 }.setViewState<TextView>(R.id.tv_photo) {
                     setLimitClickListener {
                         PermissionUtils.permission(PermissionConstants.STORAGE)

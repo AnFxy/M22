@@ -132,6 +132,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    app:isHiddenCamera="true"
                     app:imageSrc="@mipmap/tianjia"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -141,6 +142,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -150,6 +152,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -159,6 +162,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -178,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:visibility="invisible"
+                    app:isHiddenCamera="true"
                     app:imageSrc="@mipmap/tianjia"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -187,6 +192,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -196,6 +202,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
                 <com.nonetxmxy.mmzqfxy.customer_view.IDPhotoView
@@ -205,6 +212,7 @@
                     android:layout_weight="1"
                     android:visibility="invisible"
                     app:imageSrc="@mipmap/tianjia"
+                    app:isHiddenCamera="true"
                     android:layout_marginStart="10dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.constant.PermissionConstants
+import com.blankj.utilcode.util.PermissionUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
 import com.nonetxmxy.mmzqfxy.base.LocalCache
@@ -15,6 +18,7 @@ import com.tuo.customview.VerificationCodeView.InputCompleteListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.security.Permission
 
 @AndroidEntryPoint
 class SMSFragment : BaseFragment<FragmentSmsBinding, SMSFragViewModel>() {
@@ -52,7 +56,23 @@ class SMSFragment : BaseFragment<FragmentSmsBinding, SMSFragViewModel>() {
         }
 
         binding.tvContinue.setLimitClickListener {
-            viewModel.doLogin(binding.vcSms.inputContent)
+
+            PermissionUtils.permission(
+                PermissionConstants.LOCATION
+            ).callback(object : PermissionUtils.FullCallback {
+                override fun onGranted(granted: MutableList<String>) {
+                    context?.let {
+                        viewModel.doLogin(it, binding.vcSms.inputContent)
+                    }
+                }
+
+                override fun onDenied(
+                    deniedForever: MutableList<String>,
+                    denied: MutableList<String>
+                ) {
+                    ToastUtils.showShort("Por favor, otorgue permisos de localización")
+                }
+            }).request()
         }
     }
 

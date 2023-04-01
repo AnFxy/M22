@@ -52,7 +52,7 @@ class LocalCache {
 
         // Location
         var lonLocal: String by SPSet(FinalKeys.LONG_LOCATION, "")
-        val latiLocal: String by SPSet(FinalKeys.LATI_LOCATION, "")
+        var latiLocal: String by SPSet(FinalKeys.LATI_LOCATION, "")
 
         // 人脸识别key
         var faceAccessKey: String by SPSet(FinalKeys.ACCESS_KEY, "")

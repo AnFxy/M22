@@ -27,6 +27,7 @@
             <enum name="top" value="1"/>
             <enum name="behind" value="2"/>
         </attr>
+        <attr name="isHiddenCamera" format="boolean"/>
         <attr name="imageSrc" format="reference"/>
     </declare-styleable>
 </resources>
