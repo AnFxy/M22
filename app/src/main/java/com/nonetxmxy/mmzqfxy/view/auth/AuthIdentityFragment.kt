@@ -412,10 +412,10 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
             return false
         }
 
-//        if (LocalCache.faceCredit == 0) {
-//            ToastUtils.showShort(getString(R.string.please_face_check))
-//            return false
-//        }
+        if (LocalCache.faceCredit == 0) {
+            ToastUtils.showShort(getString(R.string.please_face_check))
+            return false
+        }
 
         return true
     }

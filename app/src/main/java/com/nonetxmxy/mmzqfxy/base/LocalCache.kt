@@ -117,6 +117,17 @@ class LocalCache {
             idCredit = 0
             bankCredit = 0
             faceCredit = 0
+
+            // Location
+            lonLocal = ""
+            latiLocal = ""
+
+            // 人脸识别key
+            faceAccessKey = ""
+            faceSecretKey = ""
+
+            // 人脸识别id
+            faceLivenessID = ""
         }
     }
 
