@@ -100,7 +100,7 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             // 名称_日期_android_版本号.apk
-            outputFileName = "M22_${currentTime()}_${versionName}.apk"
+            outputFileName = "MexiCrédi_${currentTime()}_${versionName}.apk"
         }
     }
 }

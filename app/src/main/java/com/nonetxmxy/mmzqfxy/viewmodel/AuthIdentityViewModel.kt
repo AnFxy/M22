@@ -1,6 +1,9 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
+import ai.advance.liveness.lib.GuardianLivenessDetectionSDK
+import ai.advance.liveness.lib.Market
 import android.content.Context
+import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
 import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
@@ -151,6 +154,12 @@ class AuthIdentityViewModel @Inject constructor(
             val faceConfig = beginRepository.getFaceConfig().xAVbNF
             LocalCache.faceAccessKey = faceConfig.paTbpP
             LocalCache.faceSecretKey = faceConfig.zZwHc
+            GuardianLivenessDetectionSDK.init(
+                Utils.getApp(),
+                faceConfig.paTbpP,
+                faceConfig.zZwHc,
+                Market.Mexico
+            )
 
             _startFace.emit(Unit)
         }
