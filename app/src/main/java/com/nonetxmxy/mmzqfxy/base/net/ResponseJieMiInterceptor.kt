@@ -14,7 +14,14 @@ class ResponseJieMiInterceptor : Interceptor {
         val request = chain.request()
         var response = chain.proceed(request)
         val jiaMiKey19 = response.headers["responseKey"]
-        if (BuildConfig.MAIN_URL.contains("${request.url.host}:${request.url.port}")) {
+
+        val isEnable = if (BuildConfig.FLAVOR == "product") {
+            BuildConfig.MAIN_URL.contains(request.url.host)
+        } else {
+            BuildConfig.MAIN_URL.contains("${request.url.host}:${request.url.port}")
+        }
+
+        if (isEnable) {
             if (response.isSuccessful) {
                 val body = response.body
                 if (body != null) {

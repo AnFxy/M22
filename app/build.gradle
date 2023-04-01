@@ -67,7 +67,7 @@ android {
 
             buildConfigField "String", "MAIN_URL", '"http://192.168.0.245:7607/"'
             buildConfigField "String", "FILE_URL", '"http://192.168.0.245:7606"'
-            buildConfigField "String", "SECRET_ARROW", '"macouty86yhbrtye"'
+            buildConfigField "String", "SECRET_ARROW", '"mxcojwy90tysmyhg"'
             buildConfigField "boolean", "NEED_JIA_MI", 'true'
             buildConfigField "String", "LANGUAGE", '"ESP"'
             buildConfigField "String", "CODE", '"MXC"'
@@ -76,8 +76,8 @@ android {
             dimension "project"
             applicationId 'com.nonetxmxy.mmzqfxy'
 
-            buildConfigField "String", "MAIN_URL", '"http://apuui.mceredi.com"'
-            buildConfigField "String", "FILE_URL", '"http:/felhu.mceredi.com"'
+            buildConfigField "String", "MAIN_URL", '"https://apuui.mceredi.com/"'
+            buildConfigField "String", "FILE_URL", '"https://felhu.mceredi.com/"'
             buildConfigField "String", "SECRET_ARROW", '"mxcojwy90tysmyhg"'
             buildConfigField "boolean", "NEED_JIA_MI", 'true'
             buildConfigField "String", "LANGUAGE", '"ESP"'
@@ -100,7 +100,7 @@ android {
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             // 名称_日期_android_版本号.apk
-            outputFileName = "MexiCrédi_${currentTime()}_${versionName}.apk"
+            outputFileName = "MexiCredi_${currentTime()}_${versionName}.apk"
         }
     }
 }

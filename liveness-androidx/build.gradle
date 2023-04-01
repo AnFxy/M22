@@ -29,10 +29,10 @@ android {
 dependencies {
 
 
-    implementation fileTree(dir: 'libs', include: ['*.aar'])
+    compileOnly fileTree(dir: 'libs', include: ['*.aar'])
 
-    implementation files('libs/core-3.5.aar')
-    implementation files('libs/liveness-detection-2.1.1.aar')
+    compileOnly files('libs/core-3.5.aar')
+    compileOnly files('libs/liveness-detection-2.1.1.aar')
 
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
