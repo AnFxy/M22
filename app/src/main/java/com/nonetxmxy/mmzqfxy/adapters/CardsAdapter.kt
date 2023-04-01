@@ -60,7 +60,7 @@ class CardsAdapter(
     class EmptyViewHolder(private val binding: ItemBankEmptyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView() {
-            // TODO
+
         }
     }
 

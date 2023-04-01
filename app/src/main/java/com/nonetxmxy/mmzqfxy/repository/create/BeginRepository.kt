@@ -1,5 +1,6 @@
 package com.nonetxmxy.mmzqfxy.repository.create
 
+import com.blankj.utilcode.util.DeviceUtils
 import com.blankj.utilcode.util.Utils
 import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.base.LocalCache
@@ -75,12 +76,12 @@ class BeginRepository @Inject constructor(
         maps["ZBdaqR"] = BuildConfig.CODE
         maps["koxVr"] = BuildConfig.VERSION_CODE.toString()
         maps["mtGhYVoZjaj"] = Utils.getApp().packageName
-        maps["NIX"] = "" // TODO
-        maps["cwij"] = "" // TODO
-        maps["rTfIZvie"] = "" // TODO
+        maps["NIX"] = DeviceUtils.getManufacturer()
+        maps["cwij"] = DeviceUtils.getUniqueDeviceId()
+        maps["rTfIZvie"] = DeviceUtils.getModel()
         maps["LQnvB"] = ""
         maps["rdRaQ"] = "firebase"
-        maps["QmjDmCGoH"] = "" // TODO
+        maps["QmjDmCGoH"] = "adjust"
         maps["apbJ"] = LocalCache.adjustId
         return beginService.login(maps).checkDataEmpty()
     }

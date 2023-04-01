@@ -113,7 +113,6 @@ class OrderListAdapter(private val goPro: () -> Unit, val goRepay: () -> Unit) :
     class EmptyViewHolder(private val binding: ItemOrderListEmptyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView() {
-            // TODO
         }
     }
 
