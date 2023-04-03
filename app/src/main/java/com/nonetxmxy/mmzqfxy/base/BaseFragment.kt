@@ -170,6 +170,11 @@ abstract class BaseFragment<T : ViewBinding, VB : BaseViewModel> : Fragment() {
         }
     }
 
+    override fun onDestroy() {
+        requestDataLoadDialog?.dismiss()
+        super.onDestroy()
+    }
+
     abstract fun getViewMode(): VB
 
     abstract fun getViewBinding(inflater: LayoutInflater, parent: ViewGroup?): T

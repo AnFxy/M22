@@ -57,6 +57,10 @@ class MyFragment : BaseFragment<FragmentMyBinding, MyFragViewModel>() {
             navController.navigate(MyFragmentDirections.actionMyFragmentToAboutCompanyFragment())
         }
 
+        binding.containerPrivacy.setLimitClickListener {
+            navController.navigate(MyFragmentDirections.actionMyFragmentToWebViewFragment())
+        }
+
         binding.containerFeedback.setLimitClickListener {
             navController.navigate(MyFragmentDirections.actionMyFragmentToSuggestionsFragment())
         }

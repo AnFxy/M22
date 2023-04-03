@@ -8,7 +8,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.setupWithNavController
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.StringUtils
@@ -30,7 +29,7 @@ import com.nonetxmxy.mmzqfxy.viewmodel.AuthContactPersonViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AuthContactPersonFragment :
+class ATContactPersonFragment :
     BaseFragment<FragmentAuthContactPersonBinding, AuthContactPersonViewModel>() {
 
     private val contactSelectResult =
@@ -76,7 +75,7 @@ class AuthContactPersonFragment :
 
     private val viewModel: AuthContactPersonViewModel by viewModels()
 
-    private val args: AuthContactPersonFragmentArgs by navArgs()
+    private val args: ATContactPersonFragmentArgs by navArgs()
 
     private var selectContact1 = true
 
@@ -199,13 +198,13 @@ class AuthContactPersonFragment :
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel._baseGoPage.collect {
                 when (it) {
-                    PageType.USER -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserInfoFragment())
-                    PageType.WORK -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserWorkFragment())
+                    PageType.USER -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserInfoFragment())
+                    PageType.WORK -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthUserWorkFragment())
                     PageType.CONTRACT -> {}
-                    PageType.ID -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
-                    PageType.BANK -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAddCardsFragment())
-                    PageType.FACE -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
-                    PageType.CONFIRM -> navController.navigate(AuthContactPersonFragmentDirections.actionAuthContactPersonFragmentToConfirmRequestFragment())
+                    PageType.ID -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
+                    PageType.BANK -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToAddCardsFragment())
+                    PageType.FACE -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(ATContactPersonFragmentDirections.actionAuthContactPersonFragmentToConfirmRequestFragment())
                 }
             }
         }

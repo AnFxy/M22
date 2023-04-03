@@ -68,23 +68,15 @@ class SMSFragViewModel @Inject constructor(
     fun doLogin(context: Context, code: String) {
         launchUIWithDialog {
             // 上传定位埋点数据
-            coroutineScope {
-                joinAll(
-                    async {
-                        GpsUtil(context).location?.let {
-                            LocalCache.lonLocal = it.longitude.toString()
-                            LocalCache.latiLocal = it.latitude.toString()
-                            beginRepository.submitLocationData(LocationType.LOGIN)
-                        }
-                    },
-                    async {
-                        val loginBean = beginRepository.doLogin(code)
-                        LocalCache.token = loginBean.cLIuElaqh
-                        LocalCache.isSAccount = loginBean.qTzzWfJh == 1
-                        LocalCache.isLogged = true
-                    }
-                )
+            val loginBean = beginRepository.doLogin(code)
+            LocalCache.token = loginBean.cLIuElaqh
+            LocalCache.isSAccount = loginBean.qTzzWfJh == 1
+            GpsUtil(context).location?.let {
+                LocalCache.lonLocal = it.longitude.toString()
+                LocalCache.latiLocal = it.latitude.toString()
+                beginRepository.submitLocationData(LocationType.LOGIN)
             }
+            LocalCache.isLogged = true
             goMain.emit(Unit)
         }
     }

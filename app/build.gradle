@@ -71,6 +71,8 @@ android {
             buildConfigField "boolean", "NEED_JIA_MI", 'true'
             buildConfigField "String", "LANGUAGE", '"ESP"'
             buildConfigField "String", "CODE", '"MXC"'
+            buildConfigField "String", "PRAVICY", '"https://www.mceredi.com/contract/PrivacyInstructions.html"'
+            buildConfigField "String", "PAY_WAY", '"https://www.mlcartp.com/contract/payment_information.html?channelCode="'
         }
         product{
             dimension "project"
@@ -82,6 +84,8 @@ android {
             buildConfigField "boolean", "NEED_JIA_MI", 'true'
             buildConfigField "String", "LANGUAGE", '"ESP"'
             buildConfigField "String", "CODE", '"MXC"'
+            buildConfigField "String", "PRAVICY", '"https://www.mceredi.com/contract/PrivacyInstructions.html"'
+            buildConfigField "String", "PAY_WAY", '"https://www.mlcartp.com/contract/payment_information.html?channelCode="'
         }
     }
 

@@ -10,9 +10,9 @@ import java.text.SimpleDateFormat
 class CommonUtil {
     companion object {
 
-        val MOXICO_PHONE_ADD_52 = "(\\+528)\\d{9}\$"
-        val MOXICO_PHONE_52 = "(528)\\d{9}\$"
-        val MOXICO_PHONE = "(8)\\d{9}\$"
+        val MOXICO_PHONE_ADD_52 = "(\\+52)\\d{10}\$"
+        val MOXICO_PHONE_52 = "(52)\\d{10}\$"
+        val MOXICO_PHONE = "\\d{10}\$"
 
         fun goGooglePlay(
             activity: FragmentActivity?,

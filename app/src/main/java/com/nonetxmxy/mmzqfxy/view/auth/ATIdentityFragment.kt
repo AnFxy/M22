@@ -44,11 +44,11 @@ import timber.log.Timber
 import kotlin.random.Random
 
 @AndroidEntryPoint
-class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdentityViewModel>() {
+class ATIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdentityViewModel>() {
 
     private val viewModel: AuthIdentityViewModel by viewModels()
 
-    private val args: AuthIdentityFragmentArgs by navArgs()
+    private val args: ATIdentityFragmentArgs by navArgs()
 
     private lateinit var photoLauncher: ActivityResultLauncher<String>
     private lateinit var cameraLauncher: ActivityResultLauncher<Uri>
@@ -265,20 +265,20 @@ class AuthIdentityFragment : BaseFragment<FragmentAuthIdentityBinding, AuthIdent
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel._baseGoPage.collect {
                 when (it) {
-                    PageType.USER -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToAuthUserInfoFragment())
-                    PageType.WORK -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToAuthUserWorkFragment())
-                    PageType.CONTRACT -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToAuthContactPersonFragment())
+                    PageType.USER -> navController.navigate(ATIdentityFragmentDirections.actionAuthIdentityFragmentToAuthUserInfoFragment())
+                    PageType.WORK -> navController.navigate(ATIdentityFragmentDirections.actionAuthIdentityFragmentToAuthUserWorkFragment())
+                    PageType.CONTRACT -> navController.navigate(ATIdentityFragmentDirections.actionAuthIdentityFragmentToAuthContactPersonFragment())
                     PageType.ID -> {}
-                    PageType.BANK -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToAddCardsFragment())
+                    PageType.BANK -> navController.navigate(ATIdentityFragmentDirections.actionAuthIdentityFragmentToAddCardsFragment())
                     PageType.FACE -> {}
-                    PageType.CONFIRM -> navController.navigate(AuthIdentityFragmentDirections.actionAuthIdentityFragmentToConfirmRequestFragment())
+                    PageType.CONFIRM -> navController.navigate(ATIdentityFragmentDirections.actionAuthIdentityFragmentToConfirmRequestFragment())
                 }
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.setFacePic.collect {
-                Glide.with(this@AuthIdentityFragment).load(LocalCache.photoInfo).into(binding.ivFaceCheck)
+                Glide.with(this@ATIdentityFragment).load(LocalCache.photoInfo).into(binding.ivFaceCheck)
             }
         }
 

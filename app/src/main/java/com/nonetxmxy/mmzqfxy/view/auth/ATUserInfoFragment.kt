@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.blankj.utilcode.util.KeyboardUtils
 import com.blankj.utilcode.util.StringUtils
@@ -32,11 +31,11 @@ import com.nonetxmxy.mmzqfxy.viewmodel.AuthUserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserInfoViewModel>() {
+class ATUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserInfoViewModel>() {
 
     private val viewModel: AuthUserInfoViewModel by viewModels()
 
-    private val args: AuthUserInfoFragmentArgs by navArgs()
+    private val args: ATUserInfoFragmentArgs by navArgs()
 
     private val authDialogSet: RxDialogSet? by lazy {
         context?.let {
@@ -242,12 +241,12 @@ class AuthUserInfoFragment : BaseFragment<FragmentAuthUserInfoBinding, AuthUserI
             viewModel._baseGoPage.collect {
                 when (it) {
                     PageType.USER -> {}
-                    PageType.WORK -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthUserWorkFragment())
-                    PageType.CONTRACT -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthContactPersonFragment())
-                    PageType.ID -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
-                    PageType.BANK -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAddCardsFragment())
-                    PageType.FACE -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
-                    PageType.CONFIRM -> navController.navigate(AuthUserInfoFragmentDirections.actionAuthUserInfoFragmentToConfirmRequestFragment())
+                    PageType.WORK -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthUserWorkFragment())
+                    PageType.CONTRACT -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthContactPersonFragment())
+                    PageType.ID -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
+                    PageType.BANK -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToAddCardsFragment())
+                    PageType.FACE -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToAuthIdentityFragment())
+                    PageType.CONFIRM -> navController.navigate(ATUserInfoFragmentDirections.actionAuthUserInfoFragmentToConfirmRequestFragment())
                 }
             }
         }

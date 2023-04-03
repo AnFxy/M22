@@ -95,4 +95,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainActivityViewModel>(),
             curLabelName in listOf("ProductListFragment", "OrderListFragment", "MyFragment")
         )
     }
+
+    override fun onDestroy() {
+        requestDataLoadDialog.dismiss()
+
+        super.onDestroy()
+    }
 }

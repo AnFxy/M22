@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_myFragment_to_pay_navigation"
             app:destination="@id/pay_navigation"/>
+        <action
+            android:id="@+id/action_myFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -98,7 +101,7 @@
 
     <fragment
         android:id="@+id/authUserInfoFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserInfoFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ATUserInfoFragment"
         android:label="AuthUserInfoFragment" >
 
         <argument
@@ -110,7 +113,7 @@
 
     <fragment
         android:id="@+id/authUserWorkFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthUserWorkFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ATUserWorkFragment"
         android:label="AuthUserWorkFragment" >
 
         <argument
@@ -121,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/authContactPersonFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthContactPersonFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ATContactPersonFragment"
         android:label="AuthContactPersonFragment" >
 
         <argument
@@ -133,7 +136,7 @@
 
     <fragment
         android:id="@+id/authIdentityFragment"
-        android:name="com.nonetxmxy.mmzqfxy.view.auth.AuthIdentityFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.auth.ATIdentityFragment"
         android:label="AuthIdentityFragment" >
 
         <argument
@@ -142,4 +145,8 @@
             app:argType="boolean"/>
 
     </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.WebViewFragment"
+        android:label="WebViewFragment" />
 </navigation>

@@ -37,6 +37,8 @@ class SuggestionsFragment : BaseFragment<FragmentSuggestionBinding, SuggestionFr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        isHiddenStatus = true
+
         photoLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             uri?.let {
                 when(viewModel.currentIndex) {
@@ -60,7 +62,6 @@ class SuggestionsFragment : BaseFragment<FragmentSuggestionBinding, SuggestionFr
         FragmentSuggestionBinding.inflate(inflater, parent, false)
 
     override fun setLayout() {
-        isHiddenStatus = true
 
         binding.editSuggesText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}

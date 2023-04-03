@@ -17,6 +17,7 @@ import androidx.navigation.fragment.navArgs
 import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.SpanUtils.ALIGN_CENTER
 import com.bumptech.glide.Glide
+import com.nonetxmxy.mmzqfxy.BuildConfig
 import com.nonetxmxy.mmzqfxy.MainActivity
 import com.nonetxmxy.mmzqfxy.MainActivityViewModel
 import com.nonetxmxy.mmzqfxy.R
@@ -93,6 +94,17 @@ class PayCodeFragment : BaseFragment<FragmentPayCodeBinding, PayCodeViewModel>()
 
         binding.tvCopy.setLimitClickListener {
             CopyUtil.copyToClipboard(viewModel.pagerData.value?.QWZRFcNqe ?: "")
+        }
+
+        binding.wbPayCode.apply {
+            settings.javaScriptCanOpenWindowsAutomatically = true
+            settings.javaScriptEnabled = true
+            settings.setSupportZoom(false)
+            settings.builtInZoomControls = true
+            settings.useWideViewPort = true
+            settings.loadWithOverviewMode = true
+            settings.domStorageEnabled = true
+            loadUrl(BuildConfig.PAY_WAY + args.payWayCode)
         }
     }
 

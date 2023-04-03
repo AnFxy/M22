@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.constant.PermissionConstants
 import com.blankj.utilcode.util.PermissionUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.adapters.CardsAdapter
@@ -158,7 +159,22 @@ class ConfirmRequestFragment :
         }
 
         binding.enviarBtn.setLimitClickListener {
-            viewModel.submitRequestInfo()
+            PermissionUtils.permission(
+                PermissionConstants.LOCATION
+            ).callback(object : PermissionUtils.FullCallback {
+                override fun onGranted(granted: MutableList<String>) {
+                    context?.let {
+                        viewModel.submitRequestInfo(it)
+                    }
+                }
+
+                override fun onDenied(
+                    deniedForever: MutableList<String>,
+                    denied: MutableList<String>
+                ) {
+                    ToastUtils.showShort("Por favor, otorgue permisos de localización")
+                }
+            }).request()
         }
 
         // pop up window 回调状态

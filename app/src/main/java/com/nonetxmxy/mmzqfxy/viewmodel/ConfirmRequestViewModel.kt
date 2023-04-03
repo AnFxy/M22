@@ -1,19 +1,24 @@
 package com.nonetxmxy.mmzqfxy.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.Utils
 import com.google.gson.Gson
 import com.nonetxmxy.mmzqfxy.base.BaseViewModel
+import com.nonetxmxy.mmzqfxy.base.LocalCache
 import com.nonetxmxy.mmzqfxy.extra.AppsMessageUtil
 import com.nonetxmxy.mmzqfxy.extra.ContractsMessageUtil
 import com.nonetxmxy.mmzqfxy.extra.PhoneMessageUtil
 import com.nonetxmxy.mmzqfxy.model.AuthPagerEvent
+import com.nonetxmxy.mmzqfxy.model.LocationType
 import com.nonetxmxy.mmzqfxy.model.auth.BankMessage
 import com.nonetxmxy.mmzqfxy.model.auth.ConfirmMessage
 import com.nonetxmxy.mmzqfxy.model.response.ConfirmResBean
 import com.nonetxmxy.mmzqfxy.repository.IAuthRepository
+import com.nonetxmxy.mmzqfxy.repository.IBeginRepository
 import com.nonetxmxy.mmzqfxy.repository.IOrderRepository
 import com.nonetxmxy.mmzqfxy.tools.CommonUtil
+import com.nonetxmxy.mmzqfxy.tools.GpsUtil
 import com.nonetxmxy.mmzqfxy.tools.days
 import com.nonetxmxy.mmzqfxy.tools.jinE
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +35,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ConfirmRequestViewModel @Inject constructor(
     private val authRepository: IAuthRepository,
-    private val orderRepository: IOrderRepository
+    private val orderRepository: IOrderRepository,
+    private val beginRepository: IBeginRepository
 ) : BaseViewModel() {
 
     private val _pagerEventFlow = MutableSharedFlow<AuthPagerEvent>()
@@ -186,13 +192,26 @@ class ConfirmRequestViewModel @Inject constructor(
         )
     }
 
-    fun submitRequestInfo() {
+    fun submitRequestInfo(context: Context) {
         launchUIWithDialog {
-            orderRepository.submitRequestConfirm(pagerData.value)
+            coroutineScope {
+                joinAll(
+                    // 上传确认额度信息
+                    async {
+                        orderRepository.submitRequestConfirm(pagerData.value)
+                    },
+                    // 上传埋点数据
+                    async {
+                        GpsUtil(context).location?.let {
+                            LocalCache.lonLocal = it.longitude.toString()
+                            LocalCache.latiLocal = it.latitude.toString()
+                            beginRepository.submitLocationData(LocationType.LOGIN)
+                        }
+                    }
+                )
+            }
             // 进入审核页面
             _goVerifiPage.emit(Unit)
-//            val currentProduct =
-//                orderRepository.getProducts().first { it.ANddPfvNno == LocalCache.currentProCode }
         }
     }
 }
