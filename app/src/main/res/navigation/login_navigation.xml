@@ -11,10 +11,17 @@
         <action
             android:id="@+id/action_loginFragment_to_SMSFragment"
             app:destination="@id/SMSFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/SMSFragment"
         android:name="com.nonetxmxy.mmzqfxy.view.login.SMSFragment"
         android:label="SMSFragment" />
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.nonetxmxy.mmzqfxy.view.WebViewFragment"
+        android:label="WebViewFragment" />
 </navigation>

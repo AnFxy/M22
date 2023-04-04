@@ -36,7 +36,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             binding.tvProName.text = productsBean.eFV
             binding.tvAmount.text = productsBean.FCmiye.toDouble().jinE()
             binding.tvDays.text = productsBean.OJjgAEGVuO.toInt().days()
-            binding.tvRate.text = "≥${productsBean.edVaOsmgaab}"
+            // binding.tvRate.text = "≥${productsBean.edVaOsmgaab}"
+            binding.tvRate.text = "≥0.1%"
 
             when (productsBean.jMdbPgc) {
                 1 -> {

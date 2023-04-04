@@ -234,7 +234,7 @@ class IDPhotoView @JvmOverloads constructor(
                     updateLoadingViewStatus(true)
                     val image = homeRepository.uploadFile(base64, extName)
                     if (image.code == 1) {
-                        imageUpLoadListener?.onPhotoGot(image.data?.url ?: "", imagePageType)
+                        imageUpLoadListener?.onPhotoGot(image.data?.XGEGbXpdxA ?: "", imagePageType)
                     } else {
                         ToastUtils.showShort(image.message ?: "")
                         loadLiveData?.postValue(false)

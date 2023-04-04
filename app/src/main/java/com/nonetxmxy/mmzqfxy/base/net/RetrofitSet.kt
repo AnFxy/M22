@@ -41,9 +41,9 @@ class RetrofitSet private constructor() {
         okhttpBuilder.addInterceptor(requestJiaMiInterceptor)
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         okhttpBuilder.addInterceptor(httpLoggingInterceptor)
-        okhttpBuilder.connectTimeout(6L, TimeUnit.SECONDS)
-            .readTimeout(6L, TimeUnit.SECONDS)
-            .writeTimeout(6L, TimeUnit.SECONDS)
+        okhttpBuilder.connectTimeout(12L, TimeUnit.SECONDS)
+            .readTimeout(12L, TimeUnit.SECONDS)
+            .writeTimeout(12L, TimeUnit.SECONDS)
 
         return Retrofit
             .Builder()

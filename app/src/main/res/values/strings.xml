@@ -132,7 +132,8 @@ La siguiente información será accesada y retenida por nosotros para calcular l
     <string name="login_page_title">@string/app_name</string>
     <string name="guding_52">+52</string>
     <string name="input_phone_number_tips">Introduzca el número de teléfono correcto</string>
-    <string name="privacy_tips">He leído y acepto el la Política de Privacidad.</string>
+    <string name="privacy_tips">He leído y acepto el la </string>
+    <string name="privacy_tips_clicked">Política de Privacidad</string>
     <string name="agree_tips">Por favor lea y acepte la Política de Privacidad</string>
     <string name="send_vcode_tips">Se ha enviado el código de verificación por SMS al +%s</string>
     <string name="send">Enviar</string>

@@ -66,5 +66,5 @@ object NetPaths {
 
 
     // 上传文件接口
-    const val uploadFile = "/file/fileUpload"
+    const val uploadFile = "/bADNwwkVZ/tGcRy"
 }

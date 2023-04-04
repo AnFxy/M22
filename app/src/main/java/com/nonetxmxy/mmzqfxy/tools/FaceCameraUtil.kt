@@ -106,7 +106,7 @@ class FaceCameraUtil(private val context: Context?, private val imageCallBack: (
                         ServiceImpl.giveIFileUploadService()
                     ).uploadFile(base64, extName)
                     if (image.code == 1) {
-                        imageCallBack.invoke(image.data?.url ?: "")
+                        imageCallBack.invoke(image.data?.XGEGbXpdxA ?: "")
                     } else {
                         ToastUtils.showShort(image.message ?: "")
                     }

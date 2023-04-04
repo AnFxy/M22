@@ -35,7 +35,7 @@ class SMSFragment : BaseFragment<FragmentSmsBinding, SMSFragViewModel>() {
 
     override fun setLayout() {
         binding.tvPhone.text =
-            String.format(getString(R.string.send_vcode_tips), LocalCache.phoneNumber.substring(2))
+            String.format(getString(R.string.send_vcode_tips), LocalCache.phoneNumber)
 
         binding.vcSms.setInputCompleteListener(object : InputCompleteListener {
             override fun inputComplete() {

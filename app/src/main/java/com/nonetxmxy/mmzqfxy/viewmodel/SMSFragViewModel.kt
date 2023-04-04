@@ -37,6 +37,8 @@ class SMSFragViewModel @Inject constructor(
             viewModelScope.launch {
                 clock.emit(remainTime.toInt())
             }
+        } else {
+            smsCodeSent()
         }
     }
 

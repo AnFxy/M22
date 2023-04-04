@@ -168,7 +168,7 @@ class AuthIdentityViewModel @Inject constructor(
     fun uploadFacePic(picStr: String) {
         launchUIWithDialog {
             val fileUpResult = authRepository.uploadFile(picStr, "jpg").checkDataEmpty()
-            LocalCache.facePhoto = fileUpResult.url
+            LocalCache.facePhoto = fileUpResult.XGEGbXpdxA
             authRepository.submitFaceInfo(faceTime)
 
             val mineInfo = orderRepository.getUserInfo()

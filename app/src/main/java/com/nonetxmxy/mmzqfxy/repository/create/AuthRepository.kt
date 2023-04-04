@@ -22,10 +22,10 @@ class AuthRepository @Inject constructor(
         suffixName: String
     ): BaseResponse<FileResponse> {
         val maps = HashMap<String, String>()
-        maps["base64Str"] = fileStr
-        maps["serviceType"] = "fileupload"
-        maps["sourceType"] = BuildConfig.CODE
-        maps["extName"] = suffixName
+        maps["IuuvhApJnKIN"] = fileStr
+        maps["JgnEIZWTqS"] = "fileupload"
+        maps["woXueYtLs"] = BuildConfig.CODE
+        maps["IhgNRQnJVPAk"] = suffixName
         return fileUploadService.uploadFile(maps)
     }
 

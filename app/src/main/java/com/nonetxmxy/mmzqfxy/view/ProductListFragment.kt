@@ -165,7 +165,9 @@ class ProductListFragment : BaseFragment<FragmentProductListBinding, ProductList
             binding.tvTitle.text = product.eFV
             binding.tvAmount.text = product.FCmiye.toDouble().jinE()
             binding.tvDays.text = product.OJjgAEGVuO.toInt().days()
-            binding.tvRate.text = "≥${product.edVaOsmgaab}"
+            // TODO 应产品要求 这个地方写死
+            // binding.tvRate.text = "≥${product.edVaOsmgaab}"
+            binding.tvRate.text = "≥0.1%"
         } else {
             binding.ivLogo.setImageResource(R.mipmap.jinbi)
             binding.tvTitle.text = "Importe máximo del préstamo"

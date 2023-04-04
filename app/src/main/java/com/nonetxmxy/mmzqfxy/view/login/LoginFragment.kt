@@ -1,11 +1,13 @@
 package com.nonetxmxy.mmzqfxy.view.login
 
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.blankj.utilcode.util.SpanUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.nonetxmxy.mmzqfxy.R
 import com.nonetxmxy.mmzqfxy.base.BaseFragment
@@ -61,6 +63,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragViewModel>() {
                 }
             }
         }
+
+        val builder =
+            SpanUtils.with(binding.tvPrivacy).append(getString(R.string.privacy_tips)).append(" ")
+                .append(getString(R.string.privacy_tips_clicked)).setClickSpan(Color.BLUE, false) {
+                navController.navigate(LoginFragmentDirections.actionLoginFragmentToWebViewFragment())
+            }
+        binding.tvPrivacy.text = builder.create()
     }
 
     override fun setObserver() {

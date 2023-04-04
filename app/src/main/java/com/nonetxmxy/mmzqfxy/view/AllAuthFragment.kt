@@ -71,15 +71,16 @@ class AllAuthFragment : BaseFragment<FragmentAllAuthBinding, AllAuthFragViewMode
         }
 
         binding.tvApply.setLimitClickListener {
-            if (LocalCache.infoCredit == 0) {
-                navController.navigate(
-                    AllAuthFragmentDirections.actionAllAuthFragmentToAuthUserInfoFragment(
-                        true
-                    )
-                )
-            } else if (LocalCache.workCredit == 0) {
+            if (LocalCache.workCredit == 0) {
                 navController.navigate(
                     AllAuthFragmentDirections.actionAllAuthFragmentToAuthUserWorkFragment(
+                        true
+                    )
+
+                )
+            } else if (LocalCache.infoCredit == 0) {
+                navController.navigate(
+                    AllAuthFragmentDirections.actionAllAuthFragmentToAuthUserInfoFragment(
                         true
                     )
                 )
